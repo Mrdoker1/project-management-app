@@ -1,7 +1,4 @@
-import { IBoard } from './../interfaces/IBoard';
 import { RootState } from './store';
-import { IToken } from '../interfaces/IToken';
-import { IAuthInfo } from '../interfaces/IAuthInfo';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const api = createApi({
@@ -16,19 +13,7 @@ export const api = createApi({
       return headers;
     },
   }),
-  endpoints: (build) => ({
-    login: build.mutation<IToken, IAuthInfo>({
-      query: (authInfo) => ({
-        url: '/auth/signin',
-        method: 'POST',
-        body: authInfo,
-      }),
-    }),
-    getBoards: build.query<IBoard[], void>({
-      query: () => `/boards`,
-      transformErrorResponse: (response: { status: string | number }) => response.status,
-    }),
-  }),
+  endpoints: () => ({}),
 });
 
-export const { useLoginMutation, useGetBoardsQuery } = api;
+//export const { useGetBoardsQuery } = api;

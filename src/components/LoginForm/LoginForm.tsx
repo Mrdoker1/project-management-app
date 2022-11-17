@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useLoginMutation } from 'store/api';
+import { useLoginMutation } from 'store/api/auth';
 import { setToken } from 'store/authSlice';
 import cl from './LoginForm.module.css';
 

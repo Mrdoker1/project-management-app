@@ -1,6 +1,6 @@
 import React from 'react';
-import { useGetBoardsQuery } from 'store/api';
 import { memo } from 'react';
+import { useGetBoardsQuery } from 'store/api/boards';
 import cl from './Board.module.css';
 
 interface IBoardProps {

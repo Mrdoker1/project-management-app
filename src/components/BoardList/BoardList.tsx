@@ -1,5 +1,6 @@
 import React from 'react';
-import { useGetBoardsQuery } from 'store/api';
+import { useGetBoardsQuery } from 'store/api/boards';
+
 import Board from './Board/Board';
 
 const BoardList = () => {
