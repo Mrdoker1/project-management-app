@@ -1,26 +1,17 @@
-import { IAuthInfo } from 'interfaces/IAuthInfo';
+import AppRouter from 'components/AppRouter/AppRouter';
 import React from 'react';
-import { useGetTokenMutation } from 'store/managerAppApi';
+import { Provider } from 'react-redux';
+import { HashRouter } from 'react-router-dom';
+import store from 'store/store';
 import './App.css';
 
 function App() {
-  const authInfo: IAuthInfo = {
-    login: 'test',
-    password: 'test',
-  };
-
-  const [getToken, result] = useGetTokenMutation();
-
-  console.log(result);
-  function clickHandler() {
-    getToken(authInfo);
-  }
-
   return (
-    <div className="App">
-      <h1>Project Manager App</h1>
-      <button onClick={clickHandler}>Sign in</button>
-    </div>
+    <Provider store={store}>
+      <HashRouter>
+        <AppRouter />
+      </HashRouter>
+    </Provider>
   );
 }
 
