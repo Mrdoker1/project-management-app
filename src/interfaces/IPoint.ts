@@ -1,4 +1,4 @@
-export interface ITask {
+export interface IPoint {
   _id: string;
   title: string;
   taskId: number;

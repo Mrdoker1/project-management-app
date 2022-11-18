@@ -1,10 +1,7 @@
-export interface ITask extends INewTask {
+export interface ITask {
   _id: string;
   boardId: string;
   columnId: string;
-}
-
-export interface INewTask {
   title: string;
   order: number;
   description: string;
