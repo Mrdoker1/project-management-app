@@ -1,26 +1,25 @@
 import { IPoint } from 'interfaces/IPoint';
-import { IUser } from 'interfaces/IUser';
 import { IToken } from 'interfaces/IToken';
 import { api } from '../api';
 
 const files = api.injectEndpoints({
   endpoints: (build) => ({
-    getPoints: build.query<IPoint[], { ids: Array<Pick<IPoint, '_id'>>, userId: Pick<IUser, '_id'> }>({
+    getPoints: build.query<IPoint[], { ids: string; userId: string }>({
       query: ({ ids, userId }) => `/points?ids=${ids}&userId=${userId}`,
       transformErrorResponse: (response: { status: string | number }) => response.status,
     }),
-    getPointsByTaskId: build.query<IPoint[], Pick<IPoint, 'taskId'>>({
+    getPointsByTaskId: build.query<IPoint[], string>({
       query: (taskId) => `/points/${taskId}`,
       transformErrorResponse: (response: { status: string | number }) => response.status,
     }),
     createPoint: build.mutation<IToken, Omit<IPoint, '_id'>>({
-        query: (point) => ({
-          url: `/points`,
-          method: 'POST',
-          body: point,
-        }),
+      query: (point) => ({
+        url: `/points`,
+        method: 'POST',
+        body: point,
+      }),
     }),
-    updatePointsSet: build.mutation<IToken, Array<{"_id": Pick<IPoint, '_id'>,  "done": Pick<IPoint, 'done'>}>>({
+    updatePointsSet: build.mutation<IToken, Array<{ _id: string; done: boolean }>>({
       query: (patch) => ({
         url: `/points`,
         method: 'PATCH',
@@ -34,7 +33,7 @@ const files = api.injectEndpoints({
         body: point,
       }),
     }),
-    deletePoint: build.mutation<IToken, Pick<IPoint, '_id'>>({
+    deletePoint: build.mutation<IToken, string>({
       query: (pointId) => ({
         url: `/points/${pointId}`,
         method: 'DELETE',
@@ -50,5 +49,5 @@ export const {
   useUpdatePointMutation,
   useUpdatePointsSetMutation,
   useGetPointsByTaskIdQuery,
-  useDeletePointMutation
+  useDeletePointMutation,
 } = files;
