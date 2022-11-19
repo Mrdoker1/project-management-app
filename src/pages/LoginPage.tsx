@@ -4,7 +4,7 @@ import React from 'react';
 const LoginPage = () => {
   return (
     <main className="main">
-      <div className="main__container no-paddings">
+      <div className="container">
         <h1>LoginPage</h1>
         <LoginForm />
       </div>

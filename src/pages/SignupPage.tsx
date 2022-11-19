@@ -4,7 +4,7 @@ import React from 'react';
 const SignupPage = () => {
   return (
     <main className="main">
-      <div className="main__container no-paddings">
+      <div className="container">
         <h1>SignupPage</h1>
         <SignupForm />
       </div>
