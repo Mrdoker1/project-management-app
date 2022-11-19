@@ -1,6 +1,5 @@
 import React from 'react';
 import { useGetBoardsQuery } from 'store/api/boards';
-
 import Board from './Board/Board';
 
 const BoardList = () => {
@@ -10,11 +9,13 @@ const BoardList = () => {
   if (isLoading) return <div>Загрузка...</div>;
   if (!boards) return <div>Ничего не найдено!</div>;
   return (
-    <div>
-      {boards.map((board) => (
-        <Board id={board._id} key={board._id} />
-      ))}
-    </div>
+    <>
+      <div>
+        {boards.map((board) => (
+          <Board id={board._id} key={board._id} />
+        ))}
+      </div>
+    </>
   );
 };
 

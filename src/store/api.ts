@@ -2,7 +2,7 @@ import { RootState } from './store';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const api = createApi({
-  reducerPath: 'managerAppApi',
+  reducerPath: 'api',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://final-task-backend-production-3625.up.railway.app',
     prepareHeaders: (headers, { getState }) => {
@@ -14,6 +14,5 @@ export const api = createApi({
     },
   }),
   endpoints: () => ({}),
+  tagTypes: ['Board'],
 });
-
-//export const { useGetBoardsQuery } = api;

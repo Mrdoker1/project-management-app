@@ -1,6 +1,5 @@
-import { IAuthInfo } from './IAuthInfo';
-
-export interface IUser extends IAuthInfo {
+export interface IUser {
   _id: string;
   name: string;
+  login: string;
 }

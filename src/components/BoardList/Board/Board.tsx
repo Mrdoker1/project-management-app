@@ -15,7 +15,7 @@ const Board = memo<IBoardProps>(({ id }) => {
   });
 
   if (!board) {
-    console.error('Board not found in cache!');
+    console.log('Board not found in cache!');
     return null;
   }
   return (
