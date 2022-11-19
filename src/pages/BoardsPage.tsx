@@ -4,7 +4,7 @@ import React from 'react';
 const BoardsPage = () => {
   return (
     <main className="main">
-      <div className="main__container no-paddings">
+      <div className="container">
         <h1>BoardsPage</h1>
         <BoardList />
       </div>

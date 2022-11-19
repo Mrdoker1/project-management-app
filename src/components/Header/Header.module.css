@@ -1,0 +1,13 @@
+.logoWrapper {
+  display: flex;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.logo {
+  font-size: 20px;
+  line-height: 130%;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+}
+

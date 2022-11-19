@@ -1,3 +1,4 @@
+import { MantineProvider } from '@mantine/core';
 import AppRouter from 'components/AppRouter/AppRouter';
 import React from 'react';
 import { Provider } from 'react-redux';
@@ -8,11 +9,18 @@ import './App.css';
 
 function App() {
   return (
-    <Provider store={store}>
-      <HashRouter>
-        <AppRouter />
-      </HashRouter>
-    </Provider>
+    <MantineProvider
+      withNormalizeCSS
+      theme={{
+        fontFamily: 'Open Sans',
+      }}
+    >
+      <Provider store={store}>
+        <HashRouter>
+          <AppRouter />
+        </HashRouter>
+      </Provider>
+    </MantineProvider>
   );
 }
 

@@ -1,0 +1,54 @@
+{
+  "links-auth": [
+    {
+      "link": "/projects",
+      "label": "Projects"
+    },
+    {
+      "link": "/profile",
+      "label": "Profile"
+    },
+    {
+      "link": "/search",
+      "label": "Search"
+    },
+    {
+      "link": "/about",
+      "label": "About"
+    },
+    {
+      "link": "English",
+      "label": "English",
+      "links": [
+        {
+          "link": "/russian",
+          "label": "Russian"
+        },
+        {
+          "link": "/english",
+          "label": "English"
+        }
+      ]
+    }
+  ],
+  "links" : [
+    {
+      "link": "/about",
+      "label": "About"
+    },
+    {
+      "link": "English",
+      "label": "English",
+      "links": [
+        {
+          "link": "/russian",
+          "label": "Russian"
+        },
+        {
+          "link": "/english",
+          "label": "English"
+        }
+      ]
+    }
+  ]
+}

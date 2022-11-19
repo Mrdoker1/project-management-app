@@ -3,7 +3,7 @@ import React from 'react';
 const BoardPage = () => {
   return (
     <main className="main">
-      <div className="main__container no-paddings">
+      <div className="container">
         <h1>BoardPage</h1>
       </div>
     </main>
