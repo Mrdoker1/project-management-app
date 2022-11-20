@@ -3,8 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import NoPage from 'pages/NoPage';
 import HomePage from 'pages/HomePage/HomePage';
-import LoginPage from 'pages/LoginPage';
-import SignupPage from 'pages/SignupPage';
+import SignupPage from 'pages/SignupPage/SignupPage';
 import BoardsPage from 'pages/BoardsPage';
 import BoardPage from 'pages/BoardPage';
 import ProfilePage from 'pages/ProfilePage';
@@ -13,6 +12,7 @@ import { selectToken } from 'store/authSlice';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 import Layout from 'components/Layout/Layout';
 import AboutPage from 'pages/AboutPage';
+import LoginPage from 'pages/LoginPage/LoginPage';
 
 const AppRouter = memo(() => {
   const token = useAppSelector(selectToken);

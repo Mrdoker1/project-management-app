@@ -3,19 +3,94 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  *padding: 0 15px;
-  width: 200px;
+  padding: 40px;
+  padding-top: 60px;
+  max-width: 460px;
+  border: 1px solid #343A40;
+  border-radius: 17px;
+  width: 460px;
+  background-color: #101113;
+  position: relative;
 }
 
-.login {
+.title {
+  align-self: start;
+  color: #fff;
+  font-weight: 400;
+}
+
+.inputWrapper {
   width: 100%;
 }
 
-.password {
-  width: 100%;
+.label {
+  color: #868E96;
+  font-weight: 600;
+}
+
+.login, .password {
+  background: #101113;
+  border-color: #25262B;
+  color: #F8F9FA;
+}
+
+.login::placeholder, .password::placeholder {
+  color: #F8F9FA;
+}
+
+.innerInput {
+  color: #F8F9FA;
+}
+
+.login:focus, .login:focus-within, .password:focus, .password:focus-within {
+  border-color: #F1F3F5;
+  background-color: #1A1B1E;
+}
+
+.rightSection:hover {
+  background-color: none;
+}
+
+.visibilityToggle:hover {
+  background-color: rgba(231, 245, 255, 1);
+  color: #101113;
+}
+
+.answer {
+  align-self: flex-start;
+  *padding-top: 5px;
+}
+
+.link {
+  color: #C1C2C5;
+  padding: 0 4px;
+  text-decoration: none;
 }
 
 .submit {
-  width: 100%;
+  background: #25262B;
+  border-radius: 4px;
+  width: 161px;
+  height: 39px; 
+  *margin-top: 5px;
 }
 
+.submit:hover {
+  color: #101113;
+  background-color: rgba(231, 245, 255, 1);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+}
+
+.closeBtn:hover {
+  color: #101113;
+  background-color: rgba(231, 245, 255, 1);
+}
+
+.message {
+  color: #fa5252;
+}
