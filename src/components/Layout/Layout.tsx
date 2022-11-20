@@ -1,4 +1,4 @@
-import { HeaderAction } from 'components/Header/Header';
+import HeaderAction from 'components/Header/Header';
 import React, { memo } from 'react';
 import { default as headerLinks } from '../Header/Header.json';
 import { Outlet } from 'react-router-dom';

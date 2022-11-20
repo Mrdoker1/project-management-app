@@ -11,7 +11,7 @@ import img3 from '../../assets/main-page-img3.png';
 
 const HomePage = () => {
   return (
-    <main className="main">
+    <>
       <section className={cl.splash}>
         <div className="container">
           <h3 className={cl.subtitle}>Project Management App</h3>
@@ -84,7 +84,7 @@ const HomePage = () => {
           <img src={img3} className={cl.textImg} />
         </section>
       </div>
-    </main>
+    </>
   );
 };
 
