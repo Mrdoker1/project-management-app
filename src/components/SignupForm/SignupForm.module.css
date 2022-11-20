@@ -3,18 +3,106 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  *padding: 0 15px;
-  width: 300px;
+  padding: 40px;
+  padding-top: 60px;
+  max-width: 460px;
+  border: 1px solid #343A40;
+  border-radius: 17px;
+  width: 460px;
+  background-color: #101113;
+  position: relative;
+}
+
+.title {
+  align-self: start;
+  color: #fff;
+  font-weight: 400;
+}
+
+.inputWrapper {
+  width: 100%;
+}
+
+.label {
+  color: #868E96;
+  font-weight: 600;
+}
+
+.login, .password, .name {
+  background: #101113;
+  border-color: #25262B;
+  color: #F8F9FA;
+}
+
+.name, .login::placeholder, .password::placeholder {
+  color: #F8F9FA;
+}
+
+.innerInput {
+  color: #F8F9FA;
+}
+
+.name:focus, .name:focus-within, .login:focus, .login:focus-within, .password:focus, .password:focus-within {
+  border-color: #F1F3F5;
+  background-color: #1A1B1E;
+}
+
+.rightSection:hover {
+  background-color: none;
+}
+
+.visibilityToggle:hover {
+  *background: none;
+  background-color: rgba(231, 245, 255, 1);
+  color: #101113;
+}
+
+.answer {
+  align-self: flex-start;
+  *padding-top: 5px;
+}
+
+.link {
+  color: #C1C2C5;
+  padding: 0 4px;
+  text-decoration: none;
 }
 
 .submit {
-  width: 100%;
+  background: #25262B;
+  border-radius: 4px;
+  width: 161px;
+  height: 39px; 
+  *margin-top: 5px;
 }
 
-.name, .login {
-  width: 100%;
+.submit:hover {
+  color: #101113;
+  background-color: rgba(231, 245, 255, 1);
 }
 
-.password {
-  width: 100%;
+.closeBtn {
+  position: absolute;
+  top: 25px;
+  right: 25px;
 }
+
+.closeBtn:hover {
+  color: #101113;
+  background-color: rgba(231, 245, 255, 1);
+}
+
+.message {
+  color: #fa5252;
+}
+
+/* .message::before {
+  position: absolute;
+  content: "";
+  display: block;
+  background: url("icon.jpg") no-repeat;
+  width: 20px;
+  height: 20px;
+  float: left;
+  margin: 0 6px 0 0;
+} */
