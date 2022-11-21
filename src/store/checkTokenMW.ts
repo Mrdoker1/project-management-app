@@ -1,0 +1,26 @@
+import { setToken } from 'store/authSlice';
+import { RootState } from 'store/store';
+import { isExpired } from 'react-jwt';
+import { Middleware, Dispatch } from 'redux';
+import { MiddlewareAPI, AnyAction } from 'redux';
+import { Navigate } from 'react-router-dom';
+
+const checkTokenMW: Middleware<Dispatch> =
+  ({ dispatch, getState }: MiddlewareAPI) =>
+  (next) =>
+  (action: AnyAction) => {
+    if (action.type != 'auth/setToken') {
+      const token = (getState() as RootState).auth.token;
+      if (token && isExpired(token)) {
+        localStorage.clear();
+        dispatch(setToken({ token: '' }));
+
+        console.log('Token has expired!');
+        Navigate({ to: '/' });
+        return;
+      }
+    }
+    return next(action);
+  };
+
+export default checkTokenMW;

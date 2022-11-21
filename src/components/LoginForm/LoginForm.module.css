@@ -75,6 +75,14 @@
   *margin-top: 5px;
 }
 
+.submit[data-loading] {
+  color: #444;
+}
+
+.submit[data-loading]::before {
+  background-color: rgba(0, 0, 0, 0.3);;
+}
+
 .submit:hover {
   color: #101113;
   background-color: rgba(231, 245, 255, 1);

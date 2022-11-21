@@ -5,7 +5,7 @@ import { useLoginMutation } from 'store/api/auth';
 import { setToken } from 'store/authSlice';
 import cl from './LoginForm.module.css';
 import { useForm } from '@mantine/form';
-import { TextInput, PasswordInput, Button, Title, CloseButton, Loader } from '@mantine/core';
+import { TextInput, PasswordInput, Button, Title, CloseButton } from '@mantine/core';
 import { NavLink } from 'react-router-dom';
 import { checkPassword, getErrorMessage } from 'utils/helpers';
 
@@ -41,19 +41,25 @@ const LoginForm = memo(() => {
     navigate('/');
   }, []);
 
-  const message = error ? getErrorMessage(error) : isLoading ? <Loader color="dark" /> : '';
+  const message = error ? getErrorMessage(error) : '';
 
   return (
-    <form onSubmit={form.onSubmit(sendForm)} className={cl.form} autoComplete="off">
+    <form onSubmit={form.onSubmit(sendForm)} className={cl.form}>
       <Title className={cl.title} order={3}>
         Sign in
       </Title>
-      <TextInput classNames={loginClasses} label="Login" {...form.getInputProps('login')} />
+      <TextInput
+        classNames={loginClasses}
+        label="Login"
+        {...form.getInputProps('login')}
+        autoFocus
+        autoComplete="username"
+      />
       <PasswordInput
         classNames={passwordClasses}
         label="Password"
         {...form.getInputProps('password')}
-        autoComplete="off"
+        autoComplete="current-password"
       />
       <p className={cl.answer}>
         {"Don't have an account?"}
@@ -62,7 +68,7 @@ const LoginForm = memo(() => {
         </NavLink>
       </p>
       <p className={cl.message}>{message}</p>
-      <Button className={cl.submit} type="submit">
+      <Button loading={isLoading} loaderPosition="center" className={cl.submit} type="submit">
         Sign in
       </Button>
       <CloseButton

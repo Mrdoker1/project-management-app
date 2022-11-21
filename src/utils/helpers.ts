@@ -1,5 +1,8 @@
+import store from 'store/store';
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
+import { isExpired } from 'react-jwt';
+import { setToken } from 'store/authSlice';
 
 function getRandom(min: number, max: number) {
   min = Math.ceil(min);
@@ -41,4 +44,18 @@ function getErrorMessage(status: FetchBaseQueryError | SerializedError) {
   return 'Unknown error';
 }
 
-export { getRandom, removeObjKey, checkPassword, getErrorMessage };
+function getFromStorage(key: string) {
+  const storage = localStorage.getItem(key);
+  return storage && JSON.parse(storage);
+}
+
+function checkToken() {
+  const token = store.getState().auth.token;
+  if (!token) return;
+  if (isExpired(token)) {
+    store.dispatch(setToken({ token: '' }));
+    console.log('Token has expired!');
+  }
+}
+
+export { getRandom, removeObjKey, checkPassword, getErrorMessage, getFromStorage, checkToken };

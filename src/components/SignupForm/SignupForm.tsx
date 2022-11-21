@@ -1,7 +1,7 @@
-import { Button, CloseButton, Loader, PasswordInput, TextInput, Title } from '@mantine/core';
+import { Button, CloseButton, PasswordInput, TextInput, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { checkPassword, getErrorMessage, removeObjKey } from 'utils/helpers';
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -16,9 +16,9 @@ interface ISignupForm {
 }
 
 const SignupForm = memo(() => {
-  const [signup, { isLoading: isSignupLoading, error: signupError }] = useSignupMutation();
-  const [login, { isLoading: isLoginLoading, error: loginError }] = useLoginMutation();
-  const isLoading = isSignupLoading || isLoginLoading;
+  const [isLoading, setIsLoading] = useState(false);
+  const [signup, { error: signupError }] = useSignupMutation();
+  const [login, { error: loginError }] = useLoginMutation();
   const error = signupError || loginError;
 
   const dispatch = useDispatch();
@@ -35,12 +35,14 @@ const SignupForm = memo(() => {
 
   const sendForm = useCallback(async (values: ISignupForm) => {
     try {
+      setIsLoading(true);
       await signup(values).unwrap();
       const auth = removeObjKey(values, 'name');
       const token = await login(auth).unwrap();
       await dispatch(setToken(token));
       navigate('/projects');
     } catch (err) {
+      setIsLoading(false);
       console.log(err);
     }
   }, []);
@@ -49,20 +51,31 @@ const SignupForm = memo(() => {
     navigate('/');
   }, []);
 
-  const message = error ? getErrorMessage(error) : isLoading ? <Loader color="dark" /> : '';
+  const message = error ? getErrorMessage(error) : '';
 
   return (
-    <form onSubmit={form.onSubmit(sendForm)} className={cl.form} autoComplete="off">
+    <form onSubmit={form.onSubmit(sendForm)} className={cl.form}>
       <Title className={cl.title} order={3}>
         Sign up
       </Title>
-      <TextInput classNames={nameClasses} label="Name" {...form.getInputProps('name')} />
-      <TextInput classNames={loginClasses} label="Login" {...form.getInputProps('login')} />
+      <TextInput
+        classNames={nameClasses}
+        label="Name"
+        {...form.getInputProps('name')}
+        autoFocus
+        autoComplete="username"
+      />
+      <TextInput
+        classNames={loginClasses}
+        label="Login"
+        {...form.getInputProps('login')}
+        autoComplete="username"
+      />
       <PasswordInput
         classNames={passwordClasses}
         label="Password"
         {...form.getInputProps('password')}
-        autoComplete="off"
+        autoComplete="current-password"
       />
       <p className={cl.answer}>
         {'Already have an account?'}
@@ -71,7 +84,7 @@ const SignupForm = memo(() => {
         </NavLink>
       </p>
       <p className={cl.message}>{message}</p>
-      <Button className={cl.submit} type="submit">
+      <Button loading={isLoading} loaderPosition="center" className={cl.submit} type="submit">
         Create an account
       </Button>
       <CloseButton
