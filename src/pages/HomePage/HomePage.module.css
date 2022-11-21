@@ -33,6 +33,7 @@
 
 .splash:before {
   /*
+  VERSION1
   content: '';
   position: absolute;
   top: 0px;
@@ -45,6 +46,7 @@
   background-position: right;
   */
   /*
+  VERSION2
   content: '';
   position: absolute;
   bottom: -155%;
