@@ -6,7 +6,7 @@
 
 Deploy
 * [Server](https://final-task-backend-production-3625.up.railway.app/api-docs/#/)
-* [App](/)
+* [App](https://mrdoker1.github.io/project-management-app/)
 
 About
 * [Task Description](https://github.com/rolling-scopes-school/tasks/blob/master/tasks/react/project-management-system-EN.md)
