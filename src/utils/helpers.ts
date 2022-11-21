@@ -1,4 +1,4 @@
-import store from 'store/store';
+import { setupStore } from 'store/store';
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { isExpired } from 'react-jwt';
@@ -50,10 +50,10 @@ function getFromStorage(key: string) {
 }
 
 function checkToken() {
-  const token = store.getState().auth.token;
+  const token = setupStore().getState().auth.token;
   if (!token) return;
   if (isExpired(token)) {
-    store.dispatch(setToken({ token: '' }));
+    setupStore().dispatch(setToken(''));
     console.log('Token has expired!');
   }
 }

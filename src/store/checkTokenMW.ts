@@ -8,12 +8,12 @@ import { Navigate } from 'react-router-dom';
 const checkTokenMW: Middleware<Dispatch> =
   ({ dispatch, getState }: MiddlewareAPI) =>
   (next) =>
-  (action: AnyAction) => {
+  async (action: AnyAction) => {
     if (action.type != 'auth/setToken') {
       const token = (getState() as RootState).auth.token;
       if (token && isExpired(token)) {
         localStorage.clear();
-        dispatch(setToken({ token: '' }));
+        await dispatch(setToken(''));
 
         console.log('Token has expired!');
         Navigate({ to: '/' });
