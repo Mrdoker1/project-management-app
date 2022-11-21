@@ -1,6 +1,5 @@
-import { Center, Group, Menu } from '@mantine/core';
+import { Group } from '@mantine/core';
 import React, { memo } from 'react';
-import { NavLink } from 'react-router-dom';
 import { useStyles } from '../HeaderStyles';
 
 interface MenuProps {

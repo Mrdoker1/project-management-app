@@ -1,0 +1,58 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.titleBlock{
+  max-width: 436px;
+}
+
+.titleBlock h3 {
+  margin-bottom: 24px;
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 100%;
+  letter-spacing: -0.04em;
+}
+
+.titleBlock p {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 155%;
+}
+
+.subTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 130%;
+  letter-spacing: -0.04em;
+  color: #fff;
+}
+
+
+
+
+/* MEDIA QUERIES */
+@media (max-width: 768px) {
+  /* .wrapper {
+    flex-direction: column;
+  } */
+  .mainPageText {
+    flex-direction: column;
+  }
+  .textWrapper {
+    text-align: center;
+    order: 2;
+  }
+  .textSubTitle {
+    justify-content: center;
+  }
+}

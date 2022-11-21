@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 
 const HomePage = memo(() => {
   const { t } = useTranslation();
-  console.log('Colaborate and build \nfaster,\n together.');
+
   return (
     <>
       <section className={cl.splash}>

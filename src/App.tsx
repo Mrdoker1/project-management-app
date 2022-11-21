@@ -3,9 +3,11 @@ import AppRouter from 'components/AppRouter/AppRouter';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
-import store from 'store/store';
+import { setupStore } from './store/store';
 import './App.css';
 import './i18n';
+
+const store = setupStore();
 
 function App() {
   return (

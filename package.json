@@ -9,6 +9,7 @@
     "@mantine/hooks": "^5.8.0",
     "@mantine/modals": "^5.8.0",
     "@mantine/notifications": "^5.8.0",
+    "@tabler/icons": "^1.112.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

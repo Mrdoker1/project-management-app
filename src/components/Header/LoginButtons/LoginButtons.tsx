@@ -4,18 +4,18 @@ import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { api } from 'store/api';
-import { selectToken, setToken } from 'store/authSlice';
+import { setToken } from 'store/authSlice';
 import { useStyles } from '../HeaderStyles';
 
 const LoginButtons = memo(() => {
   const dispatch = useAppDispatch();
-  const token = useAppSelector(selectToken);
+  const token = useAppSelector((state) => state.auth.token);
   const { classes } = useStyles();
   const { t } = useTranslation();
 
   function clickHandler(e: React.MouseEvent) {
     e.preventDefault();
-    dispatch(setToken({ token: '' }));
+    dispatch(setToken(''));
     dispatch(api.util.resetApiState());
   }
 

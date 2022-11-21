@@ -11,6 +11,7 @@ const auth = api.injectEndpoints({
         method: 'POST',
         body: authInfo,
       }),
+      transformErrorResponse: (response: { status: string | number }) => response.status,
     }),
 
     signup: build.mutation<IUser, IAuth>({
@@ -19,6 +20,7 @@ const auth = api.injectEndpoints({
         method: 'POST',
         body: user,
       }),
+      transformErrorResponse: (response: { status: string | number }) => response.status,
     }),
   }),
   overrideExisting: false,
