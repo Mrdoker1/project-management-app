@@ -61,11 +61,11 @@
   */
   content: '';
   position: absolute;
-  bottom: -37%;
-  right: -5%;
-  width: 600px;
-  height: 600px;
-  animation: rotating 16s infinite ease-in-out;
+  bottom: -160%;
+  right: -30%;
+  width: 1000px;
+  height: 1000px;
+  animation: rotating 23s infinite ease-in-out;
   background: linear-gradient(180deg, #FF6161 0%, #43FFDD 35.88%, #45BCFF 67.65%, #D795FF 100%);
   mix-blend-mode: normal;
   filter: blur(132.344px);
