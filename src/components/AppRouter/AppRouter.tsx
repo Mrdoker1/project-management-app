@@ -4,18 +4,17 @@ import { Route, Routes } from 'react-router-dom';
 import NoPage from 'pages/NoPage';
 import HomePage from 'pages/HomePage/HomePage';
 import SignupPage from 'pages/SignupPage/SignupPage';
-import BoardsPage from 'pages/BoardsPage';
+import BoardsPage from 'pages/BoardsPage/BoardsPage';
 import BoardPage from 'pages/BoardPage';
 import ProfilePage from 'pages/ProfilePage';
 import { useAppSelector } from 'hooks/redux';
-import { selectToken } from 'store/authSlice';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 import Layout from 'components/Layout/Layout';
 import AboutPage from 'pages/AboutPage';
 import LoginPage from 'pages/LoginPage/LoginPage';
 
 const AppRouter = memo(() => {
-  const token = useAppSelector(selectToken);
+  const token = useAppSelector((state) => state.auth.token);
   //console.log(token);
   return (
     <>

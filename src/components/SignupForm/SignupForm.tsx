@@ -37,8 +37,8 @@ const SignupForm = memo(() => {
     try {
       await signup(values).unwrap();
       const auth = removeObjKey(values, 'name');
-      const token = await login(auth).unwrap();
-      await dispatch(setToken(token));
+      const token = await (await login(auth).unwrap()).token;
+      dispatch(setToken(token));
       navigate('/projects');
     } catch (err) {
       console.log(err);

@@ -29,8 +29,9 @@ const LoginForm = memo(() => {
 
   const sendForm = useCallback(async (values: ILoginForm) => {
     try {
-      const token = await login(values).unwrap();
-      await dispatch(setToken(token));
+      const token = await (await login(values).unwrap()).token;
+      console.log(token);
+      dispatch(setToken(token));
       navigate('/projects');
     } catch (err) {
       console.log(err);

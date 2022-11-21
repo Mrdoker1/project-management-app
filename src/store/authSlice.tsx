@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from './store';
 
 interface IAuthState {
   token: string;
@@ -13,14 +12,12 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setToken: (state, { payload: { token } }: PayloadAction<IAuthState>) => {
-      state.token = token;
+    setToken: (state, action: PayloadAction<string>) => {
+      state.token = action.payload;
     },
   },
 });
 
 export const { setToken } = authSlice.actions;
-
-export const selectToken = (state: RootState) => state.auth.token;
 
 export default authSlice.reducer;

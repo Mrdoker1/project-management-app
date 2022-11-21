@@ -16,7 +16,7 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { api } from 'store/api';
-import { selectToken, setToken } from 'store/authSlice';
+import { setToken } from 'store/authSlice';
 import cl from './Header.module.css';
 
 const Logo = () => (
@@ -97,11 +97,11 @@ interface HeaderActionProps {
 }
 
 export function HeaderAction({ links }: HeaderActionProps) {
-  const token = useAppSelector(selectToken);
+  const token = useAppSelector((state) => state.auth.token);
   const dispatch = useAppDispatch();
   function clickHandler(e: React.MouseEvent) {
     e.preventDefault();
-    dispatch(setToken({ token: '' }));
+    dispatch(setToken(''));
     dispatch(api.util.resetApiState());
   }
 
