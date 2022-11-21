@@ -1,27 +1,16 @@
 import BoardList from 'components/BoardList/BoardList';
 import React from 'react';
-import { setModalState } from 'store/boardsSlice';
 import { useGetBoardsQuery } from 'store/api/boards';
-import { Input, Space, Modal } from '@mantine/core';
+import { Input, Space } from '@mantine/core';
 import { IconSearch } from '@tabler/icons';
 import cl from './BoardsPage.module.css';
-import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import BoardsModal from 'pages/BoardsPage/BoardsModal/BoardsModal';
 
 const BoardsPage = () => {
   const { data: boards } = useGetBoardsQuery();
-  const dispatch = useAppDispatch();
-  const modalState = useAppSelector((state) => state.boards.modal.opened);
   return (
     <main className="main">
-      <Modal
-        opened={modalState}
-        onClose={() => {
-          dispatch(setModalState(false));
-        }}
-        title="Introduce yourself!"
-      >
-        {/* Modal content */}
-      </Modal>
+      <BoardsModal />
       <div className="container">
         <div className={layoutClasses.heading}>
           <h1>Projects ({boards ? boards.length : 0})</h1>

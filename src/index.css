@@ -19,3 +19,16 @@ a {
   text-decoration: none;
 }
 */
+
+.mantine-Paper-root {
+  color: white;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px;
+  border: 1px solid #343A40;
+  border-radius: 17px;
+  width: 460px;
+  background-color: #101113;
+  position: relative;
+}
