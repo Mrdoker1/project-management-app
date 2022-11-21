@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 import store from 'store/store';
 import './App.css';
+import './i18n';
 
 function App() {
   return (
