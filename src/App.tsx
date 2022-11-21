@@ -12,9 +12,9 @@ const store = setupStore();
 function App() {
   return (
     <MantineProvider
-      withNormalizeCSS
       theme={{
         fontFamily: 'Open Sans',
+        headings: { fontFamily: 'Open Sans' },
       }}
     >
       <Provider store={store}>
