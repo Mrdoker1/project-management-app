@@ -6,7 +6,7 @@ const resources = {
       'Create, share, and get feedback with collaborative boards for rapid development.':
         'Create, share, and get feedback with collaborative \n boards for rapid development.',
       'Login page title': 'Login page',
-      'About page title': 'About page title',
+      'About project': 'About project',
       'Create Kanban Board': 'Create Kanban Board',
       Integrate: 'Integrate',
       'The ability to quickly set up and customize workflows for just about anything':
@@ -40,7 +40,7 @@ const resources = {
       'Create, share, and get feedback with collaborative boards for rapid development.':
         'Создавайте, делитесь и получайте отзывы с помощью совместных \n  досок для быстрой разработки.',
       'Login page title': 'Страница авторизации',
-      'About page title': 'О нас',
+      'About project': 'О проекте',
       'Create Kanban Board': 'Создать канбан-доску',
       Integrate: 'Интеграция',
       'The ability to quickly set up and customize workflows for just about anything':
