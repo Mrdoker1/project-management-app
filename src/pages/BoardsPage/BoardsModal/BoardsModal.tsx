@@ -1,9 +1,8 @@
 import React from 'react';
 import { setModalState } from 'store/boardsSlice';
-import { Modal } from '@mantine/core';
+import { Modal, Select, TextInput, Button } from '@mantine/core';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { useForm } from '@mantine/form';
-import { TextInput, Button } from '@mantine/core';
 import cl from './BoardsModal.module.css';
 
 const BoardsModal = () => {
@@ -11,13 +10,12 @@ const BoardsModal = () => {
   const modalState = useAppSelector((state) => state.boards.modal.opened);
 
   const form = useForm({
-    initialValues: { name: '', email: '', age: 0 },
+    initialValues: { name: '', description: '' },
 
     // functions will be used to validate values at corresponding key
     validate: {
       name: (value) => (value.length < 2 ? 'Name must have at least 2 letters' : null),
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-      age: (value) => (value < 18 ? 'You must be at least 18 to register' : null),
+      description: (value) => (value.length < 2 ? 'Name must have at least 2 letters' : null),
     },
   });
 
@@ -33,15 +31,26 @@ const BoardsModal = () => {
       <form onSubmit={form.onSubmit(console.log)}>
         <TextInput
           classNames={inputClasses}
-          label="Description"
-          placeholder="Description"
-          {...form.getInputProps('Description')}
+          label="Name"
+          placeholder="Name"
+          {...form.getInputProps('name')}
         />
         <TextInput
           classNames={inputClasses}
-          label="Email"
-          placeholder="Email"
-          {...form.getInputProps('email')}
+          label="Description"
+          placeholder="Description"
+          {...form.getInputProps('description')}
+        />
+        <Select
+          classNames={inputClasses}
+          label="Assigned User"
+          placeholder="Pick one"
+          data={[
+            { value: 'react', label: 'React' },
+            { value: 'ng', label: 'Angular' },
+            { value: 'svelte', label: 'Svelte' },
+            { value: 'vue', label: 'Vue' },
+          ]}
         />
         <Button className={cl.submit} type="submit" mt="sm">
           Save

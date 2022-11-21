@@ -7,6 +7,11 @@
     color: #868E96;
     font-weight: 600;
   }
+
+  .name:focus, .name:focus-within {
+    border-color: #F1F3F5;
+    background-color: #1A1B1E;
+  }
   
   .name {
     background: #101113;
