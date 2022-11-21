@@ -22,7 +22,20 @@ const HomePage = memo(() => {
           <p className={cl.description}>
             {t('Create, share, and get feedback with collaborative boards for rapid development.')}
           </p>
-          <Button className="button" color="cyan" radius={8} sx={{ height: 36 }}>
+          <Button
+            className="button"
+            color="cyan"
+            radius={8}
+            sx={{ height: 36 }}
+            styles={(theme) => ({
+              root: {
+                fontSize: '18px',
+                lineHeight: '155%',
+                position: 'relative',
+                zIndex: 10,
+              },
+            })}
+          >
             {t('Create Kanban Board')}
           </Button>
         </div>
