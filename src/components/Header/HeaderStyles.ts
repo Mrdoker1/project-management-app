@@ -31,7 +31,7 @@ export const useStyles = createStyles((theme) => ({
     padding: '8px 12px',
     borderRadius: theme.radius.sm,
     textDecoration: 'none',
-    color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
+    color: '#909296',
     fontSize: theme.fontSizes.md,
     fontWeight: 600,
 

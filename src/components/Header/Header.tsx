@@ -1,6 +1,6 @@
 import { Menu, Center, Header, Container, Group, Burger } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import cl from './Header.module.css';
 import { useStyles } from './HeaderStyles';
@@ -8,6 +8,7 @@ import logo from '../../assets/logo.svg';
 import DrawerComponent from './Drawer/Drawer';
 import LoginButtons from './LoginButtons/LoginButtons';
 import MenuComponent from './Menu/Menu';
+import i18n from 'i18n';
 
 interface HeaderActionProps {
   links: {
@@ -20,20 +21,27 @@ interface HeaderActionProps {
 const HeaderAction = memo(({ links }: HeaderActionProps) => {
   const { classes } = useStyles();
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
+  const [language, setLanguage] = useState('English');
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language]);
 
   const menuItems = links.map((link) => {
-    const items = link.links?.map((item) => <Menu.Item key={item.link}>{item.label}</Menu.Item>);
+    const items = link.links?.map((item) => (
+      <Menu.Item key={item.link} onClick={() => setLanguage(item.label)}>
+        {item.label}
+      </Menu.Item>
+    ));
 
     if (items) {
       return (
         <Menu key={link.label} trigger="hover" exitTransitionDuration={0}>
           <Menu.Target>
-            <NavLink to={link.link} className={classes.link}>
-              <Center>
-                <span className={classes.linkLabel}>{link.label}</span>
-                {/* <IconChevronDown size={12} stroke={1.5} /> */}
-              </Center>
-            </NavLink>
+            <Center>
+              <span className={classes.linkLabel}>{language}</span>
+              {/* <IconChevronDown size={12} stroke={1.5} /> */}
+            </Center>
           </Menu.Target>
           <Menu.Dropdown>{items}</Menu.Dropdown>
         </Menu>

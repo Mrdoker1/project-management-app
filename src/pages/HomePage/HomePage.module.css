@@ -18,6 +18,7 @@
   font-weight: 600;
   line-height: 100%;
   letter-spacing: -0.04em;
+  white-space: pre-line;
 }
 
 .description {
@@ -25,6 +26,7 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 155%;
+  white-space: pre-line;
 }
 
 .button {

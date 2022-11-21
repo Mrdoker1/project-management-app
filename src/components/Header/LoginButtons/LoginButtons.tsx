@@ -1,6 +1,7 @@
 import { Button, Group } from '@mantine/core';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import React, { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { api } from 'store/api';
 import { selectToken, setToken } from 'store/authSlice';
@@ -10,6 +11,7 @@ const LoginButtons = memo(() => {
   const dispatch = useAppDispatch();
   const token = useAppSelector(selectToken);
   const { classes } = useStyles();
+  const { t } = useTranslation();
 
   function clickHandler(e: React.MouseEvent) {
     e.preventDefault();
@@ -22,7 +24,7 @@ const LoginButtons = memo(() => {
       {token ? (
         <Link to="/" onClick={clickHandler}>
           <Button className="button button--subtle" variant="subtle" radius={8} sx={{ height: 39 }}>
-            Sign Out
+            {t('Sign Out')}
           </Button>
         </Link>
       ) : (
@@ -34,7 +36,7 @@ const LoginButtons = memo(() => {
               radius={8}
               sx={{ height: 39 }}
             >
-              Login
+              {t('Login')}
             </Button>
           </Link>
           <Link to="/signup">
@@ -44,7 +46,7 @@ const LoginButtons = memo(() => {
               variant="outline"
               sx={{ height: 39 }}
             >
-              Sign up
+              {t('Sign up')}
             </Button>
           </Link>
         </>
