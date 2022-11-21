@@ -9,15 +9,31 @@
 html {   
   height: 100%;
   scroll-behavior: smooth;
-  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Open Sans', sans-serif;
 }
 
 body {
   height: 100%;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background: #000;
+  color: #909296;
+  font-weight: 600;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.main {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -51,6 +67,17 @@ button {
   width: 100%;
   padding: 0 15px;
   margin: 0 auto;
+  overflow: hidden;
+}
+
+.page-wrapper {
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.page-login, .page-signup {
+  justify-content: center;
 }
 
 /*
@@ -86,3 +113,56 @@ button {
   height: 100%;
 }
 */
+
+@keyframes rotating {
+  from{
+      transform: rotate(0deg);
+  }
+  to{
+      transform: rotate(360deg);
+  }
+}
+
+.animated-background {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-background::after {
+  content: '';
+  width: 105%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: 0px;
+  background: url('./assets/noise.svg');
+  background-size: 10%;
+}
+
+.animated-background::before {
+  content: '';
+  position: absolute;
+  bottom: -160%;
+  right: -30%;
+  width: 1000px;
+  height: 1000px;
+  animation: rotating 23s infinite ease-in-out;
+  background: linear-gradient(180deg, #FF6161 0%, #43FFDD 35.88%, #45BCFF 67.65%, #D795FF 100%);
+  mix-blend-mode: normal;
+  filter: blur(132.344px);
+  border-radius: 20%;
+  transform: matrix(0, 1, 1, 0, 0, 0);
+}
+
+.animated-background--topLeft:before {
+  top: -600px;
+  left: -40%;
+}
+
+.animated-background--bottomRight:before {
+  bottom: -600px;
+  right: -40%;
+}
