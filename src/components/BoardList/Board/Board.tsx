@@ -2,11 +2,11 @@ import React, { useCallback } from 'react';
 import { memo } from 'react';
 import { useGetBoardsQuery, useDeleteBoardMutation } from 'store/api/boards';
 import { Button, CloseButton } from '@mantine/core';
-import { useAppDispatch } from 'hooks/redux';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { useHover } from '@mantine/hooks';
 import cl from './Board.module.css';
 import { useNavigate } from 'react-router-dom';
-import { setModalState } from 'store/boardsSlice';
+import { setModal, actionType } from 'store/boardsSlice';
 
 interface IBoardProps {
   id: string;
@@ -14,9 +14,10 @@ interface IBoardProps {
 
 const Board = memo<IBoardProps>(({ id }) => {
   const dispatch = useAppDispatch();
+  const modal = useAppSelector((state) => state.boards.modal);
   const { hovered, ref } = useHover();
   const navigate = useNavigate();
-  const [deleteBoard, response] = useDeleteBoardMutation();
+  const [deleteBoard] = useDeleteBoardMutation();
   const { board } = useGetBoardsQuery(undefined, {
     selectFromResult: ({ data }) => ({
       board: data?.find((board) => board._id === id),
@@ -27,8 +28,14 @@ const Board = memo<IBoardProps>(({ id }) => {
     navigate(`/board/${id}`);
   }, []);
 
-  const editBoardHeandler = useCallback(() => {
-    dispatch(setModalState(true));
+  const editBoardHeandler = useCallback(async () => {
+    dispatch(
+      setModal({
+        boardData: board,
+        state: true,
+        type: actionType.Edit,
+      })
+    );
     console.log(id);
   }, []);
 

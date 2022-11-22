@@ -1,18 +1,36 @@
-import React from 'react';
-import { setModalState } from 'store/boardsSlice';
+import React, { useEffect } from 'react';
+import { setModalState, actionType } from 'store/boardsSlice';
 import { Modal, Select, TextInput, Button } from '@mantine/core';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { useForm } from '@mantine/form';
 import cl from './BoardsModal.module.css';
+import { useCreateBoardMutation, useUpdateBoardMutation } from 'store/api/boards';
 
 const BoardsModal = () => {
   const dispatch = useAppDispatch();
-  const modalState = useAppSelector((state) => state.boards.modal.opened);
+  const modal = useAppSelector((state) => state.boards.modal);
+  const [createBoard] = useCreateBoardMutation();
+  const [updateBoard] = useUpdateBoardMutation();
+
+  const users = modal.boardData.users.map((value) => {
+    return {
+      value: value,
+      label: value,
+    };
+  });
+
+  const values = {
+    name: modal.boardData.title,
+    description: modal.boardData._id,
+    owner: modal.boardData.owner,
+  };
 
   const form = useForm({
-    initialValues: { name: '', description: '' },
-
-    // functions will be used to validate values at corresponding key
+    initialValues: {
+      name: '',
+      description: '',
+      owner: '',
+    },
     validate: {
       name: (value) => (value.length < 2 ? 'Name must have at least 2 letters' : null),
       description: (value) => (value.length < 2 ? 'Name must have at least 2 letters' : null),
@@ -22,13 +40,40 @@ const BoardsModal = () => {
   return (
     <Modal
       centered
-      opened={modalState}
+      opened={modal.opened}
       onClose={() => {
         dispatch(setModalState(false));
       }}
-      title="Edit Board"
+      title={modal.type === actionType.Edit ? 'Edit Board' : 'Create Board'}
     >
-      <form onSubmit={form.onSubmit(console.log)}>
+      <form
+        onSubmit={form.onSubmit(async (values) => {
+          if (modal.type === 1) {
+            try {
+              await updateBoard({
+                _id: modal.boardData._id,
+                title: values.name,
+                owner: values.owner,
+                users: [],
+              }).unwrap();
+              dispatch(setModalState(false));
+            } catch (error) {
+              console.error('rejected', error);
+            }
+          } else {
+            try {
+              await createBoard({
+                title: values.name,
+                owner: values.owner,
+                users: modal.boardData.users,
+              }).unwrap();
+              dispatch(setModalState(false));
+            } catch (error) {
+              console.error('rejected', error);
+            }
+          }
+        })}
+      >
         <TextInput
           classNames={inputClasses}
           label="Name"
@@ -42,18 +87,15 @@ const BoardsModal = () => {
           {...form.getInputProps('description')}
         />
         <Select
+          searchable
           classNames={inputClasses}
-          label="Assigned User"
-          placeholder="Pick one"
-          data={[
-            { value: 'react', label: 'React' },
-            { value: 'ng', label: 'Angular' },
-            { value: 'svelte', label: 'Svelte' },
-            { value: 'vue', label: 'Vue' },
-          ]}
+          label="Users"
+          placeholder="Select user"
+          data={users}
+          {...form.getInputProps('owner')}
         />
         <Button className={cl.submit} type="submit" mt="sm">
-          Save
+          {modal.type === 1 ? 'Save' : 'Create'}
         </Button>
       </form>
     </Modal>
