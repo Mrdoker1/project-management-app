@@ -11,7 +11,6 @@ i18n
   .init({
     resources,
     lng: 'English',
-    debug: true,
     /*
     detection: {
       order: ['queryString', 'cookie'],

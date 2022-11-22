@@ -10,9 +10,7 @@ const Layout = memo(() => {
   return (
     <>
       <HeaderAction links={token ? headerLinks['links-auth'] : headerLinks.links} />
-      <main>
-        <Outlet></Outlet>
-      </main>
+      <Outlet></Outlet>
       <Footer />
     </>
   );
