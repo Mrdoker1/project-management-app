@@ -17,6 +17,7 @@ const BoardsModal = () => {
     return {
       value: value.name,
       label: value.name,
+      key: value._id,
     };
   });
 
@@ -48,6 +49,7 @@ const BoardsModal = () => {
       title={modal.type === actionType.Edit ? 'Edit Board' : 'Create Board'}
     >
       <form
+        className={cl.form}
         onSubmit={form.onSubmit(async (values) => {
           if (modal.type === 1) {
             try {
