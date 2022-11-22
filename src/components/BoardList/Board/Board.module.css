@@ -52,7 +52,7 @@
 .buttons {
   position: absolute;
   display: flex;
-  width: 88%;
+  width: calc(100% - 40px);
   flex-direction: row;
   gap: 8px;
   justify-content: center;
