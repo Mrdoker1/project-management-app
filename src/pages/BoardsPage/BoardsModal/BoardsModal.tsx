@@ -99,6 +99,7 @@ const BoardsModal = () => {
         <ColorInput
           classNames={inputClasses}
           label="Color"
+          format="rgb"
           placeholder="Select color"
           {...form.getInputProps('color')}
         />

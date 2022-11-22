@@ -2,11 +2,13 @@ import React, { useCallback } from 'react';
 import { memo } from 'react';
 import { useGetBoardsQuery, useDeleteBoardMutation } from 'store/api/boards';
 import { Button, CloseButton } from '@mantine/core';
-import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import { useAppDispatch } from 'hooks/redux';
 import { useHover } from '@mantine/hooks';
 import cl from './Board.module.css';
 import { useNavigate } from 'react-router-dom';
 import { setModal, actionType } from 'store/boardsSlice';
+import { createUseStyles } from 'react-jss';
+import { Theme, makeStyles } from 'jss-theme';
 
 interface IBoardProps {
   id: string;
@@ -14,7 +16,6 @@ interface IBoardProps {
 
 const Board = memo<IBoardProps>(({ id }) => {
   const dispatch = useAppDispatch();
-  const modal = useAppSelector((state) => state.boards.modal);
   const { hovered, ref } = useHover();
   const navigate = useNavigate();
   const [deleteBoard] = useDeleteBoardMutation();
@@ -23,6 +24,35 @@ const Board = memo<IBoardProps>(({ id }) => {
       board: data?.find((board) => board._id === id),
     }),
   });
+
+  const background = () => {
+    const rgba = `rgba${board!.color.slice(3, board!.color.length - 1)}, 1)`;
+    const rgbaZero = `rgba${board!.color.slice(3, board!.color.length - 1)}, 0)`;
+    return `linear-gradient(to bottom, ${rgba}, ${rgbaZero})`;
+  };
+
+  const useStyles = createUseStyles({
+    gradientBorder: () => ({
+      position: 'relative',
+      boxSizing: 'border-box',
+      backgroundClip: 'padding-box',
+      border: 'solid 1px transparent',
+      '&:before': {
+        content: '""',
+        position: 'absolute',
+        top: '0',
+        right: '0',
+        bottom: '0',
+        left: '0',
+        zIndex: '-1',
+        margin: '-1px',
+        borderRadius: 'inherit',
+        background: background(),
+      },
+    }),
+  });
+
+  const classes = useStyles();
 
   const openBoardHeandler = useCallback(() => {
     navigate(`/board/${id}`);
@@ -78,7 +108,7 @@ const Board = memo<IBoardProps>(({ id }) => {
   );
 
   return (
-    <div ref={ref} className={`${cl.board} ${cl.gradientBorder}`}>
+    <div ref={ref} className={`${cl.board} ${classes.gradientBorder}`}>
       {hovered ? hoverLayout : defaultLayout}
     </div>
   );

@@ -59,13 +59,12 @@
 }
 
 .button {
-  background: #25262B;
+  background:rgba(0, 0, 0, 0.4);
   border-radius: 4px;
 }
 
 .button:hover {
-  color: #101113;
-  background-color: rgba(231, 245, 255, 1);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .deleteBtn{
