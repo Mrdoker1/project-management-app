@@ -37,7 +37,8 @@ const BoardsModal = () => {
 
   useEffect(() => {
     form.setValues(values);
-  }, [2]);
+    console.log('dsds');
+  }, [modal]);
 
   return (
     <Modal
