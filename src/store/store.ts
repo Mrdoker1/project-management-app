@@ -2,11 +2,13 @@ import { api } from './api';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import boardsReducer from './boardsSlice';
 import authReducer from './authSlice';
+import usersReducer from './usersSlice';
 
 const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
   auth: authReducer,
   boards: boardsReducer,
+  users: usersReducer,
 });
 
 export const setupStore = () => {

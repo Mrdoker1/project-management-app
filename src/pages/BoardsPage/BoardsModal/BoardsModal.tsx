@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import { setModalState, actionType } from 'store/boardsSlice';
 import { Modal, Select, TextInput, Button } from '@mantine/core';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
@@ -9,13 +9,14 @@ import { useCreateBoardMutation, useUpdateBoardMutation } from 'store/api/boards
 const BoardsModal = () => {
   const dispatch = useAppDispatch();
   const modal = useAppSelector((state) => state.boards.modal);
+  const usersData = useAppSelector((state) => state.users.users);
   const [createBoard] = useCreateBoardMutation();
   const [updateBoard] = useUpdateBoardMutation();
 
-  const users = modal.boardData.users.map((value) => {
+  const users = usersData.map((value) => {
     return {
-      value: value,
-      label: value,
+      value: value.name,
+      label: value.name,
     };
   });
 
@@ -26,16 +27,16 @@ const BoardsModal = () => {
   };
 
   const form = useForm({
-    initialValues: {
-      name: '',
-      description: '',
-      owner: '',
-    },
+    initialValues: values,
     validate: {
       name: (value) => (value.length < 2 ? 'Name must have at least 2 letters' : null),
       description: (value) => (value.length < 2 ? 'Name must have at least 2 letters' : null),
     },
   });
+
+  useEffect(() => {
+    form.setValues(values);
+  }, [2]);
 
   return (
     <Modal
@@ -65,7 +66,7 @@ const BoardsModal = () => {
               await createBoard({
                 title: values.name,
                 owner: values.owner,
-                users: modal.boardData.users,
+                users: [],
               }).unwrap();
               dispatch(setModalState(false));
             } catch (error) {
@@ -89,7 +90,7 @@ const BoardsModal = () => {
         <Select
           searchable
           classNames={inputClasses}
-          label="Users"
+          label="Owner"
           placeholder="Select user"
           data={users}
           {...form.getInputProps('owner')}
