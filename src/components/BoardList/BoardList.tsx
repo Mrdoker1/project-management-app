@@ -1,28 +1,29 @@
 import React, { useCallback } from 'react';
 import { useGetBoardsQuery } from 'store/api/boards';
-import { SimpleGrid, Button } from '@mantine/core';
+import { SimpleGrid, Button, Loader } from '@mantine/core';
 import Board from './Board/Board';
 import { IconPlus } from '@tabler/icons';
 import cl from './BoardList.module.css';
 import { actionType, setModal } from 'store/boardsSlice';
-import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import { useAppDispatch } from 'hooks/redux';
 
 const BoardList = () => {
   const { data: boards, isLoading, error } = useGetBoardsQuery();
   const dispatch = useAppDispatch();
-  const modal = useAppSelector((state) => state.boards.modal);
   const createBoardHeandler = useCallback(() => {
     const emptyBoard = {
       _id: '',
       title: '',
       owner: '',
+      description: '',
+      color: '',
       users: [],
     };
     dispatch(setModal({ boardData: emptyBoard, state: true, type: actionType.Create }));
   }, []);
 
   if (typeof error == 'number') return <div>Ошибка {error}</div>;
-  if (isLoading) return <div>Загрузка...</div>;
+  if (isLoading) return <Loader color="dark" />;
   if (!boards) return <div>Ничего не найдено!</div>;
   return (
     <>

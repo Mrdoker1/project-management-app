@@ -58,7 +58,7 @@ const Board = memo<IBoardProps>(({ id }) => {
         title="back to home"
       />
       <h4 className={cl.boardTitle}>{board.title}</h4>
-      <p className={cl.boardDescription}>{board.owner}</p>
+      <p className={cl.boardDescription}>{board.description}</p>
       <div className={cl.buttons}>
         <Button onClick={openBoardHeandler} className={cl.button}>
           Open Board
@@ -73,7 +73,7 @@ const Board = memo<IBoardProps>(({ id }) => {
   const defaultLayout = (
     <>
       <h4 className={cl.boardTitle}>{board.title}</h4>
-      <p className={cl.boardDescription}>{board.owner}</p>
+      <p className={cl.boardDescription}>{board.description}</p>
     </>
   );
 

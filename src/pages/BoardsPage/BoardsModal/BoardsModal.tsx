@@ -1,6 +1,6 @@
-import React, { useEffect, useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import { setModalState, actionType } from 'store/boardsSlice';
-import { Modal, Select, TextInput, Button } from '@mantine/core';
+import { Modal, Select, TextInput, Button, Textarea, ColorInput } from '@mantine/core';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { useForm } from '@mantine/form';
 import cl from './BoardsModal.module.css';
@@ -23,8 +23,9 @@ const BoardsModal = () => {
 
   const values = {
     name: modal.boardData.title,
-    description: modal.boardData._id,
+    description: modal.boardData.description,
     owner: modal.boardData.owner,
+    color: modal.boardData.color,
   };
 
   const form = useForm({
@@ -37,7 +38,6 @@ const BoardsModal = () => {
 
   useEffect(() => {
     form.setValues(values);
-    console.log('dsds');
   }, [modal]);
 
   return (
@@ -58,6 +58,8 @@ const BoardsModal = () => {
                 _id: modal.boardData._id,
                 title: values.name,
                 owner: values.owner,
+                description: values.description,
+                color: values.color,
                 users: [],
               }).unwrap();
               dispatch(setModalState(false));
@@ -69,6 +71,8 @@ const BoardsModal = () => {
               await createBoard({
                 title: values.name,
                 owner: values.owner,
+                description: values.description,
+                color: values.color,
                 users: [],
               }).unwrap();
               dispatch(setModalState(false));
@@ -84,12 +88,6 @@ const BoardsModal = () => {
           placeholder="Name"
           {...form.getInputProps('name')}
         />
-        <TextInput
-          classNames={inputClasses}
-          label="Description"
-          placeholder="Description"
-          {...form.getInputProps('description')}
-        />
         <Select
           searchable
           classNames={inputClasses}
@@ -97,6 +95,18 @@ const BoardsModal = () => {
           placeholder="Select user"
           data={users}
           {...form.getInputProps('owner')}
+        />
+        <ColorInput
+          classNames={inputClasses}
+          label="Color"
+          placeholder="Select color"
+          {...form.getInputProps('color')}
+        />
+        <Textarea
+          classNames={inputClasses}
+          label="Description"
+          placeholder="Description"
+          {...form.getInputProps('description')}
         />
         <Button className={cl.submit} type="submit" mt="sm">
           {modal.type === 1 ? 'Save' : 'Create'}

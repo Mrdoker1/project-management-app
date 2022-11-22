@@ -20,6 +20,8 @@ const initialState: IBoardsState = {
       _id: '',
       title: '',
       owner: '',
+      description: '',
+      color: '',
       users: [],
     },
     opened: false,
@@ -48,8 +50,11 @@ export const boardsSlice = createSlice({
     setModalState: (state, action: PayloadAction<boolean>) => {
       state.modal.opened = action.payload;
     },
+    setBoardColor: (state, action: PayloadAction<string>) => {
+      state.modal.boardData.color = action.payload;
+    },
   },
 });
 
 export default boardsSlice.reducer;
-export const { setModalState, setModal } = boardsSlice.actions;
+export const { setModalState, setModal, setBoardColor } = boardsSlice.actions;
