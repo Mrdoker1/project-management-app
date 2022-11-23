@@ -6,7 +6,7 @@ import { useAppDispatch } from 'hooks/redux';
 import { useHover } from '@mantine/hooks';
 import cl from './Board.module.css';
 import { useNavigate } from 'react-router-dom';
-import { setModal, actionType } from 'store/boardsSlice';
+import { actionType, setModalBoardId, setModalState, setModalType } from 'store/boardsSlice';
 import { createUseStyles } from 'react-jss';
 
 interface IBoardProps {
@@ -58,13 +58,9 @@ const Board = memo<IBoardProps>(({ id }) => {
   }, []);
 
   const editBoardHeandler = useCallback(async () => {
-    dispatch(
-      setModal({
-        boardData: board,
-        state: true,
-        type: actionType.Edit,
-      })
-    );
+    dispatch(setModalState(true));
+    dispatch(setModalType(actionType.Edit));
+    dispatch(setModalBoardId(id));
     console.log(id);
   }, []);
 

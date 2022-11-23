@@ -1,22 +1,15 @@
 import BoardList from 'components/BoardList/BoardList';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useGetBoardsQuery } from 'store/api/boards';
 import { Input, Space } from '@mantine/core';
 import { IconSearch } from '@tabler/icons';
 import cl from './BoardsPage.module.css';
 import BoardsModal from 'pages/BoardsPage/BoardsModal/BoardsModal';
 import { useGetUsersQuery } from 'store/api/users';
-import { useAppDispatch } from 'hooks/redux';
-import { setUsers } from 'store/usersSlice';
 
 const BoardsPage = () => {
   const { data: boards } = useGetBoardsQuery();
-  const { data: users } = useGetUsersQuery();
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(setUsers(users || []));
-  });
+  const {} = useGetUsersQuery();
 
   return (
     <main className="main">

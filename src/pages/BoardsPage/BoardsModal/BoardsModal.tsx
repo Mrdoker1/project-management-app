@@ -4,16 +4,28 @@ import { Modal, Select, TextInput, Button, Textarea, ColorInput } from '@mantine
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { useForm } from '@mantine/form';
 import cl from './BoardsModal.module.css';
-import { useCreateBoardMutation, useUpdateBoardMutation } from 'store/api/boards';
+import {
+  boards,
+  useCreateBoardMutation,
+  useGetBoardQuery,
+  useUpdateBoardMutation,
+} from 'store/api/boards';
+import { useSelector } from 'react-redux';
+import { useGetUsersQuery, users } from 'store/api/users';
 
 const BoardsModal = () => {
   const dispatch = useAppDispatch();
   const modal = useAppSelector((state) => state.boards.modal);
-  const usersData = useAppSelector((state) => state.users.users);
+  useGetBoardQuery(modal.board.id);
+  useGetUsersQuery();
+  const getUsersSelector = users.endpoints.getUsers.select();
+  const getBoardsSelector = boards.endpoints.getBoard.select(modal.board.id);
+  const usersData = useSelector(getUsersSelector).data;
+  const boardData = useSelector(getBoardsSelector).data;
   const [createBoard] = useCreateBoardMutation();
   const [updateBoard] = useUpdateBoardMutation();
 
-  const users = usersData.map((value) => {
+  const usersList = usersData!.map((value) => {
     return {
       value: value.name,
       label: value.name,
@@ -22,10 +34,10 @@ const BoardsModal = () => {
   });
 
   const values = {
-    name: modal.boardData.title,
-    description: modal.boardData.description,
-    owner: modal.boardData.owner,
-    color: modal.boardData.color,
+    name: boardData!.title,
+    description: boardData!.description,
+    owner: boardData!.owner,
+    color: boardData!.color,
   };
 
   const form = useForm({
@@ -55,7 +67,7 @@ const BoardsModal = () => {
           if (modal.type === 1) {
             try {
               await updateBoard({
-                _id: modal.boardData._id,
+                _id: modal.board.id,
                 title: values.name,
                 owner: values.owner,
                 description: values.description,
@@ -93,7 +105,7 @@ const BoardsModal = () => {
           classNames={inputClasses}
           label="Owner"
           placeholder="Select user"
-          data={users}
+          data={usersList}
           {...form.getInputProps('owner')}
         />
         <ColorInput

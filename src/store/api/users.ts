@@ -1,7 +1,7 @@
 import { IUser } from './../../interfaces/IUser';
 import { api } from './../api';
 
-const users = api.injectEndpoints({
+export const users = api.injectEndpoints({
   endpoints: (build) => ({
     getUsers: build.query<IUser[], void>({
       query: () => 'users',

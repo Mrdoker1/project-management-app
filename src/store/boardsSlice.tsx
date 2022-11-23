@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IBoard } from 'interfaces/IBoard';
 
 export enum actionType {
   Edit = 1,
@@ -8,7 +7,9 @@ export enum actionType {
 
 interface IBoardsState {
   modal: {
-    boardData: IBoard;
+    board: {
+      id: string;
+    };
     opened: boolean;
     type: actionType;
   };
@@ -16,13 +17,8 @@ interface IBoardsState {
 
 const initialState: IBoardsState = {
   modal: {
-    boardData: {
-      _id: '',
-      title: '',
-      owner: '',
-      description: '',
-      color: '',
-      users: [],
+    board: {
+      id: '',
     },
     opened: false,
     type: actionType.Edit,
@@ -33,28 +29,17 @@ export const boardsSlice = createSlice({
   name: 'boards',
   initialState,
   reducers: {
-    setModal: (
-      state,
-      action: PayloadAction<{
-        boardData?: IBoard;
-        state: boolean;
-        type: actionType;
-      }>
-    ) => {
-      if (action.payload.boardData) {
-        state.modal.boardData = action.payload.boardData;
-      }
-      state.modal.opened = action.payload.state;
-      state.modal.type = action.payload.type;
-    },
     setModalState: (state, action: PayloadAction<boolean>) => {
       state.modal.opened = action.payload;
     },
-    setBoardColor: (state, action: PayloadAction<string>) => {
-      state.modal.boardData.color = action.payload;
+    setModalType: (state, action: PayloadAction<actionType>) => {
+      state.modal.type = action.payload;
+    },
+    setModalBoardId: (state, action: PayloadAction<string>) => {
+      state.modal.board.id = action.payload;
     },
   },
 });
 
 export default boardsSlice.reducer;
-export const { setModalState, setModal, setBoardColor } = boardsSlice.actions;
+export const { setModalState, setModalBoardId, setModalType } = boardsSlice.actions;
