@@ -8,7 +8,6 @@ import cl from './Board.module.css';
 import { useNavigate } from 'react-router-dom';
 import { setModal, actionType } from 'store/boardsSlice';
 import { createUseStyles } from 'react-jss';
-import { Theme, makeStyles } from 'jss-theme';
 
 interface IBoardProps {
   id: string;
@@ -28,7 +27,7 @@ const Board = memo<IBoardProps>(({ id }) => {
   const background = () => {
     const rgba = `rgba${board!.color.slice(3, board!.color.length - 1)}, 1)`;
     const rgbaZero = `rgba${board!.color.slice(3, board!.color.length - 1)}, 0)`;
-    return `linear-gradient(to bottom, ${rgba}, ${rgbaZero})`;
+    return `linear-gradient(180deg, ${rgba}, 30%, ${rgbaZero})`;
   };
 
   const useStyles = createUseStyles({

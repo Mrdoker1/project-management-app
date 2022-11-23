@@ -72,7 +72,7 @@ const BoardsModal = () => {
                 title: values.name,
                 owner: values.owner,
                 description: values.description,
-                color: values.color,
+                color: values.color ? values.color : 'rgb(140, 140, 140)',
                 users: [],
               }).unwrap();
               dispatch(setModalState(false));

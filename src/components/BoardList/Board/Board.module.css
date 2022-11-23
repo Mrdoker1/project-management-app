@@ -11,7 +11,7 @@
   text-align: center;
   padding: 60px 20px 60px;
   border-radius: 17px;
-  background: linear-gradient(180deg, #101113 0%, rgba(16, 17, 19, 0) 100%);
+  background: linear-gradient(180deg, #000000 0%, rgba(83, 107, 155, 0) 100%);
 }
 
 .boardTitle {
@@ -59,12 +59,13 @@
 }
 
 .button {
-  background:rgba(0, 0, 0, 0.4);
+  background:rgba(80, 80, 80, 0.4);
   border-radius: 4px;
 }
 
 .button:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  color:rgba(0, 0, 0, 1);
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .deleteBtn{
