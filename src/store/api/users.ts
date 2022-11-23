@@ -33,3 +33,5 @@ export const users = api.injectEndpoints({
 
 export const { useGetUsersQuery, useGetUserQuery, useUpdateUserMutation, useDeleteUserMutation } =
   users;
+
+export default users;

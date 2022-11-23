@@ -1,13 +1,16 @@
-import { Button, CloseButton, Loader, PasswordInput, TextInput, Title } from '@mantine/core';
+import { Button, CloseButton, PasswordInput, TextInput, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { checkPassword, getErrorMessage, removeObjKey } from 'utils/helpers';
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useLoginMutation, useSignupMutation } from 'store/api/auth';
 import { setToken } from 'store/authSlice';
 import cl from './SignupForm.module.css';
+import users from 'store/api/users';
+import { setProfile } from 'store/profileSlice';
+import { useTranslation } from 'react-i18next';
 
 interface ISignupForm {
   name: string;
@@ -16,10 +19,12 @@ interface ISignupForm {
 }
 
 const SignupForm = memo(() => {
-  const [signup, { isLoading: isSignupLoading, error: signupError }] = useSignupMutation();
-  const [login, { isLoading: isLoginLoading, error: loginError }] = useLoginMutation();
-  const isLoading = isSignupLoading || isLoginLoading;
+  const [isLoading, setIsLoading] = useState(false);
+  const [signup, { error: signupError }] = useSignupMutation();
+  const [login, { error: loginError }] = useLoginMutation();
+  const [getUsers] = users.endpoints.getUsers.useLazyQuery();
   const error = signupError || loginError;
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,12 +40,20 @@ const SignupForm = memo(() => {
 
   const sendForm = useCallback(async (values: ISignupForm) => {
     try {
+      setIsLoading(true);
       await signup(values).unwrap();
       const auth = removeObjKey(values, 'name');
-      const token = await (await login(auth).unwrap()).token;
-      dispatch(setToken(token));
+      const token = await login(auth).unwrap();
+      await dispatch(setToken(token));
+
+      const data = await getUsers().unwrap();
+      const user = data.find((user) => user.login === values.login);
+      if (!user) throw new Error('User not exists!');
+      await dispatch(setProfile(user));
+
       navigate('/projects');
     } catch (err) {
+      setIsLoading(false);
       console.log(err);
     }
   }, []);
@@ -49,37 +62,48 @@ const SignupForm = memo(() => {
     navigate('/');
   }, []);
 
-  const message = error ? getErrorMessage(error) : isLoading ? <Loader color="dark" /> : '';
+  const message = error ? getErrorMessage(error) : '';
 
   return (
-    <form onSubmit={form.onSubmit(sendForm)} className={cl.form} autoComplete="off">
+    <form onSubmit={form.onSubmit(sendForm)} className={cl.form}>
       <Title className={cl.title} order={3}>
-        Sign up
+        {t('Sign up')}
       </Title>
-      <TextInput classNames={nameClasses} label="Name" {...form.getInputProps('name')} />
-      <TextInput classNames={loginClasses} label="Login" {...form.getInputProps('login')} />
+      <TextInput
+        classNames={nameClasses}
+        label={t('Name')}
+        {...form.getInputProps('name')}
+        autoFocus
+        autoComplete="username"
+      />
+      <TextInput
+        classNames={loginClasses}
+        label={t('Login')}
+        {...form.getInputProps('login')}
+        autoComplete="username"
+      />
       <PasswordInput
         classNames={passwordClasses}
-        label="Password"
+        label={t('Password')}
         {...form.getInputProps('password')}
-        autoComplete="off"
+        autoComplete="current-password"
       />
       <p className={cl.answer}>
-        {'Already have an account?'}
+        {t('Already have an account?')}
         <NavLink to="/login" className={cl.link}>
-          Sign in
+          {t('Come in')}
         </NavLink>
       </p>
       <p className={cl.message}>{message}</p>
-      <Button className={cl.submit} type="submit">
-        Create an account
+      <Button loading={isLoading} loaderPosition="center" className={cl.submit} type="submit">
+        {t('Create an account')}
       </Button>
       <CloseButton
         onClick={closeHandler}
         size={24}
         className={cl.closeBtn}
         aria-label="Close modal"
-        title="back to home"
+        title="back to home page"
       />
     </form>
   );

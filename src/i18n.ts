@@ -10,7 +10,8 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'English',
+    //lng: 'English',
+    //returnNull: false,
     /*
     detection: {
       order: ['queryString', 'cookie'],
