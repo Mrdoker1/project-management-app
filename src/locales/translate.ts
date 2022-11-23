@@ -31,6 +31,10 @@ const resources = {
       Login: 'Login',
       'Sign up': 'Sign Up',
       'Sign Out': 'Sign Out',
+      About: 'About',
+      Projects: 'Projects',
+      Profile: 'Profile',
+      Search: 'Search',
     },
   },
   Russian: {
@@ -66,6 +70,10 @@ const resources = {
       Login: 'Вход',
       'Sign up': 'Регистрация',
       'Sign Out': 'Выход',
+      About: 'О проекте',
+      Projects: 'Проекты',
+      Profile: 'Профиль',
+      Search: 'Поиск',
     },
   },
 };
