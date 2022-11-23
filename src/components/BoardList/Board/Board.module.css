@@ -14,6 +14,13 @@
   background: linear-gradient(180deg, #000000 0%, rgba(83, 107, 155, 0) 100%);
 }
 
+.box {
+  position: 'relative';
+  box-sizing: 'border-box';
+  background-clip: 'padding-box';
+  border: 'solid 1px transparent';
+}
+
 .boardTitle {
   margin-bottom: 8px;
   font-size: 18px;

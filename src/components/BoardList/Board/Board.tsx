@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { memo } from 'react';
 import { useGetBoardsQuery, useDeleteBoardMutation } from 'store/api/boards';
 import { Button, CloseButton } from '@mantine/core';
@@ -7,7 +7,6 @@ import { useHover } from '@mantine/hooks';
 import cl from './Board.module.css';
 import { useNavigate } from 'react-router-dom';
 import { actionType, setModalBoardId, setModalState, setModalType } from 'store/boardsSlice';
-import { createUseStyles } from 'react-jss';
 
 interface IBoardProps {
   id: string;
@@ -24,34 +23,37 @@ const Board = memo<IBoardProps>(({ id }) => {
     }),
   });
 
-  const background = () => {
-    const rgba = `rgba${board!.color.slice(3, board!.color.length - 1)}, 1)`;
-    const rgbaZero = `rgba${board!.color.slice(3, board!.color.length - 1)}, 0)`;
-    return `linear-gradient(180deg, ${rgba}, 30%, ${rgbaZero})`;
-  };
+  const [gradient, setGradient] = useState('');
 
-  const useStyles = createUseStyles({
-    gradientBorder: () => ({
-      position: 'relative',
-      boxSizing: 'border-box',
-      backgroundClip: 'padding-box',
-      border: 'solid 1px transparent',
-      '&:before': {
-        content: '""',
-        position: 'absolute',
-        top: '0',
-        right: '0',
-        bottom: '0',
-        left: '0',
-        zIndex: '-1',
-        margin: '-1px',
-        borderRadius: 'inherit',
-        background: background(),
-      },
-    }),
-  });
+  const boardStyle = {
+    position: 'relative',
+    boxSizing: 'border-box',
+    backgroundClip: 'padding-box',
+    border: 'solid 1px transparent',
+  } as React.CSSProperties;
 
-  const classes = useStyles();
+  const gradientStyle = {
+    content: '""',
+    position: 'absolute',
+    top: '0',
+    right: '0',
+    bottom: '0',
+    left: '0',
+    zIndex: '-1',
+    margin: '-1px',
+    borderRadius: 'inherit',
+    background: gradient,
+  } as React.CSSProperties;
+
+  useEffect(() => {
+    if (board) {
+      const rgba = `rgba${board.color.slice(3, board.color.length - 1)}, 1)`;
+      const rgbaZero = `rgba${board.color.slice(3, board.color.length - 1)}, 0)`;
+      const gradient = `linear-gradient(180deg, ${rgba}, 30%, ${rgbaZero})`;
+      setGradient(gradient);
+      console.log(gradient);
+    }
+  }, [board]);
 
   const openBoardHeandler = useCallback(() => {
     navigate(`/board/${id}`);
@@ -103,9 +105,12 @@ const Board = memo<IBoardProps>(({ id }) => {
   );
 
   return (
-    <div ref={ref} className={`${cl.board} ${classes.gradientBorder}`}>
-      {hovered ? hoverLayout : defaultLayout}
-    </div>
+    <>
+      <div ref={ref} style={boardStyle} className={`${cl.board}`}>
+        {hovered ? hoverLayout : defaultLayout}
+        <div style={gradientStyle}></div>
+      </div>
+    </>
   );
 });
 

@@ -93,6 +93,8 @@ export const {
   useUpdateBoardMutation,
   useDeleteBoardMutation,
   useGetBoardsByIdsQuery,
+  useLazyGetBoardsQuery,
+  useLazyGetBoardQuery,
   useLazyGetBoardsByIdsQuery,
   useGetBoardsByUserIdQuery,
 } = boards;

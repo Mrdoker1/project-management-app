@@ -1,56 +1,59 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { setModalState, actionType } from 'store/boardsSlice';
 import { Modal, Select, TextInput, Button, Textarea, ColorInput } from '@mantine/core';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { useForm } from '@mantine/form';
 import cl from './BoardsModal.module.css';
-import {
-  boards,
-  useCreateBoardMutation,
-  useGetBoardQuery,
-  useUpdateBoardMutation,
-} from 'store/api/boards';
-import { useSelector } from 'react-redux';
-import { useGetUsersQuery, users } from 'store/api/users';
+import { useCreateBoardMutation, useGetBoardQuery, useUpdateBoardMutation } from 'store/api/boards';
+import { useGetUsersQuery } from 'store/api/users';
 
 const BoardsModal = () => {
   const dispatch = useAppDispatch();
   const modal = useAppSelector((state) => state.boards.modal);
-  useGetBoardQuery(modal.board.id);
-  useGetUsersQuery();
-  const getUsersSelector = users.endpoints.getUsers.select();
-  const getBoardsSelector = boards.endpoints.getBoard.select(modal.board.id);
-  const usersData = useSelector(getUsersSelector).data;
-  const boardData = useSelector(getBoardsSelector).data;
+
   const [createBoard] = useCreateBoardMutation();
   const [updateBoard] = useUpdateBoardMutation();
 
-  const usersList = usersData!.map((value) => {
-    return {
-      value: value.name,
-      label: value.name,
-      key: value._id,
-    };
-  });
+  const { data: board } = useGetBoardQuery(modal.board.id);
+  const { data: users } = useGetUsersQuery();
 
-  const values = {
-    name: boardData!.title,
-    description: boardData!.description,
-    owner: boardData!.owner,
-    color: boardData!.color,
+  const defaultValues = {
+    name: '',
+    description: '',
+    owner: modal.type == 2 ? 'Mask' : '',
+    color: '',
   };
 
+  const [usersList, setUsers] = useState([{ value: '', label: '', key: '' }]);
+  const [boardData, setBoard] = useState(defaultValues);
+
+  useEffect(() => {
+    if (users) {
+      const usersData = users.map((value) => {
+        return { value: value.name, label: value.name, key: value._id };
+      });
+      setUsers(usersData);
+    }
+
+    if (board) {
+      const values = {
+        name: board.title,
+        description: board.description,
+        owner: board.owner,
+        color: board.color,
+      };
+      modal.type == 1 ? form.setValues(values) : form.setValues(defaultValues);
+      setBoard(values);
+    }
+  }, [board, modal]);
+
   const form = useForm({
-    initialValues: values,
+    initialValues: boardData,
     validate: {
       name: (value) => (value.length < 2 ? 'Name must have at least 2 letters' : null),
       description: (value) => (value.length < 2 ? 'Name must have at least 2 letters' : null),
     },
   });
-
-  useEffect(() => {
-    form.setValues(values);
-  }, [modal]);
 
   return (
     <Modal

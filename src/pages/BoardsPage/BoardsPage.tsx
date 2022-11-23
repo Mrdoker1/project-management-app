@@ -5,11 +5,9 @@ import { Input, Space } from '@mantine/core';
 import { IconSearch } from '@tabler/icons';
 import cl from './BoardsPage.module.css';
 import BoardsModal from 'pages/BoardsPage/BoardsModal/BoardsModal';
-import { useGetUsersQuery } from 'store/api/users';
 
 const BoardsPage = () => {
   const { data: boards } = useGetBoardsQuery();
-  const {} = useGetUsersQuery();
 
   return (
     <main className="main">
