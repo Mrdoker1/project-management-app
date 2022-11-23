@@ -1,24 +1,30 @@
 {
   "files": {
-    "main.css": "/project-management-app/static/css/main.f2aea972.css",
-    "main.js": "/project-management-app/static/js/main.0491f398.js",
-    "static/media/noise.svg": "/project-management-app/static/media/noise.a2d3768d7dec9a58bea8.svg",
+    "main.css": "/project-management-app/static/css/main.c861939d.css",
+    "main.js": "/project-management-app/static/js/main.9edac200.js",
+    "static/media/noise.svg": "/project-management-app/static/media/noise.e07516f4891703e45c35.svg",
     "static/media/main-page-img1.png": "/project-management-app/static/media/main-page-img1.00baf73b9a6c59d7a84e.png",
     "static/media/main-page-img2.png": "/project-management-app/static/media/main-page-img2.3cc36cc9f611f42ff9cc.png",
     "static/media/main-page-img3.png": "/project-management-app/static/media/main-page-img3.07380afdd8a9b0524b66.png",
-    "static/media/rs-logo.svg": "/project-management-app/static/media/rs-logo.839968899a4f024d61fad52e73d2552e.svg",
-    "static/media/feature3.svg": "/project-management-app/static/media/feature3.b8439b5fc999a01d583b72b92bc292b9.svg",
-    "static/media/feature2.svg": "/project-management-app/static/media/feature2.d915fb6783eed4957994957ae5dfd90d.svg",
-    "static/media/logo.svg": "/project-management-app/static/media/logo.4d60fdcc7551a6afbe315335f36e769b.svg",
-    "static/media/feature1.svg": "/project-management-app/static/media/feature1.fc5d8ac6cf360a36994cf7ba148194f9.svg",
+    "static/media/rs-logo.svg": "/project-management-app/static/media/rs-logo.6d15a1e3d423bf1ba7d297149985bddc.svg",
+    "static/media/ts-ico.svg": "/project-management-app/static/media/ts-ico.cdf3e5fc1e781d4ef93dbb7eca21853e.svg",
+    "static/media/i18-ico.svg": "/project-management-app/static/media/i18-ico.d9301975c3f290e4e7c356d6a9780050.svg",
+    "static/media/redux-ico.svg": "/project-management-app/static/media/redux-ico.d3e007b89c21d23aeed820d9cb5169a6.svg",
+    "static/media/mantine-ico.svg": "/project-management-app/static/media/mantine-ico.24f998482d486f0c637fe15a76bdd2e1.svg",
+    "static/media/git.svg": "/project-management-app/static/media/git.a2acd7134380a9c791181244c34092df.svg",
+    "static/media/react-ico.svg": "/project-management-app/static/media/react-ico.a83117f72599b36bf66a146029e19823.svg",
+    "static/media/feature3.svg": "/project-management-app/static/media/feature3.325b84d036f65b9bc6f44c4a68dec09c.svg",
+    "static/media/feature2.svg": "/project-management-app/static/media/feature2.f257481983eb11ef25cce57801bebfca.svg",
+    "static/media/logo.svg": "/project-management-app/static/media/logo.d952dd9327d98b84ada56bd0c48ee8ac.svg",
+    "static/media/feature1.svg": "/project-management-app/static/media/feature1.01749128703ef353cc2116c84b61c259.svg",
     "index.html": "/project-management-app/index.html",
     "static/media/getFetch.cjs": "/project-management-app/static/media/getFetch.40f37ddea2378391108f.cjs",
-    "static/media/check-ico.svg": "/project-management-app/static/media/check-ico.953d2a0487c175ab0a2300e28a7cd0fd.svg",
-    "main.f2aea972.css.map": "/project-management-app/static/css/main.f2aea972.css.map",
-    "main.0491f398.js.map": "/project-management-app/static/js/main.0491f398.js.map"
+    "static/media/check-ico.svg": "/project-management-app/static/media/check-ico.66a125ab8bc3afeb89ff24cd0e8ca3de.svg",
+    "main.c861939d.css.map": "/project-management-app/static/css/main.c861939d.css.map",
+    "main.9edac200.js.map": "/project-management-app/static/js/main.9edac200.js.map"
   },
   "entrypoints": [
-    "static/css/main.f2aea972.css",
-    "static/js/main.0491f398.js"
+    "static/css/main.c861939d.css",
+    "static/js/main.9edac200.js"
   ]
 }
