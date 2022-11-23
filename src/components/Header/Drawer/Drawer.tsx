@@ -1,7 +1,6 @@
 import { Group, ScrollArea, Drawer, Button } from '@mantine/core';
 import React, { memo } from 'react';
-import { useStyles } from '../HeaderStyles';
-
+import cl from '../Header.module.css';
 interface DrawerComponentProps {
   items: JSX.Element[];
   drawerOpened: boolean;
@@ -9,8 +8,6 @@ interface DrawerComponentProps {
 }
 
 const DrawerComponent = memo(({ items, drawerOpened, closeDrawer }: DrawerComponentProps) => {
-  const { classes } = useStyles();
-
   return (
     <Drawer
       opened={drawerOpened}
@@ -18,7 +15,7 @@ const DrawerComponent = memo(({ items, drawerOpened, closeDrawer }: DrawerCompon
       size="100%"
       padding="md"
       title="Navigation"
-      className={classes.hiddenDesktop}
+      className={cl.hiddenDesktop}
       zIndex={1000000}
     >
       <ScrollArea sx={{ height: 'calc(100vh - 60px)' }} mx="-md">
