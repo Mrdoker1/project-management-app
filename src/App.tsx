@@ -11,9 +11,9 @@ import initApp from 'utils/initApp';
 function App() {
   return (
     <MantineProvider
-      withNormalizeCSS
       theme={{
         fontFamily: 'Open Sans',
+        headings: { fontFamily: 'Open Sans' },
       }}
     >
       <Provider store={store}>

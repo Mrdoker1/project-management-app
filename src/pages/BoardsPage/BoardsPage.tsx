@@ -8,6 +8,7 @@ import BoardsModal from 'pages/BoardsPage/BoardsModal/BoardsModal';
 
 const BoardsPage = () => {
   const { data: boards } = useGetBoardsQuery();
+
   return (
     <main className="main">
       <BoardsModal />

@@ -10,7 +10,7 @@ import ProfilePage from 'pages/ProfilePage';
 import { useAppSelector } from 'hooks/redux';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 import Layout from 'components/Layout/Layout';
-import AboutPage from 'pages/AboutPage';
+import AboutPage from 'pages/AboutPage/AboutPage';
 import LoginPage from 'pages/LoginPage/LoginPage';
 
 const AppRouter = memo(() => {

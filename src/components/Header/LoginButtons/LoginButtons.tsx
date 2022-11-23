@@ -38,7 +38,7 @@ const LoginButtons = memo(() => {
               radius={8}
               sx={{ height: 39 }}
             >
-              {t('Login')}
+              {t('Sign in')}
             </Button>
           </Link>
           <Link to="/signup">

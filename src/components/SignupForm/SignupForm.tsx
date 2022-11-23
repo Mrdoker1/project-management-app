@@ -10,6 +10,7 @@ import { setToken } from 'store/authSlice';
 import cl from './SignupForm.module.css';
 import users from 'store/api/users';
 import { setProfile } from 'store/profileSlice';
+import { useTranslation } from 'react-i18next';
 
 interface ISignupForm {
   name: string;
@@ -23,6 +24,7 @@ const SignupForm = memo(() => {
   const [login, { error: loginError }] = useLoginMutation();
   const [getUsers] = users.endpoints.getUsers.useLazyQuery();
   const error = signupError || loginError;
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -65,43 +67,43 @@ const SignupForm = memo(() => {
   return (
     <form onSubmit={form.onSubmit(sendForm)} className={cl.form}>
       <Title className={cl.title} order={3}>
-        Sign up
+        {t('Sign up')}
       </Title>
       <TextInput
         classNames={nameClasses}
-        label="Name"
+        label={t('Name')}
         {...form.getInputProps('name')}
         autoFocus
         autoComplete="username"
       />
       <TextInput
         classNames={loginClasses}
-        label="Login"
+        label={t('Login')}
         {...form.getInputProps('login')}
         autoComplete="username"
       />
       <PasswordInput
         classNames={passwordClasses}
-        label="Password"
+        label={t('Password')}
         {...form.getInputProps('password')}
         autoComplete="current-password"
       />
       <p className={cl.answer}>
-        {'Already have an account?'}
+        {t('Already have an account?')}
         <NavLink to="/login" className={cl.link}>
-          Sign in
+          {t('Come in')}
         </NavLink>
       </p>
       <p className={cl.message}>{message}</p>
       <Button loading={isLoading} loaderPosition="center" className={cl.submit} type="submit">
-        Create an account
+        {t('Create an account')}
       </Button>
       <CloseButton
         onClick={closeHandler}
         size={24}
         className={cl.closeBtn}
         aria-label="Close modal"
-        title="back to home"
+        title="back to home page"
       />
     </form>
   );

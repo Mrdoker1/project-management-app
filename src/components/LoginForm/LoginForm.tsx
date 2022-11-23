@@ -10,6 +10,7 @@ import { NavLink } from 'react-router-dom';
 import { checkPassword, getErrorMessage } from 'utils/helpers';
 import users from 'store/api/users';
 import { setProfile } from 'store/profileSlice';
+import { useTranslation } from 'react-i18next';
 
 interface ILoginForm {
   login: string;
@@ -21,6 +22,7 @@ const LoginForm = memo(() => {
   const [getUsers] = users.endpoints.getUsers.useLazyQuery();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const form = useForm<ILoginForm>({
     initialValues: { login: '', password: '' },
@@ -53,37 +55,37 @@ const LoginForm = memo(() => {
   return (
     <form onSubmit={form.onSubmit(sendForm)} className={cl.form}>
       <Title className={cl.title} order={3}>
-        Sign in
+        {t('Sign in')}
       </Title>
       <TextInput
         classNames={loginClasses}
-        label="Login"
+        label={t('Login')}
         {...form.getInputProps('login')}
         autoFocus
         autoComplete="username"
       />
       <PasswordInput
         classNames={passwordClasses}
-        label="Password"
+        label={t('Password')}
         {...form.getInputProps('password')}
         autoComplete="current-password"
       />
       <p className={cl.answer}>
-        {"Don't have an account?"}
+        {t("Don't have an account?")}
         <NavLink to="/signup" className={cl.link}>
-          Sign up
+          {t('Register')}
         </NavLink>
       </p>
       <p className={cl.message}>{message}</p>
       <Button loading={isLoading} loaderPosition="center" className={cl.submit} type="submit">
-        Sign in
+        {t('Sign in')}
       </Button>
       <CloseButton
         onClick={closeHandler}
         size={24}
         className={cl.closeBtn}
         aria-label="Close modal"
-        title="back to home"
+        title="back to home page"
       />
     </form>
   );

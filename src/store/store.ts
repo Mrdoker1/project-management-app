@@ -4,6 +4,7 @@ import boardsReducer from './boardsSlice';
 import authReducer from './authSlice';
 import profileReducer from './profileSlice';
 import settingsReducer from './settingsSlice';
+import usersReducer from './usersSlice';
 import checkTokenMW from './checkTokenMW';
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   boards: boardsReducer,
   profile: profileReducer,
   settings: settingsReducer,
+  users: usersReducer,
 });
 
 const store = configureStore({

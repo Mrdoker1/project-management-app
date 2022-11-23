@@ -34,7 +34,7 @@
   color: #F8F9FA;
 }
 
-.name, .login::placeholder, .password::placeholder {
+.name::placeholder, .login::placeholder, .password::placeholder {
   color: #F8F9FA;
 }
 

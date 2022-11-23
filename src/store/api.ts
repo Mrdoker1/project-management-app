@@ -6,6 +6,7 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://final-task-backend-production-3625.up.railway.app',
     prepareHeaders: (headers, { getState }) => {
+      headers.set('Content-type', 'application/json');
       const token = (getState() as RootState).auth.token;
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
