@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLoginMutation, useSignupMutation } from 'store/api/auth';
 import { setToken } from 'store/authSlice';
 import cl from './SignupForm.module.css';
+import users from 'store/api/users';
 
 interface ISignupForm {
   name: string;
@@ -19,6 +20,7 @@ const SignupForm = memo(() => {
   const [isLoading, setIsLoading] = useState(false);
   const [signup, { error: signupError }] = useSignupMutation();
   const [login, { error: loginError }] = useLoginMutation();
+  const [getUsers] = users.endpoints.getUsers.useLazyQuery();
   const error = signupError || loginError;
 
   const dispatch = useDispatch();
@@ -38,8 +40,10 @@ const SignupForm = memo(() => {
       setIsLoading(true);
       await signup(values).unwrap();
       const auth = removeObjKey(values, 'name');
-      const token = (await login(auth).unwrap()).token;
+      const token = await login(auth).unwrap();
       await dispatch(setToken(token));
+      const data = await getUsers().unwrap();
+      //console.log(data);
       navigate('/projects');
     } catch (err) {
       setIsLoading(false);

@@ -1,8 +1,8 @@
-import { setupStore } from 'store/store';
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { isExpired } from 'react-jwt';
 import { setToken } from 'store/authSlice';
+import store from 'store/store';
 
 function getRandom(min: number, max: number) {
   min = Math.ceil(min);
@@ -49,13 +49,4 @@ function getFromStorage(key: string) {
   return storage && JSON.parse(storage);
 }
 
-function checkToken() {
-  const token = setupStore().getState().auth.token;
-  if (!token) return;
-  if (isExpired(token)) {
-    setupStore().dispatch(setToken(''));
-    console.log('Token has expired!');
-  }
-}
-
-export { getRandom, removeObjKey, checkPassword, getErrorMessage, getFromStorage, checkToken };
+export { getRandom, removeObjKey, checkPassword, getErrorMessage, getFromStorage };

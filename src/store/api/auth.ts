@@ -5,12 +5,13 @@ import { api } from './../api';
 
 const auth = api.injectEndpoints({
   endpoints: (build) => ({
-    login: build.mutation<IToken, Omit<IAuth, 'name'>>({
+    login: build.mutation<string, Omit<IAuth, 'name'>>({
       query: (authInfo) => ({
         url: '/auth/signin',
         method: 'POST',
         body: authInfo,
       }),
+      transformResponse: (response: IToken) => response.token,
       transformErrorResponse: (response: { status: string | number }) => response.status,
     }),
 

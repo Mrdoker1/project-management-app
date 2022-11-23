@@ -3,13 +3,10 @@ import AppRouter from 'components/AppRouter/AppRouter';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
-import initApp from 'utils/initApp';
-import { setupStore } from './store/store';
 import './App.css';
 import './i18n';
-
-const store = setupStore();
-//initApp();
+import store from 'store/store';
+import initApp from 'utils/initApp';
 
 function App() {
   return (
@@ -27,5 +24,7 @@ function App() {
     </MantineProvider>
   );
 }
+
+initApp();
 
 export default App;
