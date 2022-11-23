@@ -1,12 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getFromStorage } from 'utils/helpers';
 
 interface IAuthState {
   token: string;
 }
 
-const initialState: IAuthState = {
+const defaultState: IAuthState = {
   token: '',
 };
+
+const storageAuth: IAuthState | undefined = getFromStorage('auth');
+const initialState = storageAuth || defaultState;
 
 export const authSlice = createSlice({
   name: 'auth',

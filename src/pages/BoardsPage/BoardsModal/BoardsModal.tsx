@@ -1,44 +1,59 @@
-import React, { useEffect, useLayoutEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { setModalState, actionType } from 'store/boardsSlice';
-import { Modal, Select, TextInput, Button } from '@mantine/core';
+import { Modal, Select, TextInput, Button, Textarea, ColorInput } from '@mantine/core';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { useForm } from '@mantine/form';
 import cl from './BoardsModal.module.css';
-import { useCreateBoardMutation, useUpdateBoardMutation } from 'store/api/boards';
+import { useCreateBoardMutation, useGetBoardQuery, useUpdateBoardMutation } from 'store/api/boards';
+import { useGetUsersQuery } from 'store/api/users';
 
 const BoardsModal = () => {
   const dispatch = useAppDispatch();
   const modal = useAppSelector((state) => state.boards.modal);
-  const usersData = useAppSelector((state) => state.users.users);
+
   const [createBoard] = useCreateBoardMutation();
   const [updateBoard] = useUpdateBoardMutation();
 
-  const users = usersData.map((value) => {
-    return {
-      value: value.name,
-      label: value.name,
-      key: value._id,
-    };
-  });
+  const { data: board } = useGetBoardQuery(modal.board.id);
+  const { data: users } = useGetUsersQuery();
 
-  const values = {
-    name: modal.boardData.title,
-    description: modal.boardData._id,
-    owner: modal.boardData.owner,
+  const defaultValues = {
+    name: '',
+    description: '',
+    owner: modal.type == 2 ? 'Mask' : '',
+    color: '',
   };
 
+  const [usersList, setUsers] = useState([{ value: '', label: '', key: '' }]);
+  const [boardData, setBoard] = useState(defaultValues);
+
+  useEffect(() => {
+    if (users) {
+      const usersData = users.map((value) => {
+        return { value: value.name, label: value.name, key: value._id };
+      });
+      setUsers(usersData);
+    }
+
+    if (board) {
+      const values = {
+        name: board.title,
+        description: board.description,
+        owner: board.owner,
+        color: board.color,
+      };
+      modal.type == 1 ? form.setValues(values) : form.setValues(defaultValues);
+      setBoard(values);
+    }
+  }, [board, modal]);
+
   const form = useForm({
-    initialValues: values,
+    initialValues: boardData,
     validate: {
       name: (value) => (value.length < 2 ? 'Name must have at least 2 letters' : null),
       description: (value) => (value.length < 2 ? 'Name must have at least 2 letters' : null),
     },
   });
-
-  useEffect(() => {
-    form.setValues(values);
-    console.log('dsds');
-  }, [modal]);
 
   return (
     <Modal
@@ -55,9 +70,11 @@ const BoardsModal = () => {
           if (modal.type === 1) {
             try {
               await updateBoard({
-                _id: modal.boardData._id,
+                _id: modal.board.id,
                 title: values.name,
                 owner: values.owner,
+                description: values.description,
+                color: values.color,
                 users: [],
               }).unwrap();
               dispatch(setModalState(false));
@@ -69,6 +86,8 @@ const BoardsModal = () => {
               await createBoard({
                 title: values.name,
                 owner: values.owner,
+                description: values.description,
+                color: values.color ? values.color : 'rgb(140, 140, 140)',
                 users: [],
               }).unwrap();
               dispatch(setModalState(false));
@@ -84,19 +103,26 @@ const BoardsModal = () => {
           placeholder="Name"
           {...form.getInputProps('name')}
         />
-        <TextInput
-          classNames={inputClasses}
-          label="Description"
-          placeholder="Description"
-          {...form.getInputProps('description')}
-        />
         <Select
           searchable
           classNames={inputClasses}
           label="Owner"
           placeholder="Select user"
-          data={users}
+          data={usersList}
           {...form.getInputProps('owner')}
+        />
+        <ColorInput
+          classNames={inputClasses}
+          label="Color"
+          format="rgb"
+          placeholder="Select color"
+          {...form.getInputProps('color')}
+        />
+        <Textarea
+          classNames={inputClasses}
+          label="Description"
+          placeholder="Description"
+          {...form.getInputProps('description')}
         />
         <Button className={cl.submit} type="submit" mt="sm">
           {modal.type === 1 ? 'Save' : 'Create'}

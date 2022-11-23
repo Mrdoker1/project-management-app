@@ -1,12 +1,12 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { memo } from 'react';
 import { useGetBoardsQuery, useDeleteBoardMutation } from 'store/api/boards';
 import { Button, CloseButton } from '@mantine/core';
-import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import { useAppDispatch } from 'hooks/redux';
 import { useHover } from '@mantine/hooks';
 import cl from './Board.module.css';
 import { useNavigate } from 'react-router-dom';
-import { setModal, actionType } from 'store/boardsSlice';
+import { actionType, setModalBoardId, setModalState, setModalType } from 'store/boardsSlice';
 
 interface IBoardProps {
   id: string;
@@ -14,7 +14,6 @@ interface IBoardProps {
 
 const Board = memo<IBoardProps>(({ id }) => {
   const dispatch = useAppDispatch();
-  const modal = useAppSelector((state) => state.boards.modal);
   const { hovered, ref } = useHover();
   const navigate = useNavigate();
   const [deleteBoard] = useDeleteBoardMutation();
@@ -24,18 +23,46 @@ const Board = memo<IBoardProps>(({ id }) => {
     }),
   });
 
+  const [gradient, setGradient] = useState('');
+
+  const boardStyle = {
+    position: 'relative',
+    boxSizing: 'border-box',
+    backgroundClip: 'padding-box',
+    border: 'solid 1px transparent',
+  } as React.CSSProperties;
+
+  const gradientStyle = {
+    content: '""',
+    position: 'absolute',
+    top: '0',
+    right: '0',
+    bottom: '0',
+    left: '0',
+    zIndex: '-1',
+    margin: '-1px',
+    borderRadius: 'inherit',
+    background: gradient,
+  } as React.CSSProperties;
+
+  useEffect(() => {
+    if (board) {
+      const rgba = `rgba${board.color.slice(3, board.color.length - 1)}, 1)`;
+      const rgbaZero = `rgba${board.color.slice(3, board.color.length - 1)}, 0)`;
+      const gradient = `linear-gradient(180deg, ${rgba}, 30%, ${rgbaZero})`;
+      setGradient(gradient);
+      console.log(gradient);
+    }
+  }, [board]);
+
   const openBoardHeandler = useCallback(() => {
     navigate(`/board/${id}`);
   }, []);
 
   const editBoardHeandler = useCallback(async () => {
-    dispatch(
-      setModal({
-        boardData: board,
-        state: true,
-        type: actionType.Edit,
-      })
-    );
+    dispatch(setModalState(true));
+    dispatch(setModalType(actionType.Edit));
+    dispatch(setModalBoardId(id));
     console.log(id);
   }, []);
 
@@ -58,7 +85,7 @@ const Board = memo<IBoardProps>(({ id }) => {
         title="back to home"
       />
       <h4 className={cl.boardTitle}>{board.title}</h4>
-      <p className={cl.boardDescription}>{board.owner}</p>
+      <p className={cl.boardDescription}>{board.description}</p>
       <div className={cl.buttons}>
         <Button onClick={openBoardHeandler} className={cl.button}>
           Open Board
@@ -73,14 +100,17 @@ const Board = memo<IBoardProps>(({ id }) => {
   const defaultLayout = (
     <>
       <h4 className={cl.boardTitle}>{board.title}</h4>
-      <p className={cl.boardDescription}>{board.owner}</p>
+      <p className={cl.boardDescription}>{board.description}</p>
     </>
   );
 
   return (
-    <div ref={ref} className={`${cl.board} ${cl.gradientBorder}`}>
-      {hovered ? hoverLayout : defaultLayout}
-    </div>
+    <>
+      <div ref={ref} style={boardStyle} className={`${cl.board}`}>
+        {hovered ? hoverLayout : defaultLayout}
+        <div style={gradientStyle}></div>
+      </div>
+    </>
   );
 });
 
