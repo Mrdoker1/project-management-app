@@ -1,6 +1,6 @@
 import { Menu, Center, Header, Container, Group, Burger } from '@mantine/core';
 import { useDisclosure, useWindowEvent } from '@mantine/hooks';
-import React, { memo, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import cl from './Header.module.css';
 import logo from '../../assets/logo.svg';
@@ -23,16 +23,16 @@ const HeaderAction = memo(({ links }: IHeaderProps) => {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const [sticky, setSticky] = useState(false);
   const language = localStorage.getItem('i18nextLng') || 'English';
-
   const stickyHeader = sticky ? cl.sticky : '';
-  const trackScroll = () => {
+
+  const trackScroll = useCallback(() => {
     setSticky(window.scrollY >= 120);
-  };
+  }, []);
   useWindowEvent('scroll', trackScroll);
 
-  const handleChangeLang = (language: string) => {
+  const handleChangeLang = useCallback((language: string) => {
     i18n.changeLanguage(language);
-  };
+  }, []);
 
   const menuItems = links.map((link) => {
     const items = link.links?.map((item) => (
