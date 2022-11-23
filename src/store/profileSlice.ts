@@ -23,12 +23,17 @@ export const profileSlice = createSlice({
   reducers: {
     setProfile: (state, action: PayloadAction<IProfileState>) => {
       state._id = action.payload._id;
-      state._id = action.payload.name;
-      state._id = action.payload.login;
+      state.name = action.payload.name;
+      state.login = action.payload.login;
+    },
+    clearProfile: (state) => {
+      state._id = undefined;
+      state.name = undefined;
+      state.login = undefined;
     },
   },
 });
 
-export const { setProfile } = profileSlice.actions;
+export const { setProfile, clearProfile } = profileSlice.actions;
 
 export default profileSlice.reducer;

@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { api } from 'store/api';
 import { setToken } from 'store/authSlice';
+import { clearProfile } from 'store/profileSlice';
 import { useStyles } from '../HeaderStyles';
 
 const LoginButtons = memo(() => {
@@ -16,6 +17,7 @@ const LoginButtons = memo(() => {
   function clickHandler(e: React.MouseEvent) {
     e.preventDefault();
     dispatch(setToken(''));
+    dispatch(clearProfile);
     dispatch(api.util.resetApiState());
   }
 

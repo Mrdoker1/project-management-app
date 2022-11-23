@@ -9,6 +9,7 @@ import { useLoginMutation, useSignupMutation } from 'store/api/auth';
 import { setToken } from 'store/authSlice';
 import cl from './SignupForm.module.css';
 import users from 'store/api/users';
+import { setProfile } from 'store/profileSlice';
 
 interface ISignupForm {
   name: string;
@@ -42,8 +43,12 @@ const SignupForm = memo(() => {
       const auth = removeObjKey(values, 'name');
       const token = await login(auth).unwrap();
       await dispatch(setToken(token));
+
       const data = await getUsers().unwrap();
-      //console.log(data);
+      const user = data.find((user) => user.login === values.login);
+      if (!user) throw new Error('User not exists!');
+      await dispatch(setProfile(user));
+
       navigate('/projects');
     } catch (err) {
       setIsLoading(false);

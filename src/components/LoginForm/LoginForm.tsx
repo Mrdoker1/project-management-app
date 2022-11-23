@@ -8,6 +8,8 @@ import { useForm } from '@mantine/form';
 import { TextInput, PasswordInput, Button, Title, CloseButton } from '@mantine/core';
 import { NavLink } from 'react-router-dom';
 import { checkPassword, getErrorMessage } from 'utils/helpers';
+import users from 'store/api/users';
+import { setProfile } from 'store/profileSlice';
 
 interface ILoginForm {
   login: string;
@@ -16,6 +18,7 @@ interface ILoginForm {
 
 const LoginForm = memo(() => {
   const [login, { isLoading, error }] = useLoginMutation();
+  const [getUsers] = users.endpoints.getUsers.useLazyQuery();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -31,6 +34,10 @@ const LoginForm = memo(() => {
     try {
       const token = await login(values).unwrap();
       await dispatch(setToken(token));
+      const data = await getUsers().unwrap();
+      const user = data.find((user) => user.login === values.login);
+      if (!user) throw new Error('User not exists!');
+      await dispatch(setProfile(user));
       navigate('/projects');
     } catch (err) {
       console.log(err);
