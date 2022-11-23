@@ -9,5 +9,94 @@
   line-height: 130%;
   letter-spacing: -0.04em;
   font-weight: 600;
+  transition: all 0.3s;
+}
+
+.header {
+  background: #000;
+  border-bottom: 1px solid #25262B;
+  position: sticky;
+  top: 0;
+  transition: all 0.3s;
+}
+
+.inner {
+  height: inherit;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.link {
+  display: block;
+  line-height: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #909296;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.linkLabel {
+  margin-right: 5px;
+  padding: 8px 0 8px 0;
+}
+
+.header.sticky {
+  height: 50px;
+  background: rgba(0, 0, 0, 0.80);
+  backdrop-filter: blur(5px);
+}
+
+.sticky .logo {
+  font-size: 16px;
+}
+
+.sticky .link {
+  font-size: 14px;
+}
+
+.sticky .linkLabel {
+  font-size: 14px;
+}
+
+.buttonOutline {
+  border-color: #fff;
+  color: #fff;
+}
+
+.buttonSubtle {
+  color: #fff;
+}
+
+.buttonSubtle:hover {
+  color: #000;
+}
+
+.sticky .button {
+  font-size: 12px;
+  height: 30px;
+  transition: all 0.3s;
+}
+
+
+@media (max-width: 768px) {
+  .links {
+    display: none;
+  }
+  .burger {
+    display: none;
+  }
+  .hiddenMobile {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .hiddenDesktop {
+    display: none;
+  }
 }
 

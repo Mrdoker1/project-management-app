@@ -49,19 +49,6 @@ button {
   cursor: pointer;
 }
 
-.button--outline {
-  border-color: #fff;
-  color: #fff;
-}
-
-.button--subtle {
-  color: #fff;
-}
-
-.button--subtle:hover {
-  color: #000;
-}
-
 .container {
   max-width: 1200px;
   width: 100%;
