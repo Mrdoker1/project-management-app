@@ -5,9 +5,9 @@ import feature1 from '../../assets/feature1.svg';
 import feature2 from '../../assets/feature2.svg';
 import feature3 from '../../assets/feature3.svg';
 import checkIco from '../../assets/check-ico.svg';
-import img1 from '../../assets/main-page-img1.png';
-import img2 from '../../assets/main-page-img2.png';
-import img3 from '../../assets/main-page-img3.png';
+import img1 from '../../assets/main-page-img1.svg';
+import img2 from '../../assets/main-page-img2.svg';
+import img3 from '../../assets/main-page-img3.svg';
 import { useTranslation } from 'react-i18next';
 
 const HomePage = memo(() => {
