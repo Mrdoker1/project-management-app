@@ -31,8 +31,12 @@ const BoardsModal = () => {
   const form = useForm({
     initialValues: boardData,
     validate: {
-      name: (value) => (value.length < 2 ? 'Name must have at least 2 letters' : null),
-      description: (value) => (value.length < 2 ? 'Name must have at least 2 letters' : null),
+      name: (value) => (value.length < 2 ? 'Board name must have at least 2 letters' : null),
+      description: (value) => {
+        if (value.length < 2) return 'Dscription must have at least 2 letters';
+        if (value.length > 120) return 'Description must not exceed 120 letters';
+        return null;
+      },
     },
   });
 
@@ -116,6 +120,7 @@ const BoardsModal = () => {
         classNames={inputClasses}
         label="Description"
         placeholder="Description"
+        maxLength={120}
         {...form.getInputProps('description')}
       />
       <Button className={cl.submit} type="submit" mt="sm">

@@ -32,6 +32,7 @@
   font-size: 16px;
   line-height: 155%;
   margin-bottom: 20px;
+  word-wrap: break-word;
 }
 
 .gradientBorder:before {
