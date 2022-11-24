@@ -7,8 +7,10 @@ import cl from './BoardsPage.module.css';
 import BoardsModal from 'pages/BoardsPage/BoardsModal/BoardsModal';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { setBoardsSearch } from 'store/boardsSlice';
+import { useTranslation } from 'react-i18next';
 
 const BoardsPage = () => {
+  const { t } = useTranslation();
   const { data: boards } = useGetBoardsQuery();
   const dispatch = useAppDispatch();
   const search = useAppSelector((state) => state.boards.search);
@@ -19,7 +21,9 @@ const BoardsPage = () => {
       <div className="container">
         <Space h={40} />
         <div className={layoutClasses.heading}>
-          <h1>Projects ({boards ? boards.length : 0})</h1>
+          <h1>
+            {t('Projects')} ({boards ? boards.length : 0})
+          </h1>
           <TextInput
             value={search}
             onChange={(event) => {
@@ -27,7 +31,7 @@ const BoardsPage = () => {
             }}
             classNames={searchClasses}
             size="md"
-            placeholder="Search Board..."
+            placeholder={`${t('Search Board...')}`}
             rightSection={<IconSearch size={20} stroke={1} />}
           />
         </div>

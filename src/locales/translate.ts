@@ -43,6 +43,8 @@ const resources = {
       Projects: 'Projects',
       Profile: 'Profile',
       Search: 'Search',
+      'Search Board...': 'Search Board... ',
+      'Create Board': 'Create Board',
     },
   },
   Russian: {
@@ -90,6 +92,8 @@ const resources = {
       Projects: 'Проекты',
       Profile: 'Профиль',
       Search: 'Поиск',
+      'Search Board...': 'Найти доску...',
+      'Create Board': 'Создать доску',
     },
   },
 };
