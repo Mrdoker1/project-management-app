@@ -8,12 +8,14 @@ import cl from './Board.module.css';
 import { useNavigate } from 'react-router-dom';
 import { actionType, setModalBoardId, setModalState, setModalType } from 'store/boardsSlice';
 import { closeModal, openConfirmModal } from '@mantine/modals';
+import { useTranslation } from 'react-i18next';
 
 interface IBoardProps {
   id: string;
 }
 
 const Board = memo<IBoardProps>(({ id }) => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { hovered, ref } = useHover();
   const navigate = useNavigate();
@@ -70,16 +72,16 @@ const Board = memo<IBoardProps>(({ id }) => {
   const deleteBoardHandler = useCallback(() => {
     let isLoading = false;
     openConfirmModal({
-      title: 'Delete board',
+      title: t('Delete board'),
       modalId: 'boardDeleteModal',
       centered: true,
       closeOnConfirm: false,
       children: (
         <Text size="sm">
-          Are you sure you want to delete this board? This action is destructive.
+          {t('Are you sure you want to delete this board? This action is destructive.')}
         </Text>
       ),
-      labels: { confirm: 'Delete board', cancel: 'Cancel' },
+      labels: { confirm: t('Delete board'), cancel: t('Cancel') },
       confirmProps: { color: 'red', loading: isLoading },
       onCancel: () => console.log('Cancel'),
       onConfirm: async () => {
@@ -110,10 +112,10 @@ const Board = memo<IBoardProps>(({ id }) => {
       <p className={cl.boardDescription}>{board.description}</p>
       <div className={cl.buttons}>
         <Button onClick={openBoardHeandler} className={cl.button}>
-          Open Board
+          {t('Open Board')}
         </Button>
         <Button onClick={editBoardHeandler} className={cl.button}>
-          Edit
+          {t('Edit')}
         </Button>
       </div>
     </>

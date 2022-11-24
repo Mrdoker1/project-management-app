@@ -6,8 +6,10 @@ import { useForm } from '@mantine/form';
 import cl from './BoardsModal.module.css';
 import { useCreateBoardMutation, useGetBoardQuery, useUpdateBoardMutation } from 'store/api/boards';
 import { useGetUsersQuery } from 'store/api/users';
+import { useTranslation } from 'react-i18next';
 
 const BoardsModal = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const modal = useAppSelector((state) => state.boards.modal);
 
@@ -97,34 +99,34 @@ const BoardsModal = () => {
     >
       <TextInput
         classNames={inputClasses}
-        label="Name"
-        placeholder="Name"
+        label={t('Board name')}
+        placeholder={t('Board name')}
         {...form.getInputProps('name')}
       />
       <Select
         searchable
         classNames={inputClasses}
-        label="Owner"
-        placeholder="Select user"
+        label={t('Owner')}
+        placeholder={t('Select user')}
         data={usersList}
         {...form.getInputProps('owner')}
       />
       <ColorInput
         classNames={inputClasses}
-        label="Color"
+        label={t('Color')}
         format="rgb"
-        placeholder="Select color"
+        placeholder={t('Select color')}
         {...form.getInputProps('color')}
       />
       <Textarea
         classNames={inputClasses}
-        label="Description"
-        placeholder="Description"
+        label={t('Description')}
+        placeholder={t('Description')}
         maxLength={120}
         {...form.getInputProps('description')}
       />
       <Button className={cl.submit} type="submit" mt="sm">
-        {modal.type === 1 ? 'Save' : 'Create'}
+        {modal.type === 1 ? t('Save') : t('Create')}
       </Button>
     </form>
   );
@@ -136,7 +138,7 @@ const BoardsModal = () => {
       onClose={() => {
         dispatch(setModalState(false));
       }}
-      title={modal.type === actionType.Edit ? 'Edit Board' : 'Create Board'}
+      title={modal.type === actionType.Edit ? t('Edit Board') : t('Create Board')}
     >
       {isLoading ? <Loader color="dark" /> : formComponent}
     </Modal>
