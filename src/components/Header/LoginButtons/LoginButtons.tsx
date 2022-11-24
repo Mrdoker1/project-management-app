@@ -6,12 +6,11 @@ import { Link } from 'react-router-dom';
 import { api } from 'store/api';
 import { setToken } from 'store/authSlice';
 import { clearProfile } from 'store/profileSlice';
-import { useStyles } from '../HeaderStyles';
+import cl from '../Header.module.css';
 
 const LoginButtons = memo(() => {
   const dispatch = useAppDispatch();
   const token = useAppSelector((state) => state.auth.token);
-  const { classes } = useStyles();
   const { t } = useTranslation();
 
   function clickHandler(e: React.MouseEvent) {
@@ -22,10 +21,15 @@ const LoginButtons = memo(() => {
   }
 
   return (
-    <Group spacing={10} className={classes.hiddenMobile}>
+    <Group spacing={10} className={cl.hiddenMobile}>
       {token ? (
         <Link to="/" onClick={clickHandler}>
-          <Button className="button button--subtle" variant="subtle" radius={8} sx={{ height: 39 }}>
+          <Button
+            className={`${cl.button} ${cl.buttonSubtle}`}
+            variant="subtle"
+            radius={8}
+            sx={{ height: 39 }}
+          >
             {t('Sign Out')}
           </Button>
         </Link>
@@ -33,7 +37,7 @@ const LoginButtons = memo(() => {
         <>
           <Link to="/login">
             <Button
-              className="button button--subtle"
+              className={`${cl.button} ${cl.buttonSubtle}`}
               variant="subtle"
               radius={8}
               sx={{ height: 39 }}
@@ -43,7 +47,7 @@ const LoginButtons = memo(() => {
           </Link>
           <Link to="/signup">
             <Button
-              className="button button--outline"
+              className={`${cl.button} ${cl.buttonOutline}`}
               radius={8}
               variant="outline"
               sx={{ height: 39 }}

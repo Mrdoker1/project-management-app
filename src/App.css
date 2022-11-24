@@ -36,6 +36,12 @@ body {
   flex-direction: column;
 }
 
+.center-wrapper {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: #fff;
 }
@@ -47,19 +53,6 @@ a {
 
 button {
   cursor: pointer;
-}
-
-.button--outline {
-  border-color: #fff;
-  color: #fff;
-}
-
-.button--subtle {
-  color: #fff;
-}
-
-.button--subtle:hover {
-  color: #000;
 }
 
 .container {

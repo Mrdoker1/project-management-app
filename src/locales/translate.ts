@@ -39,6 +39,10 @@ const resources = {
       'Come in': 'Sign in',
       Register: 'Sign up',
       'back to home page': 'back to home page',
+      About: 'About',
+      Projects: 'Projects',
+      Profile: 'Profile',
+      Search: 'Search',
     },
   },
   Russian: {
@@ -82,6 +86,10 @@ const resources = {
       'Come in': 'Войти',
       Register: 'Зарегистрироваться',
       'back to home': 'Вернуться на главную',
+      About: 'О проекте',
+      Projects: 'Проекты',
+      Profile: 'Профиль',
+      Search: 'Поиск',
     },
   },
 };

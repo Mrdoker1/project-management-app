@@ -3,7 +3,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import cl from './AboutPage.module.css';
 import gitIco from '../../assets/git.svg';
-
 import mantine from '../../assets/mantine-ico.svg';
 import react from '../../assets/react-ico.svg';
 import ts from '../../assets/ts-ico.svg';
