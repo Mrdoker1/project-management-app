@@ -5,11 +5,12 @@ import Board from './Board/Board';
 import { IconPlus } from '@tabler/icons';
 import cl from './BoardList.module.css';
 import { actionType, setModalState, setModalType } from 'store/boardsSlice';
-import { useAppDispatch } from 'hooks/redux';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
 
 const BoardList = () => {
   const { data: boards, isLoading, error } = useGetBoardsQuery();
   const dispatch = useAppDispatch();
+  const search = useAppSelector((state) => state.boards.search).toLowerCase();
   const createBoardHeandler = useCallback(() => {
     dispatch(setModalType(actionType.Create));
     dispatch(setModalState(true));
@@ -30,9 +31,14 @@ const BoardList = () => {
             { maxWidth: 600, cols: 1, spacing: 'sm' },
           ]}
         >
-          {boards.map((board) => (
-            <Board id={board._id} key={board._id} />
-          ))}
+          {boards.map((board) => {
+            if (
+              board.description.toLowerCase().includes(search) ||
+              board.title.toLowerCase().includes(search)
+            ) {
+              return <Board id={board._id} key={board._id} />;
+            }
+          })}
           <Button
             onClick={createBoardHeandler}
             radius={17}
