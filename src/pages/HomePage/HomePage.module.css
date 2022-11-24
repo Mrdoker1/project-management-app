@@ -33,33 +33,6 @@
 }
 
 .splash:before {
-  /*
-  VERSION1
-  content: '';
-  position: absolute;
-  top: 0px;
-  width: 1000px;
-  height: 1000px;
-  background: url("../../assets/ellipse.svg");
-  background-repeat: no-repeat;
-  animation: rotating 3s infinite linear;
-  background-size: 108%;
-  background-position: right;
-  */
-  /*
-  VERSION2
-  content: '';
-  position: absolute;
-  bottom: -155%;
-  right: -30%;
-  width: 1400px;
-  height: 1400px;
-  background: url('../../assets/ellipse.svg');
-  background-repeat: no-repeat;
-  animation: rotating 3s infinite linear;;
-  background-size: 108%;
-  background-position: right;
-  */
   content: '';
   position: absolute;
   bottom: -150%;

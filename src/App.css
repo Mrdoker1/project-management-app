@@ -132,7 +132,8 @@ button {
   right: 0;
   top: 0px;
   background: url('./assets/noise.svg');
-  background-size: 10%;
+  background-size: 40%;
+  mix-blend-mode: soft-light;
 }
 
 .animated-background::before {
@@ -142,11 +143,11 @@ button {
   right: -30%;
   width: 1000px;
   height: 1000px;
-  animation: rotating 23s infinite ease-in-out;
-  background: linear-gradient(180deg, #FF6161 0%, #43FFDD 35.88%, #45BCFF 67.65%, #D795FF 100%);
+  animation: rotating 20s infinite ease-in-out;
+  background: linear-gradient(180deg, #ff7615 0%, #c8ff15 14%, #43FFDD 35.88%, #45BCFF 67.65%, #D795FF 100%);
   mix-blend-mode: normal;
-  filter: blur(132.344px);
-  border-radius: 20%;
+  filter: blur(120px);
+  border-radius: 300px;
   transform: matrix(0, 1, 1, 0, 0, 0);
 }
 
