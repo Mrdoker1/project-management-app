@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { actionType, setModalBoardId, setModalState, setModalType } from 'store/boardsSlice';
 import { closeModal, openConfirmModal } from '@mantine/modals';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
 
 interface IBoardProps {
   id: string;
@@ -54,7 +55,6 @@ const Board = memo<IBoardProps>(({ id }) => {
       const rgbaZero = `rgba${board.color.slice(3, board.color.length - 1)}, 0)`;
       const gradient = `linear-gradient(180deg, ${rgba}, 30%, ${rgbaZero})`;
       setGradient(gradient);
-      console.log(gradient);
     }
   }, [board]);
 
@@ -110,14 +110,19 @@ const Board = memo<IBoardProps>(({ id }) => {
       />
       <h4 className={cl.boardTitle}>{board.title}</h4>
       <p className={cl.boardDescription}>{board.description}</p>
-      <div className={cl.buttons}>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className={cl.buttons}
+      >
         <Button onClick={openBoardHeandler} className={cl.button}>
           {t('Open Board')}
         </Button>
         <Button onClick={editBoardHeandler} className={cl.button}>
           {t('Edit')}
         </Button>
-      </div>
+      </motion.div>
     </>
   );
 
@@ -130,10 +135,15 @@ const Board = memo<IBoardProps>(({ id }) => {
 
   return (
     <>
-      <div ref={ref} style={boardStyle} className={`${cl.board}`}>
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        ref={ref}
+        style={boardStyle}
+        className={`${cl.board}`}
+      >
         {hovered ? hoverLayout : defaultLayout}
-        <div style={gradientStyle}></div>
-      </div>
+        <motion.div style={gradientStyle}></motion.div>
+      </motion.div>
     </>
   );
 });
