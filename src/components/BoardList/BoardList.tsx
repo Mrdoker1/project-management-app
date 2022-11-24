@@ -17,7 +17,7 @@ const BoardList = () => {
   }, []);
 
   if (typeof error == 'number') return <div>Ошибка {error}</div>;
-  if (isLoading) return <Loader color="dark" />;
+  if (isLoading) return <Loader style={{ width: '100%' }} color="dark" />;
   if (!boards) return <div>Ничего не найдено!</div>;
   return (
     <>

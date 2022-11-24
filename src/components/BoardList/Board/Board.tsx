@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { memo } from 'react';
 import { useGetBoardsQuery, useDeleteBoardMutation } from 'store/api/boards';
-import { Button, CloseButton } from '@mantine/core';
+import { Button, CloseButton, Text } from '@mantine/core';
 import { useAppDispatch } from 'hooks/redux';
 import { useHover } from '@mantine/hooks';
 import cl from './Board.module.css';
 import { useNavigate } from 'react-router-dom';
 import { actionType, setModalBoardId, setModalState, setModalType } from 'store/boardsSlice';
+import { closeModal, openConfirmModal } from '@mantine/modals';
 
 interface IBoardProps {
   id: string;
@@ -66,8 +67,29 @@ const Board = memo<IBoardProps>(({ id }) => {
     console.log(id);
   }, []);
 
-  const deleteBoardHeandler = useCallback(() => {
-    deleteBoard(id);
+  const deleteBoardHandler = useCallback(() => {
+    let isLoading = false;
+    openConfirmModal({
+      title: 'Delete board',
+      modalId: 'boardDeleteModal',
+      centered: true,
+      closeOnConfirm: false,
+      children: (
+        <Text size="sm">
+          Are you sure you want to delete this board? This action is destructive.
+        </Text>
+      ),
+      labels: { confirm: 'Delete board', cancel: 'Cancel' },
+      confirmProps: { color: 'red', loading: isLoading },
+      onCancel: () => console.log('Cancel'),
+      onConfirm: async () => {
+        isLoading = true;
+        console.log(isLoading);
+        await deleteBoard(id);
+        closeModal('boardDeleteModal');
+        isLoading = false;
+      },
+    });
   }, []);
 
   if (!board) {
@@ -79,10 +101,10 @@ const Board = memo<IBoardProps>(({ id }) => {
     <>
       <CloseButton
         size={24}
-        onClick={deleteBoardHeandler}
+        onClick={deleteBoardHandler}
         className={cl.deleteBtn}
         aria-label="Close modal"
-        title="back to home"
+        title="Delete Board"
       />
       <h4 className={cl.boardTitle}>{board.title}</h4>
       <p className={cl.boardDescription}>{board.description}</p>

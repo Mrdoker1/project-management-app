@@ -159,3 +159,15 @@ button {
   bottom: -600px;
   right: -40%;
 }
+
+.mantine-ugjxpi {
+  color:#fff;
+  border: 1px solid transparent;
+  background: #25262B;
+  border-radius: 4px;
+}
+
+.mantine-ugjxpi:hover {
+  color: #101113;
+  background-color: rgba(231, 245, 255, 1);
+}
