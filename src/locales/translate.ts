@@ -60,6 +60,10 @@ const resources = {
       Cancel: 'Cancel',
       'Are you sure you want to delete this board? This action is destructive.':
         'Are you sure you want to delete this board? This action is destructive.',
+      'Sorry! Page not found': 'Sorry! Page not found',
+      'Head homepage or use the search to find what you`re looking for':
+        'Head homepage or use the search to find what you`re \n looking for.',
+      'Back to HomePage': 'Back to HomePage',
     },
   },
   Russian: {
@@ -124,6 +128,10 @@ const resources = {
       Cancel: 'Отмена',
       'Are you sure you want to delete this board? This action is destructive.':
         'Вы уверены, что хотите удалить эту доску? Это действие является необратимым.',
+      'Sorry! Page not found': 'Извините! \n Страница не найдена.',
+      'Head homepage or use the search to find what you`re looking for':
+        'Перейдите на главную страницу или воспользуйтесь поиском, чтобы \n найти то, что вы ищете.',
+      'Back to HomePage': 'Вернуться на главную',
     },
   },
 };

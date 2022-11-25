@@ -3,7 +3,7 @@ import React, { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { actionType, setModalState, setModalType } from 'store/boardsSlice';
-import { useAppDispatch } from 'hooks/redux';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import cl from './HomePage.module.css';
 import feature1 from '../../assets/feature1.svg';
 import feature2 from '../../assets/feature2.svg';
@@ -17,9 +17,10 @@ const HomePage = memo(() => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const token = useAppSelector((state) => state.auth.token);
 
   const createBoard = useCallback(() => {
-    navigate('/projects');
+    token ? navigate('/projects') : navigate('/login');
     dispatch(setModalType(actionType.Create));
     dispatch(setModalState(true));
   }, []);
@@ -43,7 +44,7 @@ const HomePage = memo(() => {
               color="cyan"
               radius={8}
               sx={{ height: 36 }}
-              styles={(theme) => ({
+              styles={() => ({
                 root: {
                   fontSize: '18px',
                   lineHeight: '155%',

@@ -1,30 +1,54 @@
-import { Group, ScrollArea, Drawer, Button } from '@mantine/core';
-import React, { memo } from 'react';
+import { Drawer, Flex } from '@mantine/core';
+import React, { memo, useCallback } from 'react';
 import cl from '../Header.module.css';
+import sidebarLogo from '../../../assets/sidebar-logo.svg';
+import rsLogo from '../../../assets/rs-logo.svg';
+import LoginButtons from '../LoginButtons/LoginButtons';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import { setMenuState } from 'store/menuSlice';
+
 interface DrawerComponentProps {
   items: JSX.Element[];
-  drawerOpened: boolean;
-  closeDrawer: () => void;
 }
 
-const DrawerComponent = memo(({ items, drawerOpened, closeDrawer }: DrawerComponentProps) => {
+const DrawerComponent = memo(({ items }: DrawerComponentProps) => {
+  const dispatch = useAppDispatch();
+  const isOpened = useAppSelector((state) => state.menu.isOpened);
+
+  const closeMenuHandler = useCallback(() => {
+    dispatch(setMenuState(false));
+  }, []);
+
   return (
     <Drawer
-      opened={drawerOpened}
-      onClose={closeDrawer}
-      size="100%"
+      opened={isOpened}
+      onClose={closeMenuHandler}
       padding="md"
-      title="Navigation"
-      className={cl.hiddenDesktop}
+      title={<img src={sidebarLogo} />}
+      className={`${cl.hiddenDesktop} ${cl.menuDrawer}`}
       zIndex={1000000}
+      styles={() => ({
+        closeButton: {
+          color: '#fff',
+        },
+      })}
     >
-      <ScrollArea sx={{ height: 'calc(100vh - 60px)' }} mx="-md">
-        <Group spacing={5}>{items}</Group>
-        <Group position="center" grow pb="xl" px="md">
-          <Button>Log in</Button>
-          <Button variant="outline">Sign up</Button>
-        </Group>
-      </ScrollArea>
+      <div className={cl.drawerMenuWrapper}>
+        <div className={cl.drawerMenu}>{items}</div>
+        <Flex gap={12} justify="center">
+          <LoginButtons />
+        </Flex>
+        <div className={cl.drawerFooter}>
+          <div className={cl.footerTop}>
+            <a href="https://rs.school/">
+              <img src={rsLogo} className={cl.logo} alt="RSschool" />
+            </a>
+          </div>
+          <div className={cl.footerCopyright}>
+            © 2022. <a href="https://rs.school/react/">React 2022Q1</a>
+          </div>
+        </div>
+      </div>
     </Drawer>
   );
 });

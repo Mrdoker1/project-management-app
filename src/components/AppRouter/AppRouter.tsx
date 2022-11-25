@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import NoPage from 'pages/NoPage';
+import NoPage from 'pages/NoPage/NoPage';
 import HomePage from 'pages/HomePage/HomePage';
 import SignupPage from 'pages/SignupPage/SignupPage';
 import BoardsPage from 'pages/BoardsPage/BoardsPage';

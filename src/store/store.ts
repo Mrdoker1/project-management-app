@@ -5,6 +5,7 @@ import authReducer from './authSlice';
 import profileReducer from './profileSlice';
 import settingsReducer from './settingsSlice';
 import usersReducer from './usersSlice';
+import menuSlice from './menuSlice';
 import checkTokenMW from './checkTokenMW';
 
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   profile: profileReducer,
   settings: settingsReducer,
   users: usersReducer,
+  menu: menuSlice,
 });
 
 const store = configureStore({
