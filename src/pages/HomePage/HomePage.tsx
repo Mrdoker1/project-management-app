@@ -1,5 +1,9 @@
 import { Button } from '@mantine/core';
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { actionType, setModalState, setModalType } from 'store/boardsSlice';
+import { useAppDispatch } from 'hooks/redux';
 import cl from './HomePage.module.css';
 import feature1 from '../../assets/feature1.svg';
 import feature2 from '../../assets/feature2.svg';
@@ -8,10 +12,17 @@ import checkIco from '../../assets/check-ico.svg';
 import img1 from '../../assets/main-page-img1.svg';
 import img2 from '../../assets/main-page-img2.svg';
 import img3 from '../../assets/main-page-img3.svg';
-import { useTranslation } from 'react-i18next';
 
 const HomePage = memo(() => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const createBoard = useCallback(() => {
+    navigate('/projects');
+    dispatch(setModalType(actionType.Create));
+    dispatch(setModalState(true));
+  }, []);
 
   return (
     <>
@@ -25,7 +36,9 @@ const HomePage = memo(() => {
                 'Create, share, and get feedback with collaborative boards for rapid development.'
               )}
             </p>
+
             <Button
+              onClick={createBoard}
               className="button"
               color="cyan"
               radius={8}
