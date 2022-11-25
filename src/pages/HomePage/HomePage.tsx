@@ -44,7 +44,7 @@ const HomePage = memo(() => {
               color="cyan"
               radius={8}
               sx={{ height: 36 }}
-              styles={(theme) => ({
+              styles={() => ({
                 root: {
                   fontSize: '18px',
                   lineHeight: '155%',

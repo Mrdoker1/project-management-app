@@ -1,5 +1,5 @@
 import { Button } from '@mantine/core';
-import React, { memo, useCallback } from 'react';
+import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import cl from './NoPage.module.css';
@@ -23,7 +23,7 @@ const NoPage = memo(() => {
           color="cyan"
           radius={8}
           sx={{ height: 36 }}
-          styles={(theme) => ({
+          styles={() => ({
             root: {
               fontSize: '18px',
               lineHeight: '155%',
