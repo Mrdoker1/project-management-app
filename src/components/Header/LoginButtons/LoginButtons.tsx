@@ -46,7 +46,7 @@ const LoginButtons = memo(() => {
           sx={{ height: 39 }}
           onClick={signOutHandler}
         >
-          {t('Sign Out')}
+          {t('Sign out')}
         </Button>
       ) : (
         <>
