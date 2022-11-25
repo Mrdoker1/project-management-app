@@ -12,6 +12,7 @@ import { IconChevronDown } from '@tabler/icons';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { setMenuState } from 'store/menuSlice';
+import { setLang } from 'store/settingsSlice';
 interface IHeaderProps {
   links: {
     link: string;
@@ -24,8 +25,8 @@ const HeaderAction = memo(({ links }: IHeaderProps) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const isOpened = useAppSelector((state) => state.menu.isOpened);
+  const language = useAppSelector((state) => state.settings.lang);
   const [sticky, setSticky] = useState(false);
-  const language = localStorage.getItem('i18nextLng') || 'English';
   const stickyHeader = sticky ? cl.sticky : '';
 
   const trackScroll = useCallback(() => {
@@ -33,8 +34,9 @@ const HeaderAction = memo(({ links }: IHeaderProps) => {
   }, []);
   useWindowEvent('scroll', trackScroll);
 
-  const handleChangeLang = useCallback((language: string) => {
-    i18n.changeLanguage(language);
+  const handleChangeLang = useCallback((lng: string) => {
+    dispatch(setLang(lng));
+    i18n.changeLanguage(lng);
   }, []);
 
   const openMenuHandler = useCallback(() => {
