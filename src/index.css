@@ -12,13 +12,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-/*
-a {
-  color: white;
-  padding: 10px;
-  text-decoration: none;
-}
-*/
 
 .mantine-Paper-root {
   color: white;
@@ -31,4 +24,15 @@ a {
   width: 460px;
   background-color: #101113;
   position: relative;
+}
+
+.mantine-Drawer-drawer {
+  max-width: 400px;
+  height: 100%;
+  display: flex;
+  align-items: inherit;
+}
+
+.mantine-Drawer-header {
+  margin-bottom: 30px;
 }

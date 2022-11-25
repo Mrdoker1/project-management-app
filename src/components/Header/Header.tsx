@@ -1,5 +1,5 @@
 import { Menu, Center, Header, Container, Group, Burger } from '@mantine/core';
-import { useDisclosure, useWindowEvent } from '@mantine/hooks';
+import { useWindowEvent } from '@mantine/hooks';
 import React, { memo, useCallback, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import cl from './Header.module.css';
@@ -10,6 +10,8 @@ import MenuComponent from './Menu/Menu';
 import i18n from 'i18n';
 import { IconChevronDown } from '@tabler/icons';
 import { useTranslation } from 'react-i18next';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import { setMenuState } from 'store/menuSlice';
 interface IHeaderProps {
   links: {
     link: string;
@@ -20,7 +22,8 @@ interface IHeaderProps {
 
 const HeaderAction = memo(({ links }: IHeaderProps) => {
   const { t } = useTranslation();
-  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
+  const dispatch = useAppDispatch();
+  const isOpened = useAppSelector((state) => state.menu.isOpened);
   const [sticky, setSticky] = useState(false);
   const language = localStorage.getItem('i18nextLng') || 'English';
   const stickyHeader = sticky ? cl.sticky : '';
@@ -32,6 +35,14 @@ const HeaderAction = memo(({ links }: IHeaderProps) => {
 
   const handleChangeLang = useCallback((language: string) => {
     i18n.changeLanguage(language);
+  }, []);
+
+  const openMenuHandler = useCallback(() => {
+    dispatch(setMenuState(true));
+  }, []);
+
+  const closeMenuHandler = useCallback(() => {
+    dispatch(setMenuState(false));
   }, []);
 
   const menuItems = links.map((link) => {
@@ -56,7 +67,7 @@ const HeaderAction = memo(({ links }: IHeaderProps) => {
     }
 
     return (
-      <NavLink key={link.label} to={link.link} className={cl.link}>
+      <NavLink key={link.label} to={link.link} className={cl.link} onClick={closeMenuHandler}>
         {t(link.label)}
       </NavLink>
     );
@@ -69,8 +80,8 @@ const HeaderAction = memo(({ links }: IHeaderProps) => {
           <Group>
             <Burger
               color="#fff"
-              opened={drawerOpened}
-              onClick={toggleDrawer}
+              opened={isOpened}
+              onClick={openMenuHandler}
               className={cl.hiddenDesktop}
             />
             <NavLink className={cl.logoWrapper} end to="/">
@@ -79,10 +90,12 @@ const HeaderAction = memo(({ links }: IHeaderProps) => {
             </NavLink>
           </Group>
           <MenuComponent items={menuItems} />
-          <LoginButtons />
+          <Group spacing={10} className={cl.hiddenMobile}>
+            <LoginButtons />
+          </Group>
         </Container>
       </Header>
-      <DrawerComponent drawerOpened={drawerOpened} items={menuItems} closeDrawer={closeDrawer} />
+      <DrawerComponent items={menuItems} />
     </>
   );
 });
