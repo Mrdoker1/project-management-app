@@ -28,6 +28,7 @@ const BoardsModal = () => {
 
   const [usersList, setUsers] = useState([{ value: '', label: '', key: '' }]);
   const [boardData, setBoard] = useState(defaultValues);
+  const [isSubmited, setIsSubmited] = useState(false);
 
   const form = useForm({
     initialValues: boardData,
@@ -42,6 +43,7 @@ const BoardsModal = () => {
   });
 
   useEffect(() => {
+    setIsSubmited(false);
     if (users) {
       const usersData = users.map((value) => {
         return { value: value.name, label: value.name, key: value._id };
@@ -59,12 +61,13 @@ const BoardsModal = () => {
       modal.type == 1 ? form.setValues(values) : form.setValues(defaultValues);
       setBoard(values);
     }
-  }, [board, modal]);
+  }, [board, modal.type]);
 
   const formComponent = (
     <form
       className={cl.form}
       onSubmit={form.onSubmit(async (values) => {
+        setIsSubmited(true);
         if (modal.type === 1) {
           try {
             await updateBoard({
@@ -123,7 +126,7 @@ const BoardsModal = () => {
         maxLength={120}
         {...form.getInputProps('description')}
       />
-      <Button className={cl.submit} type="submit" mt="sm">
+      <Button className={cl.submit} type="submit" mt="sm" loading={isSubmited}>
         {modal.type === 1 ? t('Save') : t('Create')}
       </Button>
     </form>
