@@ -91,7 +91,12 @@ const LoginForm = memo(() => {
   );
 });
 
-const loginClasses = { input: cl.login, root: cl.inputWrapper, label: cl.label };
+const loginClasses = {
+  input: cl.login,
+  root: cl.inputWrapper,
+  label: cl.label,
+};
+
 const passwordClasses = {
   input: cl.password,
   root: cl.inputWrapper,
