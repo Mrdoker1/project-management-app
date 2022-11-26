@@ -36,6 +36,12 @@ body {
   flex-direction: column;
 }
 
+.center-wrapper {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: #fff;
 }
@@ -47,19 +53,6 @@ a {
 
 button {
   cursor: pointer;
-}
-
-.button--outline {
-  border-color: #fff;
-  color: #fff;
-}
-
-.button--subtle {
-  color: #fff;
-}
-
-.button--subtle:hover {
-  color: #000;
 }
 
 .container {
@@ -76,43 +69,13 @@ button {
   z-index: 10;
 }
 
-.page-login, .page-signup {
+.page-login, .page-signup, .page-404 {
   justify-content: center;
 }
 
-/*
-#root {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: var(--primary-color);
-  color: var(--text-color); 
-  height: 100%;
+.page-404 {
+  text-align: center;
 }
-*/
-
-/* .header__container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 2rem;
-  background-color: var(--secondary-color);
-} 
-
-.main {
-  flex-grow: 1;
-}
-
-.main__container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--primary-color);
-  padding: 0 2rem;
-  height: 100%;
-}
-*/
 
 @keyframes rotating {
   from{
@@ -139,7 +102,8 @@ button {
   right: 0;
   top: 0px;
   background: url('./assets/noise.svg');
-  background-size: 10%;
+  background-size: 40%;
+  mix-blend-mode: soft-light;
 }
 
 .animated-background::before {
@@ -149,20 +113,37 @@ button {
   right: -30%;
   width: 1000px;
   height: 1000px;
-  animation: rotating 23s infinite ease-in-out;
-  background: linear-gradient(180deg, #FF6161 0%, #43FFDD 35.88%, #45BCFF 67.65%, #D795FF 100%);
+  animation: rotating 20s infinite ease-in-out;
+  background: linear-gradient(180deg, #ff7615 0%, #c8ff15 14%, #43FFDD 35.88%, #45BCFF 67.65%, #D795FF 100%);
   mix-blend-mode: normal;
-  filter: blur(132.344px);
-  border-radius: 20%;
+  filter: blur(120px);
+  border-radius: 300px;
   transform: matrix(0, 1, 1, 0, 0, 0);
 }
 
 .animated-background--topLeft:before {
   top: -600px;
-  left: -40%;
+  left: -800px;
 }
 
 .animated-background--bottomRight:before {
   bottom: -600px;
-  right: -40%;
+  right: -800px;
+}
+
+.animated-background--topRight:before {
+  top: -890px;
+  right: -10%;
+}
+
+.mantine-ugjxpi {
+  color:#fff;
+  border: 1px solid transparent;
+  background: #25262B;
+  border-radius: 4px;
+}
+
+.mantine-ugjxpi:hover {
+  color: #101113;
+  background-color: rgba(231, 245, 255, 1);
 }

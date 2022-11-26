@@ -9,5 +9,150 @@
   line-height: 130%;
   letter-spacing: -0.04em;
   font-weight: 600;
+  transition: all 0.3s;
+}
+
+.header {
+  background: #000;
+  border-bottom: 1px solid #25262B;
+  position: sticky;
+  top: 0;
+  transition: all 0.3s;
+}
+
+.inner {
+  height: inherit;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.link {
+  display: block;
+  line-height: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #909296;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.link:hover, .linkLabel:hover {
+  color: #fff;
+}
+
+.linkLabel {
+  margin-right: 5px;
+  padding: 8px 0 8px 0;
+  transition: all 0.3s;
+}
+
+.header.sticky {
+  height: 50px;
+  background: rgba(0, 0, 0, 0.80);
+  backdrop-filter: blur(5px);
+}
+
+.sticky .logo {
+  font-size: 16px;
+}
+
+.sticky .link {
+  font-size: 14px;
+}
+
+.sticky .linkLabel {
+  font-size: 14px;
+}
+
+.buttonOutline {
+  border-color: #fff;
+  color: #fff;
+}
+
+.buttonSubtle {
+  color: #fff;
+}
+
+@media (hover: hover) {
+  .buttonSubtle:hover  { color: #000; }
+}
+
+.sticky .button {
+  font-size: 12px;
+  height: 30px;
+  transition: all 0.3s;
+}
+
+.drawerMenuWrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.drawerMenu {
+  text-align: center;
+  color: #909296;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 155%;
+}
+
+.drawerFooter {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 155%;
+  color: #5C5F66;
+  text-decoration: none;
+}
+
+.drawerFooter a {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 155%;
+  color: #5C5F66;
+  text-decoration: none;
+}
+
+.drawerMenu a {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 155%;
+}
+
+.drawerMenuWrapper .buttonOutline, .drawerMenuWrapper .buttonSubtle {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 155%;
+  background: #25262B;
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .links {
+    display: none;
+  }
+  .burger {
+    display: none;
+  }
+  .hiddenMobile {
+    display: none;
+  }
+  @media (hover: hover) {
+    a:hover { color: #fff; }
+  }
+}
+
+@media (min-width: 768px) {
+  .hiddenDesktop {
+    display: none;
+  }
 }
 

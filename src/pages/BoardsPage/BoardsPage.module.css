@@ -1,5 +1,6 @@
 .inputWrapper {
   width: 100%;
+  max-width: 300px;
 }
 
 .label {
@@ -10,6 +11,15 @@
 .heading {
   display: flex;
   justify-content: space-between;
+  padding-bottom: 80px;
+}
+
+@media screen and (max-width: 480px) {
+  .heading {
+    flex-direction: column;
+    padding-bottom: 40px;
+    gap: 20px;
+  }
 }
 
 .name {

@@ -1,4 +1,5 @@
 import { MantineProvider } from '@mantine/core';
+import { ModalsProvider } from '@mantine/modals';
 import AppRouter from 'components/AppRouter/AppRouter';
 import React from 'react';
 import { Provider } from 'react-redux';
@@ -16,11 +17,13 @@ function App() {
         headings: { fontFamily: 'Open Sans' },
       }}
     >
-      <Provider store={store}>
-        <HashRouter>
-          <AppRouter />
-        </HashRouter>
-      </Provider>
+      <ModalsProvider>
+        <Provider store={store}>
+          <HashRouter>
+            <AppRouter />
+          </HashRouter>
+        </Provider>
+      </ModalsProvider>
     </MantineProvider>
   );
 }

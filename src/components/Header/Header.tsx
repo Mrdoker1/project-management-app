@@ -1,16 +1,19 @@
 import { Menu, Center, Header, Container, Group, Burger } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import React, { memo, useEffect, useState } from 'react';
+import { useWindowEvent } from '@mantine/hooks';
+import React, { memo, useCallback, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import cl from './Header.module.css';
-import { useStyles } from './HeaderStyles';
 import logo from '../../assets/logo.svg';
 import DrawerComponent from './Drawer/Drawer';
 import LoginButtons from './LoginButtons/LoginButtons';
 import MenuComponent from './Menu/Menu';
 import i18n from 'i18n';
-
-interface HeaderActionProps {
+import { IconChevronDown } from '@tabler/icons';
+import { useTranslation } from 'react-i18next';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import { setMenuState } from 'store/menuSlice';
+import { setLang } from 'store/settingsSlice';
+interface IHeaderProps {
   links: {
     link: string;
     label: string;
@@ -18,18 +21,35 @@ interface HeaderActionProps {
   }[];
 }
 
-const HeaderAction = memo(({ links }: HeaderActionProps) => {
-  const { classes } = useStyles();
-  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
-  const [language, setLanguage] = useState('English');
+const HeaderAction = memo(({ links }: IHeaderProps) => {
+  const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const isOpened = useAppSelector((state) => state.menu.isOpened);
+  const language = useAppSelector((state) => state.settings.lang);
+  const [sticky, setSticky] = useState(false);
+  const stickyHeader = sticky ? cl.sticky : '';
 
-  useEffect(() => {
-    i18n.changeLanguage(language);
-  }, [language]);
+  const trackScroll = useCallback(() => {
+    setSticky(window.scrollY >= 120);
+  }, []);
+  useWindowEvent('scroll', trackScroll);
+
+  const handleChangeLang = useCallback((lng: string) => {
+    dispatch(setLang(lng));
+    i18n.changeLanguage(lng);
+  }, []);
+
+  const openMenuHandler = useCallback(() => {
+    dispatch(setMenuState(true));
+  }, []);
+
+  const closeMenuHandler = useCallback(() => {
+    dispatch(setMenuState(false));
+  }, []);
 
   const menuItems = links.map((link) => {
     const items = link.links?.map((item) => (
-      <Menu.Item key={item.link} onClick={() => setLanguage(item.label)}>
+      <Menu.Item key={item.link} onClick={() => handleChangeLang(item.label)}>
         {item.label}
       </Menu.Item>
     ));
@@ -39,8 +59,8 @@ const HeaderAction = memo(({ links }: HeaderActionProps) => {
         <Menu key={link.label} trigger="hover" exitTransitionDuration={0}>
           <Menu.Target>
             <Center>
-              <span className={classes.linkLabel}>{language}</span>
-              {/* <IconChevronDown size={12} stroke={1.5} /> */}
+              <span className={cl.linkLabel}>{language}</span>
+              <IconChevronDown size={12} stroke={1.5} />
             </Center>
           </Menu.Target>
           <Menu.Dropdown>{items}</Menu.Dropdown>
@@ -49,22 +69,22 @@ const HeaderAction = memo(({ links }: HeaderActionProps) => {
     }
 
     return (
-      <NavLink key={link.label} to={link.link} className={classes.link}>
-        {link.label}
+      <NavLink key={link.label} to={link.link} className={cl.link} onClick={closeMenuHandler}>
+        {t(link.label)}
       </NavLink>
     );
   });
 
   return (
     <>
-      <Header className={classes.header} height={64}>
-        <Container size={1200} className={classes.inner}>
+      <Header className={`${cl.header} ${stickyHeader}`} height={64}>
+        <Container size={1200} className={cl.inner}>
           <Group>
             <Burger
               color="#fff"
-              opened={drawerOpened}
-              onClick={toggleDrawer}
-              className={classes.hiddenDesktop}
+              opened={isOpened}
+              onClick={openMenuHandler}
+              className={cl.hiddenDesktop}
             />
             <NavLink className={cl.logoWrapper} end to="/">
               <img src={logo} alt="Logo" />
@@ -72,10 +92,12 @@ const HeaderAction = memo(({ links }: HeaderActionProps) => {
             </NavLink>
           </Group>
           <MenuComponent items={menuItems} />
-          <LoginButtons />
+          <Group spacing={10} className={cl.hiddenMobile}>
+            <LoginButtons />
+          </Group>
         </Container>
       </Header>
-      <DrawerComponent drawerOpened={drawerOpened} items={menuItems} closeDrawer={closeDrawer} />
+      <DrawerComponent items={menuItems} />
     </>
   );
 });
