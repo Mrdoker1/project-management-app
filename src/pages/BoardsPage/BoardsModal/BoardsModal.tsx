@@ -16,7 +16,7 @@ const BoardsModal = () => {
   const [createBoard] = useCreateBoardMutation();
   const [updateBoard] = useUpdateBoardMutation();
 
-  const { data: board } = useGetBoardQuery(modal.board.id);
+  const { data: board, isFetching } = useGetBoardQuery(modal.board.id);
   const { data: users } = useGetUsersQuery();
 
   const defaultValues = {
@@ -28,7 +28,6 @@ const BoardsModal = () => {
 
   const [usersList, setUsers] = useState([{ value: '', label: '', key: '' }]);
   const [boardData, setBoard] = useState(defaultValues);
-  const [isLoading, setIsLoading] = useState(true);
 
   const form = useForm({
     initialValues: boardData,
@@ -59,7 +58,6 @@ const BoardsModal = () => {
       };
       modal.type == 1 ? form.setValues(values) : form.setValues(defaultValues);
       setBoard(values);
-      setIsLoading(false);
     }
   }, [board, modal]);
 
@@ -140,7 +138,7 @@ const BoardsModal = () => {
       }}
       title={modal.type === actionType.Edit ? t('Edit Board') : t('Create Board')}
     >
-      {isLoading ? <Loader color="dark" /> : formComponent}
+      {isFetching ? <Loader color="dark" /> : formComponent}
     </Modal>
   );
 };
