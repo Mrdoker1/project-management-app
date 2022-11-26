@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/project-management-app/static/css/main.b83e814b.css",
-    "main.js": "/project-management-app/static/js/main.760eafb7.js",
+    "main.css": "/project-management-app/static/css/main.c57db835.css",
+    "main.js": "/project-management-app/static/js/main.cce20fc9.js",
     "static/media/noise.svg": "/project-management-app/static/media/noise.a2d3768d7dec9a58bea8.svg",
     "static/media/main-page-img1.svg": "/project-management-app/static/media/main-page-img1.e3bf2a3cd686c9b1ed70400e71631e13.svg",
     "static/media/main-page-img2.svg": "/project-management-app/static/media/main-page-img2.9eaf71610d17ba08d9d8119f0658c39b.svg",
@@ -15,15 +15,16 @@
     "static/media/react-ico.svg": "/project-management-app/static/media/react-ico.2f6a44caa7fd32253c110608dad57dc4.svg",
     "static/media/feature3.svg": "/project-management-app/static/media/feature3.b8439b5fc999a01d583b72b92bc292b9.svg",
     "static/media/feature2.svg": "/project-management-app/static/media/feature2.d915fb6783eed4957994957ae5dfd90d.svg",
+    "static/media/sidebar-logo.svg": "/project-management-app/static/media/sidebar-logo.2e724a7d51f6b37df4b1ff76bf49c6b3.svg",
     "static/media/logo.svg": "/project-management-app/static/media/logo.4d60fdcc7551a6afbe315335f36e769b.svg",
     "static/media/feature1.svg": "/project-management-app/static/media/feature1.fc5d8ac6cf360a36994cf7ba148194f9.svg",
     "index.html": "/project-management-app/index.html",
     "static/media/check-ico.svg": "/project-management-app/static/media/check-ico.953d2a0487c175ab0a2300e28a7cd0fd.svg",
-    "main.b83e814b.css.map": "/project-management-app/static/css/main.b83e814b.css.map",
-    "main.760eafb7.js.map": "/project-management-app/static/js/main.760eafb7.js.map"
+    "main.c57db835.css.map": "/project-management-app/static/css/main.c57db835.css.map",
+    "main.cce20fc9.js.map": "/project-management-app/static/js/main.cce20fc9.js.map"
   },
   "entrypoints": [
-    "static/css/main.b83e814b.css",
-    "static/js/main.760eafb7.js"
+    "static/css/main.c57db835.css",
+    "static/js/main.cce20fc9.js"
   ]
 }
