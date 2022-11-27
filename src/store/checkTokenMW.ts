@@ -16,9 +16,9 @@ const checkTokenMW: Middleware<Dispatch> =
 
       if (token && isExpired(token)) {
         localStorage.clear();
-        await dispatch(setToken(''));
-        await dispatch(clearProfile);
-        await dispatch(api.util.resetApiState());
+        dispatch(setToken(''));
+        dispatch(clearProfile);
+        dispatch(api.util.resetApiState());
 
         console.log('Token has expired!');
         return redirect('/login');

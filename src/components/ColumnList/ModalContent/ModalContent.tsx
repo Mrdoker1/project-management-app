@@ -41,7 +41,6 @@ const ModalContent = memo(() => {
         data-autofocus
         classNames={inputClasses}
         label={t('Column name')}
-        //placeholder={t('Column name')}
         {...form.getInputProps('name')}
       />
       <Button className={cl.submit} type="submit" mt="sm" loading={isLoading}>
