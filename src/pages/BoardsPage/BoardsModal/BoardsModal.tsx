@@ -43,7 +43,6 @@ const BoardsModal = () => {
   });
 
   useEffect(() => {
-    setIsSubmited(false);
     if (users) {
       const usersData = users.map((value) => {
         return { value: value.name, label: value.name, key: value._id };
@@ -96,6 +95,7 @@ const BoardsModal = () => {
             console.error('rejected', error);
           }
         }
+        setIsSubmited(false);
       })}
     >
       <TextInput
