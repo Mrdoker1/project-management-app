@@ -5,10 +5,10 @@
   gap: 20px;
   padding: 40px;
   padding-top: 60px;
-  max-width: 460px;
+  *max-width: 460px;
   border: 1px solid #343A40;
   border-radius: 17px;
-  width: 460px;
+  *width: 460px;
   background-color: #101113;
   position: relative;
 }
@@ -38,13 +38,24 @@
   color: #F8F9FA;
 }
 
+.login:focus, .login:focus-within, .password:focus, .password:focus-within {
+  border-color: #F1F3F5;
+  background-color: #1A1B1E;
+}
+
 .innerInput {
   color: #F8F9FA;
 }
 
-.login:focus, .login:focus-within, .password:focus, .password:focus-within {
-  border-color: #F1F3F5;
-  background-color: #1A1B1E;
+.login:-webkit-autofill,
+.innerInput:-webkit-autofill{
+  transition: background-color 600000s 0s, color 600000s 0s;
+  -webkit-transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+.login:autofill,
+.innerInput:autofill {
+  background: #101113; /* or any other */
 }
 
 .rightSection:hover {
@@ -65,7 +76,6 @@
 
 .answer {
   align-self: flex-start;
-  *padding-top: 5px;
 }
 
 .link {

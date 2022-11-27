@@ -47,6 +47,19 @@
   background-color: #1A1B1E;
 }
 
+.name:-webkit-autofill,
+.login:-webkit-autofill,
+.innerInput:-webkit-autofill{
+  transition: background-color 600000s 0s, color 600000s 0s;
+  -webkit-transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+.name:autofill,
+.login:autofill,
+.innerInput:autofill {
+  background: #101113; /* or any other */
+}
+
 .rightSection:hover {
   background-color: none;
 }
@@ -59,14 +72,12 @@
 }
 
 .visibilityToggle:hover {
-  *background: none;
   background-color: rgba(231, 245, 255, 1);
   color: #101113;
 }
 
 .answer {
   align-self: flex-start;
-  *padding-top: 5px;
 }
 
 .link {
@@ -80,7 +91,6 @@
   border-radius: 4px;
   width: 161px;
   height: 39px; 
-  *margin-top: 5px;
 }
 
 .submit[data-loading] {

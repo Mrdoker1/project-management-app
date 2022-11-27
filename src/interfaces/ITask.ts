@@ -5,6 +5,6 @@ export interface ITask {
   title: string;
   order: number;
   description: string;
-  userId: number;
+  userId: string;
   users: Array<string>;
 }

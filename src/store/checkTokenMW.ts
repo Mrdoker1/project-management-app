@@ -5,7 +5,7 @@ import { RootState } from 'store/store';
 import { isExpired } from 'react-jwt';
 import { Middleware, Dispatch } from 'redux';
 import { MiddlewareAPI, AnyAction } from 'redux';
-import { Navigate } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
 
 const checkTokenMW: Middleware<Dispatch> =
   ({ dispatch, getState }: MiddlewareAPI) =>
@@ -16,13 +16,12 @@ const checkTokenMW: Middleware<Dispatch> =
 
       if (token && isExpired(token)) {
         localStorage.clear();
-        await dispatch(setToken(''));
-        await dispatch(clearProfile);
-        await dispatch(api.util.resetApiState());
+        dispatch(setToken(''));
+        dispatch(clearProfile);
+        dispatch(api.util.resetApiState());
 
         console.log('Token has expired!');
-        Navigate({ to: '/' });
-        return;
+        return redirect('/login');
       }
     }
     return next(action);

@@ -1,0 +1,15 @@
+.row {
+  overflow: auto;
+  padding-bottom: 40px;
+}
+
+.columnBtnWrapper {
+  border: 1px solid #343A40;
+  border-radius: 8px;
+  *background-color: #101113;
+  background: #000;
+  min-width: 200px;
+  color: #fff;
+  transition: 0.3s all;
+  width: auto;
+}
