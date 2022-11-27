@@ -1,0 +1,23 @@
+.navlink {
+  color: #FFFFFF;
+  width: auto;
+  display: inline-flex;
+  padding-left: 0;
+  margin-left: -7px;
+  transition: all 0.3s;
+}
+
+.navlink:hover {
+  background: none;
+  color: rgb(192, 192, 192);
+}
+
+.navlinkIcon{
+  margin-right: 6px;
+}
+
+.navlinkLabel{
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 130%;
+}

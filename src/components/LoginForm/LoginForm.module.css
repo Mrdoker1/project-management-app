@@ -5,10 +5,10 @@
   gap: 20px;
   padding: 40px;
   padding-top: 60px;
-  max-width: 460px;
+  *max-width: 460px;
   border: 1px solid #343A40;
   border-radius: 17px;
-  width: 460px;
+  *width: 460px;
   background-color: #101113;
   position: relative;
 }

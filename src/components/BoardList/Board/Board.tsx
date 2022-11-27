@@ -60,14 +60,14 @@ const Board = memo<IBoardProps>(({ id }) => {
   }, [board]);
 
   const openBoardHeandler = useCallback(() => {
-    navigate(`/board/${id}`);
+    navigate(`/projects/${id}`);
   }, []);
 
   const editBoardHeandler = useCallback(async () => {
     dispatch(setModalState(true));
     dispatch(setModalType(actionType.Edit));
     dispatch(setModalBoardId(id));
-    console.log(id);
+    //console.log(id);
   }, []);
 
   const deleteBoardHandler = useCallback(() => {

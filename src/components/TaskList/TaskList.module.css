@@ -1,0 +1,18 @@
+.task {
+  flex-direction: column;
+  width: 100%;
+}
+
+.taskBtnWrapper {
+  width: auto;
+  padding-left: 0;
+  margin-left: -5px;
+  background: none;
+  align-self: flex-start;
+  transition: all 0.3s;
+}
+
+.taskBtnWrapper:hover {
+  color: rgb(192, 192, 192);
+  background: none;
+}
