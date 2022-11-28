@@ -140,7 +140,7 @@ const Board = memo<IBoardProps>(({ id }) => {
         className={`${cl.board}`}
       >
         {hovered ? hoverLayout : defaultLayout}
-        <motion.div style={gradientStyle}></motion.div>
+        <motion.div className={cl.boardGradient} style={gradientStyle}></motion.div>
       </motion.div>
     </>
   );
