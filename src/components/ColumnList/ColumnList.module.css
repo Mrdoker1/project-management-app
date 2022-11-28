@@ -6,10 +6,14 @@
 .columnBtnWrapper {
   border: 1px solid #343A40;
   border-radius: 8px;
-  *background-color: #101113;
   background: #000;
-  min-width: 200px;
+  width: 296px;
   color: #fff;
   transition: 0.3s all;
-  width: auto;
+  height: 50px;
+  line-height: 0;
 }
+
+/* .columnBtnInner {
+  padding: 6px 0;
+} */

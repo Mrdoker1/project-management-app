@@ -44,7 +44,7 @@ const ColumnList = memo(() => {
           fullWidth={true}
           variant="outline"
           type="submit"
-          leftIcon={<IconPlus />}
+          leftIcon={<IconPlus size={20} />}
           classNames={ButtonClasses}
         >
           {t('Add column')}
@@ -60,6 +60,7 @@ const ColumnList = memo(() => {
 const ButtonClasses = {
   input: cl.columnBtn,
   root: cl.columnBtnWrapper,
+  inner: cl.columnBtnInner,
 };
 
 export default ColumnList;

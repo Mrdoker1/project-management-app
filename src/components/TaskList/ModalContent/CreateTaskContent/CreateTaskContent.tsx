@@ -1,6 +1,6 @@
 import { Button, Group, Select, Textarea, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import cl from './CreateTaskContent.module.css';
 import { useTranslation } from 'react-i18next';
 import { useGetUsersQuery } from 'store/api/users';
@@ -19,6 +19,7 @@ const CreateTaskContent = memo(() => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const creatingTask = useAppSelector((state) => state.task.creatingTask);
+  const currentUserName = useAppSelector((state) => state.profile.name);
 
   const { usersList } = useGetUsersQuery(undefined, {
     selectFromResult: ({ data }) => ({
@@ -51,6 +52,10 @@ const CreateTaskContent = memo(() => {
       userId: (value) => (!value ? 'Select user' : null),
     },
   });
+
+  useEffect(() => {
+    form.setValues({ userId: currentUserName });
+  }, []);
 
   return (
     <form className={cl.form} onSubmit={form.onSubmit(createTask)}>

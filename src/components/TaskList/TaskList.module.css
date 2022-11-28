@@ -1,15 +1,16 @@
 .task {
   flex-direction: column;
   width: 100%;
+  gap: 8px;
 }
 
 .taskBtnWrapper {
   width: auto;
   padding-left: 0;
-  margin-left: -5px;
   background: none;
   align-self: flex-start;
   transition: all 0.3s;
+  line-height: 0;
 }
 
 .taskBtnWrapper:hover {
