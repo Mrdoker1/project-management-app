@@ -77,7 +77,7 @@ const LoginForm = memo(() => {
         </NavLink>
       </p>
       <p className={cl.message}>{message}</p>
-      <Button loading={isLoading} loaderPosition="center" className={cl.submit} type="submit">
+      <Button loading={isLoading} className={cl.submit} type="submit">
         {t('Sign in')}
       </Button>
       <CloseButton
