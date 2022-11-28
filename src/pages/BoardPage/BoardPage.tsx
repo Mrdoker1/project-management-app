@@ -13,7 +13,7 @@ const BoardPage = () => {
         <BoardHeader />
         <Space h={40} />
         <ColumnList />
-        <Space h={40} />
+        <Space h={20} />
       </div>
     </main>
   );

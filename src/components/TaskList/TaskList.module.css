@@ -1,7 +1,10 @@
-.task {
+.tasks {
   flex-direction: column;
   width: 100%;
   gap: 8px;
+  min-height: 40px;
+  max-height: calc(-370px + 100vh);
+  overflow: hidden auto;
 }
 
 .taskBtnWrapper {
