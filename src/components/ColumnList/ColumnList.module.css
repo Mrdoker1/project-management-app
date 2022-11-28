@@ -1,15 +1,18 @@
 .row {
-  overflow: auto;
-  padding-bottom: 40px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  align-items: flex-start;
+  height: calc(-346px + 100vh);
 }
 
 .columnBtnWrapper {
   border: 1px solid #343A40;
   border-radius: 8px;
-  *background-color: #101113;
   background: #000;
-  min-width: 200px;
+  width: 296px;
   color: #fff;
   transition: 0.3s all;
-  width: auto;
+  height: 50px;
+  line-height: 0;
+  flex-shrink: 0;
 }

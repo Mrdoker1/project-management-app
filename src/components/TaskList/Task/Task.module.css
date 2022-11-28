@@ -1,34 +1,50 @@
 
 .task {
-  background-color: #101113;
+  display: flex;
+  background: #25262B;
   color: #fff;
-  border: 1px solid #373A40;
   border-radius: 7px;
   width: 100%;
   justify-content: space-between;
+  padding: 4px 19px;
+  transition: 0.3s all;
+  border: 1px solid #25262B;
+}
+
+.task:hover {
+  border: 1px solid #909296;
+}
+
+.task:hover .closeBtn {
+  opacity: 1;
 }
 
 .taskBtnWrapper {
-  width: auto;
-  padding: 3px 10px;
+  flex-grow: 1;
+  justify-content: flex-start;
   background: none;
   align-self: flex-start;
   transition: all 0.3s;
   font-size: 16px;
   line-height: 155%;
   border: none;
+  padding: 0;
 }
 
 .taskBtnWrapper:hover {
-  color: rgb(192, 192, 192);
   background: none;
+}
+
+.taskBtnInner{
+  justify-content: flex-start;
 }
 
 .closeBtn {
   color: #fff;
   transition: 0.3s all;
+  opacity: 0;
 }
 
 .closeBtn:hover {
-  color: #000;
+  color: #101113;
 }

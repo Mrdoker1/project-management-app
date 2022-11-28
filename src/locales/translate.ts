@@ -68,6 +68,7 @@ const resources = {
         'Sets targets and objectives and actively works towards them, whilst raising the quality of the outcomes.',
       'Add column': 'Add column',
       'Add task': 'Add task',
+      Name: 'Name',
     },
   },
   Russian: {
@@ -140,6 +141,7 @@ const resources = {
         'Ставит цели и задачи и активно работает над их достижением, повышая при этом качество результатов.',
       'Add column': 'Добавить колонку',
       'Add task': 'Добавить задачу',
+      Name: 'Имя',
     },
   },
 };

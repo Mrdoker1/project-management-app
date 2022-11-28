@@ -32,11 +32,15 @@ const TaskList = memo<ITaskListProps>(({ boardId, columnId }) => {
   if (!tasks) return <div>{t('Ничего не найдено!')}</div>;
 
   return (
-    <Flex className={cl.task} gap={{ base: 'xs', sm: 'sm' }}>
+    <Flex className={cl.tasks} gap={{ base: 'xs', sm: 'sm' }}>
       {tasks.map((task) => (
         <Task _id={task._id} boardId={boardId} columnId={columnId} key={task._id} />
       ))}
-      <Button onClick={openCreatingModal} leftIcon={<IconPlus />} classNames={ButtonClasses}>
+      <Button
+        onClick={openCreatingModal}
+        leftIcon={<IconPlus size={20} />}
+        classNames={ButtonClasses}
+      >
         {t('Add task')}
       </Button>
       <ModalContent />

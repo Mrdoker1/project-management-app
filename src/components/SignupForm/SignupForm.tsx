@@ -44,12 +44,12 @@ const SignupForm = memo(() => {
       await signup(values).unwrap();
       const auth = removeObjKey(values, 'name');
       const token = await login(auth).unwrap();
-      await dispatch(setToken(token));
+      dispatch(setToken(token));
 
       const data = await getUsers().unwrap();
       const user = data.find((user) => user.login === values.login);
       if (!user) throw new Error('User not exists!');
-      await dispatch(setProfile(user));
+      dispatch(setProfile(user));
 
       navigate('/projects');
     } catch (err) {

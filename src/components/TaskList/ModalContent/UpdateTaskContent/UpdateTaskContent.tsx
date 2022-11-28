@@ -1,4 +1,4 @@
-import { Button, Group, Select, Text, Textarea, TextInput } from '@mantine/core';
+import { Button, Group, Select, Textarea, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import React, { memo, useEffect } from 'react';
 import cl from './UpdateTaskContent.module.css';
@@ -6,9 +6,8 @@ import { useTranslation } from 'react-i18next';
 import { useGetUsersQuery } from 'store/api/users';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { ITask } from 'interfaces/ITask';
-import { useDeleteTaskByIdMutation, useUpdateTaskByIdMutation } from 'store/api/tasks';
+import { useUpdateTaskByIdMutation } from 'store/api/tasks';
 import { setIsOpen } from 'store/taskSlice';
-import { openConfirmModal } from '@mantine/modals';
 
 interface TaskFormValues {
   title: string;
@@ -21,7 +20,6 @@ const UpdateTaskContent = memo(() => {
   const { t } = useTranslation();
   const updatingTask = useAppSelector((state) => state.task.updatingTask);
   const [updateTaskMutation, { isLoading }] = useUpdateTaskByIdMutation();
-  const [deleteTaskMutation] = useDeleteTaskByIdMutation();
 
   const { usersList } = useGetUsersQuery(undefined, {
     selectFromResult: ({ data }) => ({
@@ -36,30 +34,9 @@ const UpdateTaskContent = memo(() => {
     dispatch(setIsOpen(false));
   };
 
-  const deleteTask = () => {
-    openConfirmModal({
-      title: t('Delete column'),
-      modalId: 'columnDeleteModal',
-      centered: true,
-      children: (
-        <Text size="sm">
-          {t('Are you sure you want to delete this column? This action is destructive.')}
-        </Text>
-      ),
-      labels: { confirm: t('Delete task'), cancel: t('Cancel') },
-      confirmProps: { color: 'red' },
-      onConfirm: async () => {
-        if (!updatingTask) return;
-        const { _id, columnId, boardId } = updatingTask;
-        deleteTaskMutation({ _id, columnId, boardId });
-        dispatch(setIsOpen(false));
-      },
-    });
+  const closeModal = () => {
+    dispatch(setIsOpen(false));
   };
-
-  // const closeModal = () => {
-  //   dispatch(setIsOpen(false));
-  // };
 
   const form = useForm({
     initialValues,
@@ -105,8 +82,8 @@ const UpdateTaskContent = memo(() => {
         <Button type="submit" className={cl.submit} mt="sm" loading={isLoading}>
           {t('Update')}
         </Button>
-        <Button className={cl.submit} mt="sm" onClick={deleteTask}>
-          {t('Delete')}
+        <Button className={cl.submit} mt="sm" onClick={closeModal}>
+          {t('Cancel')}
         </Button>
       </Group>
     </form>

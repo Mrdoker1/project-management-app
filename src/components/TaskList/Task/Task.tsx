@@ -1,6 +1,6 @@
 import { Button, CloseButton, Group, Text } from '@mantine/core';
 import { openConfirmModal } from '@mantine/modals';
-import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import { useAppDispatch } from 'hooks/redux';
 import React, { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDeleteTaskByIdMutation, useGetTasksQuery } from 'store/api/tasks';
@@ -64,7 +64,7 @@ const Task = memo<ITaskListProps>(({ _id, columnId, boardId }) => {
       <Button onClick={openUpdatingModal} classNames={ButtonClasses}>
         {title}
       </Button>
-      <CloseButton onClick={deleteTask} />
+      <CloseButton onClick={deleteTask} size={24} className={cl.closeBtn} />
     </Group>
   );
 });
@@ -72,6 +72,7 @@ const Task = memo<ITaskListProps>(({ _id, columnId, boardId }) => {
 const ButtonClasses = {
   root: cl.taskBtnWrapper,
   input: cl.taskBtn,
+  inner: cl.taskBtnInner,
 };
 
 export default Task;
