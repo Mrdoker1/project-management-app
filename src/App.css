@@ -153,3 +153,11 @@ button {
   color: #101113;
   background-color: rgba(231, 245, 255, 1);
 }
+
+.mantine-7okxq6[data-selected] {
+  background-color: #15aabf;
+}
+
+.mantine-7okxq6[data-selected]:hover {
+  background-color: #0597ab;
+}
