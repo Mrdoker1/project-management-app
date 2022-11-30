@@ -18,7 +18,7 @@ const ModalContent = memo(() => {
   }, []);
 
   return (
-    <Modal centered opened={isOpen} title={t(title)} onClose={closeModal}>
+    <Modal overlayOpacity={0.4} centered opened={isOpen} title={t(title)} onClose={closeModal}>
       {isEdit ? <UpdateTaskContent /> : <CreateTaskContent />}
     </Modal>
   );

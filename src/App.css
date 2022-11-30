@@ -154,6 +154,14 @@ button {
   background-color: rgba(231, 245, 255, 1);
 }
 
+.board-scroll {
+  height: 8px;
+}
+
+.board-scroll .os-scrollbar-handle {
+  background-color: #343A40;
+}
+
 .mantine-7okxq6[data-selected] {
   background-color: #15aabf;
 }

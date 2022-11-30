@@ -1,4 +1,4 @@
-import { Button, Group, Select, Textarea, TextInput } from '@mantine/core';
+import { Button, Select, Textarea, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import React, { memo, useEffect } from 'react';
 import cl from './CreateTaskContent.module.css';
@@ -19,11 +19,11 @@ const CreateTaskContent = memo(() => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const creatingTask = useAppSelector((state) => state.task.creatingTask);
-  const currentUserName = useAppSelector((state) => state.profile.name);
+  const currentUserId = useAppSelector((state) => state.profile._id);
 
   const { usersList } = useGetUsersQuery(undefined, {
     selectFromResult: ({ data }) => ({
-      usersList: data?.map(({ name, _id }) => ({ value: name, label: name, key: _id })),
+      usersList: data?.map(({ name, _id }) => ({ value: _id, label: name, key: _id })),
     }),
   });
 
@@ -33,10 +33,6 @@ const CreateTaskContent = memo(() => {
     if (!creatingTask) return;
     const task: Omit<ITask, '_id'> = { ...values, ...creatingTask, users: [] };
     await createTaskMutation(task);
-    dispatch(setIsOpen(false));
-  };
-
-  const closeModal = () => {
     dispatch(setIsOpen(false));
   };
 
@@ -54,7 +50,7 @@ const CreateTaskContent = memo(() => {
   });
 
   useEffect(() => {
-    form.setValues({ userId: currentUserName });
+    form.setValues({ userId: currentUserId });
   }, []);
 
   return (
@@ -78,14 +74,9 @@ const CreateTaskContent = memo(() => {
         data={usersList ?? []}
         {...form.getInputProps('userId')}
       />
-      <Group align="center" position="center">
-        <Button type="submit" className={cl.submit} mt="sm" loading={isLoading}>
-          {t('Create')}
-        </Button>
-        <Button className={cl.submit} mt="sm" onClick={closeModal}>
-          {t('Cancel')}
-        </Button>
-      </Group>
+      <Button type="submit" className={cl.submit} mt="sm" loading={isLoading}>
+        {t('Create')}
+      </Button>
     </form>
   );
 });

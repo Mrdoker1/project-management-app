@@ -41,7 +41,7 @@ const LoginForm = memo(() => {
       const user = data.find((user) => user.login === values.login);
       if (!user) throw new Error('User not exists!');
       dispatch(setProfile(user));
-      navigate('/projects');
+      //navigate('/projects');
     } catch (err) {
       console.log(err);
     }

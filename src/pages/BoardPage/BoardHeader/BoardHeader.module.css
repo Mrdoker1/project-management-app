@@ -1,3 +1,7 @@
+.header {
+  padding: 40px 0;
+}
+
 .navlink {
   color: #FFFFFF;
   width: auto;
@@ -20,4 +24,10 @@
   font-size: 34px;
   font-weight: 700;
   line-height: 130%;
+}
+
+@media (max-height: 600px) {
+  .header {
+    padding: 10px 0;
+  }
 }

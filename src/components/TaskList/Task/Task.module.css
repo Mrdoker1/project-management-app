@@ -9,6 +9,7 @@
   padding: 4px 19px;
   transition: 0.3s all;
   border: 1px solid #25262B;
+  flex-wrap: nowrap;
 }
 
 .task:hover {
@@ -29,6 +30,9 @@
   line-height: 155%;
   border: none;
   padding: 0;
+  min-height: 36px;
+	height: auto;
+  word-break: break-word;
 }
 
 .taskBtnWrapper:hover {
@@ -37,6 +41,10 @@
 
 .taskBtnInner{
   justify-content: flex-start;
+}
+
+.taskBtnLabel {
+  white-space: normal;
 }
 
 .closeBtn {
