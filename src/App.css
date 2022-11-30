@@ -161,3 +161,11 @@ button {
 .board-scroll .os-scrollbar-handle {
   background-color: #343A40;
 }
+
+.mantine-7okxq6[data-selected] {
+  background-color: #15aabf;
+}
+
+.mantine-7okxq6[data-selected]:hover {
+  background-color: #0597ab;
+}

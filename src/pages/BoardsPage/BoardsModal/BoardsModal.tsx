@@ -22,7 +22,7 @@ const BoardsModal = () => {
   const defaultValues = {
     name: '',
     description: '',
-    owner: modal.type == 2 ? 'Mask' : '',
+    owner: modal.type == actionType.Create ? 'Mask' : '',
     color: '',
   };
 
@@ -45,7 +45,7 @@ const BoardsModal = () => {
   useEffect(() => {
     if (users) {
       const usersData = users.map((value) => {
-        return { value: value.name, label: value.name, key: value._id };
+        return { value: value._id, label: value.name, key: value._id };
       });
       setUsers(usersData);
     }
