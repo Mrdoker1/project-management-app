@@ -9,7 +9,7 @@ import ModalContent from './ModalContent/ModalContent';
 import Task from './Task/Task';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import cl from './TaskList.module.css';
-import 'overlayscrollbars/overlayscrollbars.css';
+// import 'overlayscrollbars/overlayscrollbars.css';
 
 interface ITaskListProps {
   columnId: string;

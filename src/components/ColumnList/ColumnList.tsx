@@ -9,7 +9,6 @@ import { setIsOpen } from 'store/columnSlice';
 import Column from './Column/Column';
 import cl from './ColumnList.module.css';
 import ModalContent from './ModalContent/ModalContent';
-import 'simplebar-react/dist/simplebar.min.css';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import 'overlayscrollbars/overlayscrollbars.css';
 
