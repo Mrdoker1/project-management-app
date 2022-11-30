@@ -22,7 +22,7 @@ const AppRouter = memo(() => {
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route element={<ProtectedRoute isAllowed={!token} />}>
+          <Route element={<ProtectedRoute isAllowed={!token} redirectPath="/projects" />}>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
           </Route>

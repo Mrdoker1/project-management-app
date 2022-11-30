@@ -51,7 +51,7 @@ const SignupForm = memo(() => {
       if (!user) throw new Error('User not exists!');
       dispatch(setProfile(user));
 
-      navigate('/projects');
+      //navigate('/projects');
     } catch (err) {
       setIsLoading(false);
       console.log(err);

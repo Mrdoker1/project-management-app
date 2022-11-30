@@ -153,3 +153,11 @@ button {
   color: #101113;
   background-color: rgba(231, 245, 255, 1);
 }
+
+.board-scroll {
+  height: 8px;
+}
+
+.board-scroll .os-scrollbar-handle {
+  background-color: #343A40;
+}

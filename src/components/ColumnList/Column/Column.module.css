@@ -30,6 +30,7 @@
   flex-grow: 1;
   border: 1px solid #141517;
   transition: 0.3s all;
+  word-break: break-word;
 }
 
 .title:focus {
@@ -58,4 +59,8 @@
 .columnBtnWrapper:hover {
   color: rgb(192, 192, 192);
   background: none;
+}
+
+.modalGroupRoot {
+  background-color: red;
 }

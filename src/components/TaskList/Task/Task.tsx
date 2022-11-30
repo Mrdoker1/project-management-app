@@ -73,6 +73,7 @@ const ButtonClasses = {
   root: cl.taskBtnWrapper,
   input: cl.taskBtn,
   inner: cl.taskBtnInner,
+  label: cl.taskBtnLabel,
 };
 
 export default Task;

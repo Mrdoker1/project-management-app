@@ -1,7 +1,7 @@
 import { CloseButton, Text, Title } from '@mantine/core';
 import { openConfirmModal } from '@mantine/modals';
 import TaskList from 'components/TaskList/TaskList';
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   useDeleteColumnByIdMutation,
@@ -18,6 +18,7 @@ interface IColumnProps {
 
 const Column = memo<IColumnProps>(({ _id, boardId }) => {
   const { t } = useTranslation();
+  const [columnTitle, setColumnTitle] = useState('');
 
   const [updateColumn] = useUpdateColumnByIdMutation();
   const [deleteColumn] = useDeleteColumnByIdMutation();
@@ -28,11 +29,20 @@ const Column = memo<IColumnProps>(({ _id, boardId }) => {
     }),
   });
 
+  const saveCurrentTitle = (e: React.FormEvent) => {
+    const target = getHtmlElement(e.target);
+    const title = target.textContent ?? '';
+    setColumnTitle(title);
+  };
+
   const updateColumnTitle = (e: React.FormEvent) => {
-    if (!column) return;
     const target = getHtmlElement(e.target);
     const title = target.textContent;
-    if (!title) return;
+    if (!column || title === columnTitle) return;
+    if (!title) {
+      target.innerHTML = columnTitle;
+      return;
+    }
     const changedColumn = { ...column, title };
     updateColumn(changedColumn);
   };
@@ -68,6 +78,7 @@ const Column = memo<IColumnProps>(({ _id, boardId }) => {
           className={cl.title}
           contentEditable={true}
           suppressContentEditableWarning={true}
+          onFocus={saveCurrentTitle}
           onBlur={updateColumnTitle}
         >
           {column.title}

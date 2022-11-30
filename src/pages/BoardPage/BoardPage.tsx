@@ -7,14 +7,12 @@ import BoardHeader from './BoardHeader/BoardHeader';
 const BoardPage = () => {
   return (
     <main className="main">
-      <ColumnModal />
-      <div className="container">
-        <Space h={40} />
+      <div className="container flex-column">
         <BoardHeader />
-        <Space h={40} />
         <ColumnList />
         <Space h={20} />
       </div>
+      <ColumnModal />
     </main>
   );
 };

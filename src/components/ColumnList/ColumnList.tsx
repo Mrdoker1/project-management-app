@@ -9,6 +9,9 @@ import { setIsOpen } from 'store/columnSlice';
 import Column from './Column/Column';
 import cl from './ColumnList.module.css';
 import ModalContent from './ModalContent/ModalContent';
+import 'simplebar-react/dist/simplebar.min.css';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import 'overlayscrollbars/overlayscrollbars.css';
 
 const ColumnList = memo(() => {
   const dispatch = useAppDispatch();
@@ -34,22 +37,34 @@ const ColumnList = memo(() => {
 
   return (
     <>
-      <Flex className={cl.row} gap={{ base: 'sm', sm: 'lg' }}>
-        {columns.map((column) => (
-          <Column _id={column._id} boardId={boardId} key={column._id} />
-        ))}
-        <Button
-          onClick={openModal}
-          radius={17}
-          fullWidth={true}
-          variant="outline"
-          type="submit"
-          leftIcon={<IconPlus size={20} />}
-          classNames={ButtonClasses}
-        >
-          {t('Add column')}
-        </Button>
-      </Flex>
+      <OverlayScrollbarsComponent
+        className={cl.scroll}
+        defer
+        options={{
+          scrollbars: { autoHide: 'scroll', theme: 'board-scroll' },
+          overflow: {
+            y: 'hidden',
+            x: 'scroll',
+          },
+        }}
+      >
+        <Flex className={cl.row} gap={{ base: 'sm', sm: 'lg' }}>
+          {columns.map((column) => (
+            <Column _id={column._id} boardId={boardId} key={column._id} />
+          ))}
+          <Button
+            onClick={openModal}
+            radius={17}
+            fullWidth={true}
+            variant="outline"
+            type="submit"
+            leftIcon={<IconPlus size={20} />}
+            classNames={ButtonClasses}
+          >
+            {t('Add column')}
+          </Button>
+        </Flex>
+      </OverlayScrollbarsComponent>
       <Modal centered opened={isOpen} title={t('Create Board')} onClose={closeModal}>
         <ModalContent />
       </Modal>

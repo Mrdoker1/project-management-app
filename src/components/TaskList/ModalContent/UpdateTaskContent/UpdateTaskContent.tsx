@@ -1,4 +1,4 @@
-import { Button, Group, Select, Textarea, TextInput } from '@mantine/core';
+import { Button, Select, Textarea, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import React, { memo, useEffect } from 'react';
 import cl from './UpdateTaskContent.module.css';
@@ -23,7 +23,7 @@ const UpdateTaskContent = memo(() => {
 
   const { usersList } = useGetUsersQuery(undefined, {
     selectFromResult: ({ data }) => ({
-      usersList: data?.map(({ name, _id }) => ({ value: name, label: name, key: _id })),
+      usersList: data?.map(({ name, _id }) => ({ value: _id, label: name, key: _id })),
     }),
   });
 
@@ -31,10 +31,6 @@ const UpdateTaskContent = memo(() => {
     if (!updatingTask) return;
     const task: ITask = { ...updatingTask, ...values };
     await updateTaskMutation(task);
-    dispatch(setIsOpen(false));
-  };
-
-  const closeModal = () => {
     dispatch(setIsOpen(false));
   };
 
@@ -78,14 +74,9 @@ const UpdateTaskContent = memo(() => {
         data={usersList ?? []}
         {...form.getInputProps('userId')}
       />
-      <Group align="center" position="center">
-        <Button type="submit" className={cl.submit} mt="sm" loading={isLoading}>
-          {t('Update')}
-        </Button>
-        <Button className={cl.submit} mt="sm" onClick={closeModal}>
-          {t('Cancel')}
-        </Button>
-      </Group>
+      <Button type="submit" className={cl.submit} mt="sm" loading={isLoading}>
+        {t('Update')}
+      </Button>
     </form>
   );
 });
