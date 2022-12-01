@@ -6,14 +6,16 @@ import { useTranslation } from 'react-i18next';
 import { useDeleteTaskByIdMutation, useGetTasksQuery } from 'store/api/tasks';
 import { setIsEdit, setIsOpen, setUpdatingTask } from 'store/taskSlice';
 import cl from './Task.module.css';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 interface ITaskListProps {
   _id: string;
+  index: number;
   columnId: string;
   boardId: string;
 }
 
-const Task = memo<ITaskListProps>(({ _id, columnId, boardId }) => {
+const Task = memo<ITaskListProps>(({ _id, index, columnId, boardId }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const [deleteTaskMutation] = useDeleteTaskByIdMutation();

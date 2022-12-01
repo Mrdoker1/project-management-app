@@ -11,6 +11,8 @@
 }
 
 .taskBtnWrapper {
+  padding-top: 20px;
+  width: inherit;
   width: auto;
   padding-left: 0;
   background: none;
@@ -32,3 +34,12 @@
 /* .taskBtnWrapper:active {
   transform: none;
 } */
+
+.draggable{
+  width: inherit;
+}
+
+.droppableEmpty {
+  width: inherit;
+  height: 0px;
+}
