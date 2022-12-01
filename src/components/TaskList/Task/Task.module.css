@@ -21,7 +21,6 @@
 }
 
 .taskBtnWrapper {
-  flex-grow: 1;
   justify-content: flex-start;
   background: none;
   align-self: flex-start;
