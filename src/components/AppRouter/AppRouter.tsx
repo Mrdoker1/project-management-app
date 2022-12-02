@@ -6,19 +6,17 @@ import HomePage from 'pages/HomePage/HomePage';
 import SignupPage from 'pages/SignupPage/SignupPage';
 import BoardsPage from 'pages/BoardsPage/BoardsPage';
 import BoardPage from 'pages/BoardPage';
-import ProfilePage from 'pages/ProfilePage';
 import { useAppSelector } from 'hooks/redux';
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 import Layout from 'components/Layout/Layout';
 import AboutPage from 'pages/AboutPage/AboutPage';
 import LoginPage from 'pages/LoginPage/LoginPage';
+import ProfilePage from 'pages/ProfilePage/ProfilePage';
 
 const AppRouter = memo(() => {
   const token = useAppSelector((state) => state.auth.token);
-  //console.log(token);
   return (
     <>
-      {/* <Header /> */}
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
@@ -30,12 +28,11 @@ const AppRouter = memo(() => {
           <Route element={<ProtectedRoute isAllowed={!!token} />}>
             <Route path="/projects" element={<BoardsPage />} />
             <Route path="/projects/:id" element={<BoardPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
           </Route>
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
-      {/* <Footer /> */}
+      {!!token && <ProfilePage />}
     </>
   );
 });
