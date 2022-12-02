@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface ISettingsState {
+interface IMenuState {
   isOpened: boolean;
 }
 
-const defaultState: ISettingsState = {
+const defaultState: IMenuState = {
   isOpened: false,
 };
 
