@@ -50,4 +50,16 @@ function getFromStorage(key: string) {
   return storage && JSON.parse(storage);
 }
 
-export { getRandom, removeObjKey, checkPassword, getErrorMessage, getFromStorage };
+function convertToBase64(file: File | null) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        return resolve(reader.result);
+      };
+    }
+  });
+}
+
+export { getRandom, removeObjKey, checkPassword, getErrorMessage, getFromStorage, convertToBase64 };
