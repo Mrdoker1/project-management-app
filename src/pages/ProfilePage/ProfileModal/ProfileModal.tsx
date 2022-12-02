@@ -42,7 +42,6 @@ const ProfileModal = () => {
   const stateAvatar = avatar;
   const navigate = useNavigate();
 
-  console.log(login, name);
   const form = useForm<IForm>({
     initialValues: {
       _id: _id!,
