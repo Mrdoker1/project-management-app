@@ -32,15 +32,16 @@ const LoginForm = memo(() => {
     }),
   });
 
-  const sendForm = useCallback(async (values: ILoginForm) => {
+  const sendForm = useCallback(async (values: ILoginForm, _event: React.FormEvent) => {
+    _event.preventDefault();
     try {
       const token = await login(values).unwrap();
-      await dispatch(setToken(token));
+      dispatch(setToken(token));
       const data = await getUsers().unwrap();
       const user = data.find((user) => user.login === values.login);
       if (!user) throw new Error('User not exists!');
-      await dispatch(setProfile(user));
-      navigate('/projects');
+      dispatch(setProfile(user));
+      //navigate('/projects');
     } catch (err) {
       console.log(err);
     }
@@ -77,7 +78,7 @@ const LoginForm = memo(() => {
         </NavLink>
       </p>
       <p className={cl.message}>{message}</p>
-      <Button loading={isLoading} loaderPosition="center" className={cl.submit} type="submit">
+      <Button loading={isLoading} className={cl.submit} type="submit">
         {t('Sign in')}
       </Button>
       <CloseButton
@@ -91,7 +92,12 @@ const LoginForm = memo(() => {
   );
 });
 
-const loginClasses = { input: cl.login, root: cl.inputWrapper, label: cl.label };
+const loginClasses = {
+  input: cl.login,
+  root: cl.inputWrapper,
+  label: cl.label,
+};
+
 const passwordClasses = {
   input: cl.password,
   root: cl.inputWrapper,

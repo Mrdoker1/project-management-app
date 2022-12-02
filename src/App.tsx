@@ -1,6 +1,6 @@
 import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
-import { NotificationsProvider } from '@mantine/notifications';
+
 import AppRouter from 'components/AppRouter/AppRouter';
 import React from 'react';
 import { Provider } from 'react-redux';
@@ -9,6 +9,7 @@ import './App.css';
 import './i18n';
 import store from 'store/store';
 import initApp from 'utils/initApp';
+import { NotificationsProvider } from '@mantine/notifications';
 
 function App() {
   return (

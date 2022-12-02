@@ -44,14 +44,14 @@ const SignupForm = memo(() => {
       await signup(values).unwrap();
       const auth = removeObjKey(values, 'name');
       const token = await login(auth).unwrap();
-      await dispatch(setToken(token));
+      dispatch(setToken(token));
 
       const data = await getUsers().unwrap();
       const user = data.find((user) => user.login === values.login);
       if (!user) throw new Error('User not exists!');
-      await dispatch(setProfile(user));
+      dispatch(setProfile(user));
 
-      navigate('/projects');
+      //navigate('/projects');
     } catch (err) {
       setIsLoading(false);
       console.log(err);
@@ -95,7 +95,7 @@ const SignupForm = memo(() => {
         </NavLink>
       </p>
       <p className={cl.message}>{message}</p>
-      <Button loading={isLoading} loaderPosition="center" className={cl.submit} type="submit">
+      <Button loading={isLoading} className={cl.submit} type="submit">
         {t('Create an account')}
       </Button>
       <CloseButton

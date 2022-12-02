@@ -28,6 +28,7 @@ const Board = memo<IBoardProps>(({ id }) => {
   });
 
   const [gradient, setGradient] = useState('');
+  const [isDeleted, setIsDeleted] = useState(false);
 
   const boardStyle = {
     position: 'relative',
@@ -59,18 +60,17 @@ const Board = memo<IBoardProps>(({ id }) => {
   }, [board]);
 
   const openBoardHeandler = useCallback(() => {
-    navigate(`/board/${id}`);
+    navigate(`/projects/${id}`);
   }, []);
 
   const editBoardHeandler = useCallback(async () => {
     dispatch(setModalState(true));
     dispatch(setModalType(actionType.Edit));
     dispatch(setModalBoardId(id));
-    console.log(id);
+    //console.log(id);
   }, []);
 
   const deleteBoardHandler = useCallback(() => {
-    let isLoading = false;
     openConfirmModal({
       title: t('Delete board'),
       modalId: 'boardDeleteModal',
@@ -82,14 +82,12 @@ const Board = memo<IBoardProps>(({ id }) => {
         </Text>
       ),
       labels: { confirm: t('Delete board'), cancel: t('Cancel') },
-      confirmProps: { color: 'red', loading: isLoading },
+      confirmProps: { color: 'red', loading: isDeleted },
       onCancel: () => console.log('Cancel'),
       onConfirm: async () => {
-        isLoading = true;
-        console.log(isLoading);
+        setIsDeleted(true);
         await deleteBoard(id);
         closeModal('boardDeleteModal');
-        isLoading = false;
       },
     });
   }, []);

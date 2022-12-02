@@ -6,45 +6,62 @@ const columns = api.injectEndpoints({
   endpoints: (build) => ({
     getColumns: build.query<IColumn[], string>({
       query: (boardId) => `/boards/${boardId}/columns`,
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ _id }) => ({ type: 'Column' as const, _id })),
+              { type: 'Column', id: 'LIST' },
+            ]
+          : [{ type: 'Column', id: 'LIST' }],
       transformErrorResponse: (response: { status: string | number }) => response.status,
     }),
-    createColumn: build.mutation<
-      IToken,
-      { column: Omit<IColumn, '_id' | 'boardId'>; boardId: Pick<IColumn, 'boardId'> }
-    >({
-      query: ({ column, boardId }) => ({
+
+    createColumn: build.mutation<IColumn, Omit<IColumn, '_id'>>({
+      query: ({ title, order, boardId }) => ({
         url: `/boards/${boardId}/columns`,
         method: 'POST',
-        body: column,
+        body: { title, order },
       }),
-    }),
-    getColumnById: build.query<IColumn[], { boardId: string; columnId: string }>({
-      query: ({ boardId, columnId }) => `/boards/${boardId}/columns/${columnId}`,
+      invalidatesTags: [{ type: 'Column', id: 'LIST' }],
       transformErrorResponse: (response: { status: string | number }) => response.status,
     }),
-    updateColumnById: build.mutation<IToken, IColumn>({
-      query: (column) => ({
-        url: `/boards/${column.boardId}/columns/${column._id}`,
-        method: 'PUT',
-        body: column,
-      }),
+
+    getColumnById: build.query<IColumn[], { boardId: string; _id: string }>({
+      query: ({ _id, boardId }) => `/boards/${boardId}/columns/${_id}`,
+      providesTags: (result, error, { _id }) => [{ type: 'Column', _id }],
+      transformErrorResponse: (response: { status: string | number }) => response.status,
     }),
+
+    updateColumnById: build.mutation<IColumn, IColumn>({
+      query: ({ _id, boardId, title, order }) => ({
+        url: `/boards/${boardId}/columns/${_id}`,
+        method: 'PUT',
+        body: { title, order },
+      }),
+      invalidatesTags: (result, error, { _id }) => [{ type: 'Column', _id }],
+      transformErrorResponse: (response: { status: string | number }) => response.status,
+    }),
+
     deleteColumnById: build.mutation<
-      IToken,
+      IColumn,
       {
+        _id: string;
         boardId: string;
-        columnId: string;
       }
     >({
-      query: ({ boardId, columnId }) => ({
-        url: `/boards/${boardId}/columns/${columnId}`,
+      query: ({ _id, boardId }) => ({
+        url: `/boards/${boardId}/columns/${_id}`,
         method: 'DELETE',
       }),
+      invalidatesTags: (result, error, { _id }) => [{ type: 'Column', _id }],
+      transformErrorResponse: (response: { status: string | number }) => response.status,
     }),
+
     getColumnsSet: build.query<IColumn[], { ids: string[]; userId: string }>({
       query: ({ ids, userId }) => `/columnsSet?ids=${ids}&userId=${userId}`,
       transformErrorResponse: (response: { status: string | number }) => response.status,
     }),
+
     updateColumnsSet: build.mutation<
       IToken,
       Array<{
@@ -58,6 +75,7 @@ const columns = api.injectEndpoints({
         body: patch,
       }),
     }),
+
     createColumnsSet: build.mutation<IToken, IColumn[]>({
       query: (columns) => ({
         url: `/columnsSet`,

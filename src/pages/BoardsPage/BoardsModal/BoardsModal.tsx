@@ -16,19 +16,19 @@ const BoardsModal = () => {
   const [createBoard] = useCreateBoardMutation();
   const [updateBoard] = useUpdateBoardMutation();
 
-  const { data: board } = useGetBoardQuery(modal.board.id);
+  const { data: board, isFetching } = useGetBoardQuery(modal.board.id);
   const { data: users } = useGetUsersQuery();
 
   const defaultValues = {
     name: '',
     description: '',
-    owner: modal.type == 2 ? 'Mask' : '',
+    owner: modal.type == actionType.Create ? 'Mask' : '',
     color: '',
   };
 
   const [usersList, setUsers] = useState([{ value: '', label: '', key: '' }]);
   const [boardData, setBoard] = useState(defaultValues);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isSubmited, setIsSubmited] = useState(false);
 
   const form = useForm({
     initialValues: boardData,
@@ -45,7 +45,7 @@ const BoardsModal = () => {
   useEffect(() => {
     if (users) {
       const usersData = users.map((value) => {
-        return { value: value.name, label: value.name, key: value._id };
+        return { value: value._id, label: value.name, key: value._id };
       });
       setUsers(usersData);
     }
@@ -59,14 +59,14 @@ const BoardsModal = () => {
       };
       modal.type == 1 ? form.setValues(values) : form.setValues(defaultValues);
       setBoard(values);
-      setIsLoading(false);
     }
-  }, [board, modal]);
+  }, [board, modal.type]);
 
   const formComponent = (
     <form
       className={cl.form}
       onSubmit={form.onSubmit(async (values) => {
+        setIsSubmited(true);
         if (modal.type === 1) {
           try {
             await updateBoard({
@@ -95,6 +95,7 @@ const BoardsModal = () => {
             console.error('rejected', error);
           }
         }
+        setIsSubmited(false);
       })}
     >
       <TextInput
@@ -125,7 +126,7 @@ const BoardsModal = () => {
         maxLength={120}
         {...form.getInputProps('description')}
       />
-      <Button className={cl.submit} type="submit" mt="sm">
+      <Button className={cl.submit} type="submit" mt="sm" loading={isSubmited}>
         {modal.type === 1 ? t('Save') : t('Create')}
       </Button>
     </form>
@@ -140,7 +141,7 @@ const BoardsModal = () => {
       }}
       title={modal.type === actionType.Edit ? t('Edit Board') : t('Create Board')}
     >
-      {isLoading ? <Loader color="dark" /> : formComponent}
+      {isFetching ? <Loader color="dark" /> : formComponent}
     </Modal>
   );
 };

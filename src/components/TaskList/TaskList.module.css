@@ -1,0 +1,45 @@
+.tasks {
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+  min-height: 40px;
+  max-height: calc(-370px + 100vh);
+  align-items: flex-start;
+  justify-content: flex-start;
+  /* overflow: hidden auto; 
+  overflow-x: hidden; */
+}
+
+.taskBtnWrapper {
+  padding-top: 20px;
+  width: inherit;
+  width: auto;
+  padding-left: 0;
+  background: none;
+  align-self: flex-start;
+  transition: all 0.3s;
+  line-height: 0;
+  font-size: 18px;
+  text-align: left;
+}
+
+.taskBtnWrapper:hover {
+  color: rgb(192, 192, 192);
+  background: none;
+}
+
+.host {
+  width: 100%;
+}
+/* .taskBtnWrapper:active {
+  transform: none;
+} */
+
+.draggable{
+  width: inherit;
+}
+
+.droppableEmpty {
+  width: inherit;
+  height: 0px;
+}

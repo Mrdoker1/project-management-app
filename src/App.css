@@ -63,6 +63,12 @@ button {
   overflow: hidden;
 }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
 .page-wrapper {
   position: relative;
   overflow: hidden;
@@ -157,6 +163,22 @@ button {
 .mantine-ugjxpi:hover {
   color: #101113;
   background-color: rgba(231, 245, 255, 1);
+}
+
+.board-scroll {
+  height: 8px;
+}
+
+.board-scroll .os-scrollbar-handle {
+  background-color: #343A40;
+}
+
+.mantine-7okxq6[data-selected] {
+  background-color: #15aabf;
+}
+
+.mantine-7okxq6[data-selected]:hover {
+  background-color: #0597ab;
 }
 
 .mantine-Paper-root.profile-drawer {

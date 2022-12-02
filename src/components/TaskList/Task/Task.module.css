@@ -1,0 +1,57 @@
+
+.task {
+  display: flex;
+  background: #25262B;
+  color: #fff;
+  border-radius: 7px;
+  width: 100%;
+  justify-content: space-between;
+  padding: 4px 19px;
+  transition: 0.3s all;
+  border: 1px solid #25262B;
+  flex-wrap: nowrap;
+}
+
+.task:hover {
+  border: 1px solid #909296;
+}
+
+.task:hover .closeBtn {
+  opacity: 1;
+}
+
+.taskBtnWrapper {
+  justify-content: flex-start;
+  background: none;
+  align-self: flex-start;
+  transition: all 0.3s;
+  font-size: 16px;
+  line-height: 155%;
+  border: none;
+  padding: 0;
+  min-height: 36px;
+	height: auto;
+  word-break: break-word;
+}
+
+.taskBtnWrapper:hover {
+  background: none;
+}
+
+.taskBtnInner{
+  justify-content: flex-start;
+}
+
+.taskBtnLabel {
+  white-space: normal;
+}
+
+.closeBtn {
+  color: #fff;
+  transition: 0.3s all;
+  opacity: 0;
+}
+
+.closeBtn:hover {
+  color: #101113;
+}

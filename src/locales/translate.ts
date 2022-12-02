@@ -64,6 +64,11 @@ const resources = {
       'Head homepage or use the search to find what you`re looking for':
         'Head homepage or use the search to find what you`re \n looking for.',
       'Back to HomePage': 'Back to HomePage',
+      'Sets targets and objectives and actively works towards them, whilst raising the quality of the outcomes.':
+        'Sets targets and objectives and actively works towards them, whilst raising the quality of the outcomes.',
+      'Add column': 'Add column',
+      'Add task': 'Add task',
+      Name: 'Name',
     },
   },
   Russian: {
@@ -132,6 +137,11 @@ const resources = {
       'Head homepage or use the search to find what you`re looking for':
         'Перейдите на главную страницу или воспользуйтесь поиском, чтобы \n найти то, что вы ищете.',
       'Back to HomePage': 'Вернуться на главную',
+      'Sets targets and objectives and actively works towards them, whilst raising the quality of the outcomes.':
+        'Ставит цели и задачи и активно работает над их достижением, повышая при этом качество результатов.',
+      'Add column': 'Добавить колонку',
+      'Add task': 'Добавить задачу',
+      Name: 'Имя',
     },
   },
 };
