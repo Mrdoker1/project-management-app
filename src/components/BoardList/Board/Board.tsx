@@ -135,14 +135,11 @@ const Board = memo<IBoardProps>(({ id }) => {
 
   return (
     <>
-      <motion.div
-        whileHover={{ scale: 1.05 }}
-        ref={ref}
-        style={boardStyle}
-        className={`${cl.board}`}
-      >
-        {hovered ? hoverLayout : defaultLayout}
-        <motion.div style={gradientStyle}></motion.div>
+      <motion.div style={boardStyle}>
+        <motion.div whileHover={{ scale: 1.05 }} ref={ref} className={`${cl.board}`}>
+          {hovered ? hoverLayout : defaultLayout}
+          <motion.div className={cl.boardGradient} style={gradientStyle}></motion.div>
+        </motion.div>
       </motion.div>
     </>
   );

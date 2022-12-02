@@ -76,9 +76,37 @@
   background-color: rgba(255, 255, 255, 1);
 }
 
-.deleteBtn{
+.deleteBtn {
   position: absolute;
   top: 25px;
   right: 25px;
 }
 
+/*
+.board {
+  background: linear-gradient(
+    to bottom, 
+    rgba(10, 10, 10, 1), 
+    rgba(52, 58, 64, 0)
+  );
+}
+*/
+
+.boardGradient:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transition: opacity 0.5s linear;
+  opacity: 0;
+  background: inherit;
+  border-radius: 17px;
+}
+
+.board:hover .boardGradient:before {
+  opacity: 1;
+  filter: brightness(85%);
+}
