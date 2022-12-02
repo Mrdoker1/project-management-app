@@ -1,46 +1,32 @@
 import { Button, Flex, Loader } from '@mantine/core';
 import { IconPlus } from '@tabler/icons';
-import { useAppDispatch } from 'hooks/redux';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useGetTasksQuery, useUpdateTasksSetMutation } from 'store/api/tasks';
+import { useGetTasksQuery } from 'store/api/tasks';
 import { setCreatingTask, setIsEdit, setIsOpen } from 'store/taskSlice';
+import { setTasks } from 'store/taskListSlice';
 import ModalContent from './ModalContent/ModalContent';
 import Task from './Task/Task';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import cl from './TaskList.module.css';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { useListState } from '@mantine/hooks';
+import { Draggable } from 'react-beautiful-dnd';
 import { ITask } from 'interfaces/ITask';
-
-const reorder = (array: Array<ITask>, from: number, to: number) => {
-  const a = [...array];
-  const tmp = a[to];
-  a[to] = a[from];
-  a[from] = tmp;
-  return a.map((t: ITask, index) => ({ _id: t._id, order: index, columnId: t.columnId }));
-};
-
-const reorderTask = (array: Array<ITask>, from: number, to: number) => {
-  const a = [...array];
-  const tmp = a[to];
-  a[to] = a[from];
-  a[from] = tmp;
-  return a.map((t: ITask, index) => ({ ...t, order: index }));
-};
+import { setSelectedBoardId } from 'store/boardsSlice';
 
 interface ITaskListProps {
   columnId: string;
   boardId: string;
+  placeholder: React.ReactElement<HTMLElement> | null | undefined;
 }
 
-const TaskList = memo<ITaskListProps>(({ boardId, columnId }) => {
+const TaskList = memo<ITaskListProps>(({ boardId, columnId, placeholder }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const tasksListState = useAppSelector((state) => state.taskList);
 
   const { data: tasks, isFetching, error } = useGetTasksQuery({ boardId, columnId });
-  const [tasksListState, setTasksListState] = useState([] as Array<ITask>);
-  const [updateTasksMutation, { isLoading }] = useUpdateTasksSetMutation();
+  const [taskListState, setTaskListState] = useState([] as Array<ITask>);
 
   const openCreatingModal = useCallback(() => {
     const task = { boardId, columnId, order: tasks?.length || 0 };
@@ -51,22 +37,22 @@ const TaskList = memo<ITaskListProps>(({ boardId, columnId }) => {
 
   useEffect(() => {
     if (tasks) {
-      const taskList = [...tasks];
-      if (taskList.length > 0) {
-        taskList.sort((a: ITask, b: ITask) => a.order - b.order);
-      }
-      console.log('sorted', taskList);
-      setTasksListState(taskList);
+      dispatch(setTasks({ boardId: boardId, columnId: columnId, array: tasks }));
+      dispatch(setSelectedBoardId(boardId));
     }
   }, [tasks]);
+
+  useEffect(() => {
+    try {
+      setTaskListState(tasksListState[boardId][columnId] || []);
+    } catch {}
+  }, [tasksListState]);
 
   if (typeof error == 'number') return <div>{`${t('Ошибка ')} ${error}`}</div>;
   if (isFetching) return <Loader style={{ width: '100%' }} color="dark" />;
   if (!tasks) return <div>{t('Ничего не найдено!')}</div>;
 
-  console.log(tasksListState);
-
-  const taskList = tasksListState.map((task: ITask) => (
+  const taskList = taskListState.map((task: ITask) => (
     <Draggable key={task._id} index={task.order} draggableId={task._id}>
       {(provided, snapshot) => (
         <div
@@ -81,6 +67,7 @@ const TaskList = memo<ITaskListProps>(({ boardId, columnId }) => {
             boardId={boardId}
             columnId={columnId}
             key={task._id}
+            data={task}
           />
         </div>
       )}
@@ -88,13 +75,7 @@ const TaskList = memo<ITaskListProps>(({ boardId, columnId }) => {
   ));
 
   return (
-    <DragDropContext
-      onDragEnd={async ({ destination, source }) => {
-        setTasksListState(reorderTask(tasksListState, source.index, destination?.index || 0));
-        console.log(reorderTask(tasksListState, source.index, destination?.index || 0));
-        await updateTasksMutation(reorder(tasksListState, source.index, destination?.index || 0));
-      }}
-    >
+    <>
       <OverlayScrollbarsComponent
         defer
         className={cl.host}
@@ -105,20 +86,10 @@ const TaskList = memo<ITaskListProps>(({ boardId, columnId }) => {
           },
         }}
       >
-        <Droppable droppableId={columnId} direction="vertical">
-          {(provided) => (
-            <div
-              className={taskList.length <= 0 ? cl.droppableEmpty : ''}
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              <Flex className={cl.tasks} gap={{ base: 'xs', sm: 'sm' }}>
-                {taskList}
-              </Flex>
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
+        <Flex className={cl.tasks} gap={{ base: 'xs', sm: 'sm' }}>
+          {taskList}
+          {placeholder}
+        </Flex>
         <Button
           onClick={openCreatingModal}
           leftIcon={<IconPlus size={20} />}
@@ -128,7 +99,7 @@ const TaskList = memo<ITaskListProps>(({ boardId, columnId }) => {
         </Button>
       </OverlayScrollbarsComponent>
       <ModalContent />
-    </DragDropContext>
+    </>
   );
 });
 

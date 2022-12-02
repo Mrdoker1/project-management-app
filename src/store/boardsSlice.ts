@@ -7,6 +7,7 @@ export enum actionType {
 
 interface IBoardsState {
   search: string;
+  selectedBoardId: string;
   modal: {
     board: {
       id: string;
@@ -18,6 +19,7 @@ interface IBoardsState {
 
 const initialState: IBoardsState = {
   search: '',
+  selectedBoardId: '',
   modal: {
     board: {
       id: '',
@@ -43,9 +45,12 @@ export const boardsSlice = createSlice({
     setBoardsSearch: (state, action: PayloadAction<string>) => {
       state.search = action.payload;
     },
+    setSelectedBoardId: (state, action: PayloadAction<string>) => {
+      state.selectedBoardId = action.payload;
+    },
   },
 });
 
 export default boardsSlice.reducer;
-export const { setModalState, setModalBoardId, setModalType, setBoardsSearch } =
+export const { setModalState, setModalBoardId, setModalType, setBoardsSearch, setSelectedBoardId } =
   boardsSlice.actions;

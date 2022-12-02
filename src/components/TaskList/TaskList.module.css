@@ -2,12 +2,16 @@
   flex-direction: column;
   width: 100%;
   gap: 8px;
-  min-height: 40px;
   max-height: calc(-370px + 100vh);
   align-items: flex-start;
   justify-content: flex-start;
   /* overflow: hidden auto; 
   overflow-x: hidden; */
+}
+
+.placeholder {
+  border-radius: 7px;
+  background-color: #1A1B1E;
 }
 
 .taskBtnWrapper {

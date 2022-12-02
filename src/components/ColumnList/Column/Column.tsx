@@ -10,6 +10,7 @@ import {
 } from 'store/api/columns';
 import { getHtmlElement } from 'utils/getHtmlElement';
 import cl from './Column.module.css';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 interface IColumnProps {
   _id: string;
@@ -71,22 +72,28 @@ const Column = memo<IColumnProps>(({ _id, boardId }) => {
   }
 
   return (
-    <div className={cl.column}>
-      <div className={cl.header}>
-        <Title
-          order={3}
-          className={cl.title}
-          contentEditable={true}
-          suppressContentEditableWarning={true}
-          onFocus={saveCurrentTitle}
-          onBlur={updateColumnTitle}
-        >
-          {column.title}
-        </Title>
-        <CloseButton onClick={deleteColumnHandler} size={24} className={cl.closeBtn} />
-      </div>
-      <TaskList boardId={boardId} columnId={_id} />
-    </div>
+    <Droppable droppableId={_id} direction="vertical">
+      {(provided) => (
+        <div {...provided.droppableProps} ref={provided.innerRef}>
+          <div className={cl.column}>
+            <div className={cl.header}>
+              <Title
+                order={3}
+                className={cl.title}
+                contentEditable={true}
+                suppressContentEditableWarning={true}
+                onFocus={saveCurrentTitle}
+                onBlur={updateColumnTitle}
+              >
+                {column.title}
+              </Title>
+              <CloseButton onClick={deleteColumnHandler} size={24} className={cl.closeBtn} />
+            </div>
+            <TaskList boardId={boardId} columnId={_id} placeholder={provided.placeholder} />
+          </div>
+        </div>
+      )}
+    </Droppable>
   );
 });
 
