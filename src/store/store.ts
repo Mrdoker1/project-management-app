@@ -3,6 +3,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import boardsReducer from './boardsSlice';
 import columnReducer from './columnSlice';
 import taskReducer from './taskSlice';
+import taskListReducer from './taskListSlice';
 import authReducer from './authSlice';
 import profileReducer from './profileSlice';
 import settingsReducer from './settingsSlice';
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   boards: boardsReducer,
   column: columnReducer,
   task: taskReducer,
+  taskList: taskListReducer,
   profile: profileReducer,
   settings: settingsReducer,
   users: usersReducer,

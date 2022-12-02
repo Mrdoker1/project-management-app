@@ -3,38 +3,30 @@ import { openConfirmModal } from '@mantine/modals';
 import { useAppDispatch } from 'hooks/redux';
 import React, { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDeleteTaskByIdMutation, useGetTasksQuery } from 'store/api/tasks';
+import { useDeleteTaskByIdMutation } from 'store/api/tasks';
 import { setIsEdit, setIsOpen, setUpdatingTask } from 'store/taskSlice';
 import cl from './Task.module.css';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { ITask } from 'interfaces/ITask';
 
 interface ITaskListProps {
   _id: string;
   index: number;
   columnId: string;
   boardId: string;
+  data: ITask;
 }
 
-const Task = memo<ITaskListProps>(({ _id, index, columnId, boardId }) => {
+const Task = memo<ITaskListProps>(({ _id, index, columnId, boardId, data }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const [deleteTaskMutation] = useDeleteTaskByIdMutation();
 
-  const { task } = useGetTasksQuery(
-    { boardId, columnId },
-    {
-      selectFromResult: ({ data }) => ({
-        task: data?.find((task) => task._id === _id),
-      }),
-    }
-  );
-
   const openUpdatingModal = useCallback(async () => {
-    if (!task) return;
-    dispatch(setUpdatingTask(task));
+    if (!data) return;
+    dispatch(setUpdatingTask(data));
     dispatch(setIsEdit(true));
     dispatch(setIsOpen(true));
-  }, [task]);
+  }, [data]);
 
   const deleteTask = () => {
     openConfirmModal({
@@ -54,12 +46,12 @@ const Task = memo<ITaskListProps>(({ _id, index, columnId, boardId }) => {
     });
   };
 
-  if (!task) {
+  if (!data) {
     console.log('Сolumn not found in cache!');
     return null;
   }
 
-  const { title } = task;
+  const { title } = data;
 
   return (
     <Group className={cl.task}>

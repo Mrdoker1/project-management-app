@@ -6,7 +6,13 @@ import { useAppDispatch } from 'hooks/redux';
 import { useHover } from '@mantine/hooks';
 import cl from './Board.module.css';
 import { useNavigate } from 'react-router-dom';
-import { actionType, setModalBoardId, setModalState, setModalType } from 'store/boardsSlice';
+import {
+  actionType,
+  setModalBoardId,
+  setModalState,
+  setModalType,
+  setSelectedBoardId,
+} from 'store/boardsSlice';
 import { closeModal, openConfirmModal } from '@mantine/modals';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
@@ -60,6 +66,7 @@ const Board = memo<IBoardProps>(({ id }) => {
   }, [board]);
 
   const openBoardHeandler = useCallback(() => {
+    dispatch(setSelectedBoardId(id));
     navigate(`/projects/${id}`);
   }, []);
 
