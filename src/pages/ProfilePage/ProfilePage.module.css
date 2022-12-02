@@ -22,6 +22,12 @@
   color: #000;
 }
 
+.boardWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
 .boardItem {
   border: none;
 }
@@ -39,12 +45,17 @@
 }
 
 .boardDescription {
+  margin-top: 16px;
   border-radius: 6px;
   background: #25262B;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 14px;
   line-height: 155%;
   color: #868E96;
+}
+
+.boardDescription:hover {
+  cursor: pointer;
 }
 
 .searchInput {

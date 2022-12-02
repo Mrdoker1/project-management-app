@@ -202,3 +202,9 @@ button {
 .mantine-Accordion-content {
   padding: 8px 16px;
 }
+
+.mantine-1s8spa1 {
+  height: 93%;
+  display: flex;
+  flex-direction: column;
+}
