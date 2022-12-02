@@ -1,5 +1,6 @@
 import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
+import { NotificationsProvider } from '@mantine/notifications';
 import AppRouter from 'components/AppRouter/AppRouter';
 import React from 'react';
 import { Provider } from 'react-redux';
@@ -17,13 +18,15 @@ function App() {
         headings: { fontFamily: 'Open Sans' },
       }}
     >
-      <ModalsProvider>
-        <Provider store={store}>
-          <HashRouter>
-            <AppRouter />
-          </HashRouter>
-        </Provider>
-      </ModalsProvider>
+      <NotificationsProvider>
+        <ModalsProvider>
+          <Provider store={store}>
+            <HashRouter>
+              <AppRouter />
+            </HashRouter>
+          </Provider>
+        </ModalsProvider>
+      </NotificationsProvider>
     </MantineProvider>
   );
 }
