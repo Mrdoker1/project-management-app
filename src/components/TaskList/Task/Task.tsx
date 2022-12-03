@@ -30,12 +30,12 @@ const Task = memo<ITaskListProps>(({ _id, index, columnId, boardId, data }) => {
 
   const deleteTask = () => {
     openConfirmModal({
-      title: t('Delete column'),
-      modalId: 'columnDeleteModal',
+      title: t('Delete task'),
+      modalId: 'taskDeleteModal',
       centered: true,
       children: (
         <Text size="sm">
-          {t('Are you sure you want to delete this column? This action is destructive.')}
+          {t('Are you sure you want to delete this task? This action is destructive.')}
         </Text>
       ),
       labels: { confirm: t('Delete task'), cancel: t('Cancel') },
@@ -47,7 +47,7 @@ const Task = memo<ITaskListProps>(({ _id, index, columnId, boardId, data }) => {
   };
 
   if (!data) {
-    console.log('Сolumn not found in cache!');
+    console.log('Task not found in cache!');
     return null;
   }
 

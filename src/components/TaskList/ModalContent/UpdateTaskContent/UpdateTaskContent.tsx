@@ -9,7 +9,7 @@ import { ITask } from 'interfaces/ITask';
 import { useUpdateTaskByIdMutation } from 'store/api/tasks';
 import { setIsOpen } from 'store/taskSlice';
 
-interface TaskFormValues {
+interface ITaskFormValues {
   title: string;
   description: string;
   userId: string;
@@ -27,7 +27,7 @@ const UpdateTaskContent = memo(() => {
     }),
   });
 
-  const updateTask = async (values: TaskFormValues) => {
+  const updateTask = async (values: ITaskFormValues) => {
     if (!updatingTask) return;
     const task: ITask = { ...updatingTask, ...values };
     await updateTaskMutation(task);
@@ -58,7 +58,7 @@ const UpdateTaskContent = memo(() => {
       <TextInput
         data-autofocus
         classNames={inputClasses}
-        label={t('Column name')}
+        label={t('Task name')}
         {...form.getInputProps('title')}
       />
       <Textarea
@@ -81,7 +81,7 @@ const UpdateTaskContent = memo(() => {
   );
 });
 
-const initialValues: TaskFormValues = {
+const initialValues: ITaskFormValues = {
   title: '',
   description: '',
   userId: '',

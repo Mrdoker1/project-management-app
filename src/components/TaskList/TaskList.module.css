@@ -2,11 +2,9 @@
   flex-direction: column;
   width: 100%;
   gap: 8px;
-  max-height: calc(-370px + 100vh);
+  max-height: calc(-440px + 100vh);
   align-items: flex-start;
   justify-content: flex-start;
-  /* overflow: hidden auto; 
-  overflow-x: hidden; */
 }
 
 .placeholder {
@@ -15,10 +13,9 @@
 }
 
 .taskBtnWrapper {
-  padding-top: 20px;
+  padding: 10px 8px;
   width: inherit;
   width: auto;
-  padding-left: 0;
   background: none;
   align-self: flex-start;
   transition: all 0.3s;
@@ -32,9 +29,14 @@
   background: none;
 }
 
+.taskBtnLabel {
+  overflow: visible;
+}
+
 .host {
   width: 100%;
 }
+
 /* .taskBtnWrapper:active {
   transform: none;
 } */

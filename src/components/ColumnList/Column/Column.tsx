@@ -10,7 +10,7 @@ import {
 } from 'store/api/columns';
 import { getHtmlElement } from 'utils/getHtmlElement';
 import cl from './Column.module.css';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { Droppable } from 'react-beautiful-dnd';
 
 interface IColumnProps {
   _id: string;

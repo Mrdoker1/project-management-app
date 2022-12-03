@@ -86,7 +86,12 @@ const ColumnList = memo(() => {
   }, []);
 
   if (typeof error == 'number') return <div>{`${t('Ошибка ')} ${error}`}</div>;
-  if (isFetching) return <Loader style={{ width: '100%' }} color="dark" />;
+  if (isFetching)
+    return (
+      <div className="align-loader">
+        <Loader style={{ width: '100%' }} color="dark" />
+      </div>
+    );
   if (!columns) return <div>{t('Ничего не найдено!')}</div>;
 
   return (
@@ -153,7 +158,7 @@ const ColumnList = memo(() => {
           className={cl.scroll}
           defer
           options={{
-            scrollbars: { autoHide: 'scroll', theme: 'board-scroll' },
+            scrollbars: { theme: 'board-scroll' },
             overflow: {
               y: 'hidden',
               x: 'scroll',
@@ -173,11 +178,11 @@ const ColumnList = memo(() => {
               leftIcon={<IconPlus size={20} />}
               classNames={ButtonClasses}
             >
-              {t('Add column')}
+              {t('Create column')}
             </Button>
           </Flex>
         </OverlayScrollbarsComponent>
-        <Modal centered opened={isOpen} title={t('Create Board')} onClose={closeModal}>
+        <Modal centered opened={isOpen} title={t('Create column')} onClose={closeModal}>
           <ModalContent />
         </Modal>
       </DragDropContext>

@@ -69,6 +69,12 @@ button {
   flex-grow: 1;
 }
 
+.align-loader {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
 .page-wrapper {
   position: relative;
   overflow: hidden;
@@ -166,11 +172,27 @@ button {
 }
 
 .board-scroll {
-  height: 8px;
+  height: 16px;
+  background-color: #1A1B1E;
+  border-radius: 20px;
 }
 
 .board-scroll .os-scrollbar-handle {
   background-color: #343A40;
+  border-radius: 20px;
+}
+
+.task-scroll {
+  width: 10px;
+  background-color: #1A1B1E;
+  border-radius: 20px;
+  margin: 1px 2px;
+}
+
+.task-scroll .os-scrollbar-handle {
+  background-color: #343A40;
+  *background-color: rgb(10, 10, 10);
+  border-radius: 20px;
 }
 
 .mantine-7okxq6[data-selected] {

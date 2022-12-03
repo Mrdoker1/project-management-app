@@ -54,7 +54,7 @@ const TaskList = memo<ITaskListProps>(({ boardId, columnId, placeholder }) => {
 
   const taskList = taskListState.map((task: ITask) => (
     <Draggable key={task._id} index={task.order} draggableId={task._id}>
-      {(provided, snapshot) => (
+      {(provided) => (
         <div
           className={cl.draggable}
           {...provided.draggableProps}
@@ -80,6 +80,7 @@ const TaskList = memo<ITaskListProps>(({ boardId, columnId, placeholder }) => {
         defer
         className={cl.host}
         options={{
+          scrollbars: { theme: 'task-scroll' },
           overflow: {
             y: 'scroll',
             x: 'hidden',
@@ -90,14 +91,14 @@ const TaskList = memo<ITaskListProps>(({ boardId, columnId, placeholder }) => {
           {taskList}
           {placeholder}
         </Flex>
-        <Button
-          onClick={openCreatingModal}
-          leftIcon={<IconPlus size={20} />}
-          classNames={ButtonClasses}
-        >
-          {t('Add task')}
-        </Button>
       </OverlayScrollbarsComponent>
+      <Button
+        onClick={openCreatingModal}
+        leftIcon={<IconPlus size={20} />}
+        classNames={ButtonClasses}
+      >
+        {t('Create task')}
+      </Button>
       <ModalContent />
     </>
   );
@@ -106,6 +107,7 @@ const TaskList = memo<ITaskListProps>(({ boardId, columnId, placeholder }) => {
 const ButtonClasses = {
   root: cl.taskBtnWrapper,
   input: cl.taskBtn,
+  label: cl.taskBtnLabel,
 };
 
 export default TaskList;
