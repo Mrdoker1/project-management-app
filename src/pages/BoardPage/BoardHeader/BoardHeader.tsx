@@ -5,6 +5,7 @@ import { Text, NavLink as MantineNavLink, Loader } from '@mantine/core';
 import cl from './BoardHeader.module.css';
 import { useGetBoardQuery } from 'store/api/boards';
 import { useTranslation } from 'react-i18next';
+import { Skeleton } from '@mantine/core';
 
 const BoardHeader = memo(() => {
   const { t } = useTranslation();
@@ -14,7 +15,8 @@ const BoardHeader = memo(() => {
   const { data: board, isLoading, error } = useGetBoardQuery(boardId);
 
   if (typeof error == 'number') return <div>{`${t('Ошибка ')} ${error}`}</div>;
-  if (isLoading) return <Loader style={{ width: '100%' }} color="dark" />;
+  // if (isLoading) return <Loader style={{ width: '100%' }} color="dark" />;
+  if (isLoading) return <></>;
   if (!board) throw new Error('Board not found');
 
   return (
