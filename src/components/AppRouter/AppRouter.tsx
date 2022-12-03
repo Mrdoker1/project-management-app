@@ -8,9 +8,9 @@ import NoPage from 'pages/NoPage/NoPage';
 import HomePage from 'pages/HomePage/HomePage';
 import SignupPage from 'pages/SignupPage/SignupPage';
 import BoardsPage from 'pages/BoardsPage/BoardsPage';
-import ProfilePage from 'pages/ProfilePage';
 import AboutPage from 'pages/AboutPage/AboutPage';
 import LoginPage from 'pages/LoginPage/LoginPage';
+import ProfilePage from 'pages/ProfilePage/ProfilePage';
 import BoardPage from 'pages/BoardPage/BoardPage';
 
 const AppRouter = memo(() => {
@@ -29,11 +29,11 @@ const AppRouter = memo(() => {
           <Route element={<ProtectedRoute isAllowed={!!token} />}>
             <Route path="/projects" element={<BoardsPage />} />
             <Route path="/projects/:id" element={<BoardPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
           </Route>
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
+      {!!token && <ProfilePage />}
     </>
   );
 });

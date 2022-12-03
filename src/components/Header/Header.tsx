@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { setMenuState } from 'store/menuSlice';
 import { setLang } from 'store/settingsSlice';
+import { setProfileMenuState } from 'store/profileMenuSlice';
 interface IHeaderProps {
   links: {
     link: string;
@@ -30,7 +31,7 @@ const HeaderAction = memo(({ links }: IHeaderProps) => {
   const stickyHeader = sticky ? cl.sticky : '';
 
   const trackScroll = useCallback(() => {
-    setSticky(window.scrollY >= 120);
+    setSticky(window.scrollY > 120);
   }, []);
   useWindowEvent('scroll', trackScroll);
 
@@ -41,6 +42,10 @@ const HeaderAction = memo(({ links }: IHeaderProps) => {
 
   const openMenuHandler = useCallback(() => {
     dispatch(setMenuState(true));
+  }, []);
+
+  const openProfileHandler = useCallback(() => {
+    dispatch(setProfileMenuState(true));
   }, []);
 
   const closeMenuHandler = useCallback(() => {
@@ -68,11 +73,19 @@ const HeaderAction = memo(({ links }: IHeaderProps) => {
       );
     }
 
-    return (
-      <NavLink key={link.label} to={link.link} className={cl.link} onClick={closeMenuHandler}>
-        {t(link.label)}
-      </NavLink>
-    );
+    if (link.label === 'Profile') {
+      return (
+        <span key={link.label} className={cl.link} onClick={openProfileHandler}>
+          {t(link.label)}
+        </span>
+      );
+    } else {
+      return (
+        <NavLink key={link.label} to={link.link} className={cl.link} onClick={closeMenuHandler}>
+          {t(link.label)}
+        </NavLink>
+      );
+    }
   });
 
   return (
