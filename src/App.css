@@ -148,6 +148,17 @@ button {
   right: -10%;
 }
 
+.animated-background--centerRight:before {
+  bottom: 0px;
+  right: -226px;
+  width: 400px;
+  height: 400px;
+}
+
+.animated-background--centerRight:after {
+  background-size: 100%;
+}
+
 .mantine-ugjxpi {
   color:#fff;
   border: 1px solid transparent;
@@ -190,4 +201,32 @@ button {
 
 .mantine-7okxq6[data-selected]:hover {
   background-color: #0597ab;
+}
+
+.mantine-Paper-root.profile-drawer {
+  max-width: 480px;
+  position: fixed;
+  border-radius: 17px 0 0 17px;
+}
+
+.profile-drawer .animated-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-height: 140px;
+}
+
+.profile-drawer .mantine-Drawer-header {
+  z-index: 10;
+}
+
+.mantine-Accordion-content {
+  padding: 8px 16px;
+}
+
+.mantine-1s8spa1 {
+  height: 93%;
+  display: flex;
+  flex-direction: column;
 }
