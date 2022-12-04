@@ -22,7 +22,6 @@
 .login, .password {
   background: #101113;
   border-color: #25262B;
-  color: #F8F9FA;
 }
 
 .login::placeholder, .password::placeholder {
@@ -65,4 +64,16 @@
 
 .deleteModal {
   z-index: 300;
+}
+
+.innerInput, .password:-webkit-autofill {
+  box-shadow: inset 0 0 0 70px #101113;
+  transition: background-color 600000s 0s, color 600000s 0s;
+  -webkit-transition: background-color 600000s 0s, color 600000s 0s;
+  background: #101113;
+}
+
+.innerInput, .password:autofill {
+  background: #101113;
+
 }
