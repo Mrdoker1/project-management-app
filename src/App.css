@@ -240,3 +240,7 @@ button {
 .mantine-1b64eov:focus {
   outline: none;
 }
+
+.mantine-ActionIcon-root {
+  color: rgb(134, 142, 150);
+}

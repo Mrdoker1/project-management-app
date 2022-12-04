@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { ITask } from 'interfaces/ITask';
 import { useCreateTaskMutation } from 'store/api/tasks';
 import { setIsOpen } from 'store/taskSlice';
+import { addTask, setTaskByOrder } from 'store/taskListSlice';
 
 interface TaskFormValues {
   title: string;

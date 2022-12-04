@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { ITask } from 'interfaces/ITask';
 import { useUpdateTaskByIdMutation } from 'store/api/tasks';
 import { setIsOpen } from 'store/taskSlice';
+import { setTaskByOrder } from 'store/taskListSlice';
 
 interface ITaskFormValues {
   title: string;
@@ -21,6 +22,7 @@ const UpdateTaskContent = memo(() => {
   const { t } = useTranslation();
   const updatingTask = useAppSelector((state) => state.task.updatingTask);
   const [updateTaskMutation, { isLoading }] = useUpdateTaskByIdMutation();
+  const tasksListState = useAppSelector((state) => state.taskList);
 
   const { usersList } = useGetUsersQuery(undefined, {
     selectFromResult: ({ data }) => ({
@@ -31,6 +33,14 @@ const UpdateTaskContent = memo(() => {
   const updateTask = async (values: ITaskFormValues) => {
     if (!updatingTask) return;
     const task: ITask = { ...updatingTask, ...values };
+    dispatch(
+      setTaskByOrder({
+        boardID: updatingTask.boardId,
+        columnID: updatingTask.columnId,
+        order: updatingTask.order,
+        task: task,
+      })
+    );
     await updateTaskMutation(task);
     dispatch(setIsOpen(false));
   };
