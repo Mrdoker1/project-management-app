@@ -75,6 +75,9 @@ const resources = {
       'Accept Changes': 'Accept Changes',
       'Your tasks': 'Your tasks',
       'You have no assigned tasks': 'You have no assigned tasks',
+      'Are you sure you want to delete your profile?':
+        'Are you sure you want to delete your profile?',
+      Delete: 'Delete',
     },
   },
   Russian: {
@@ -154,6 +157,9 @@ const resources = {
       'Accept Changes': 'Применить Изменения',
       'Your tasks': 'Ваши задачи',
       'You have no assigned tasks': 'У вас нет назначенных задач',
+      'Are you sure you want to delete your profile?':
+        'Вы уверены что хотите удалить свой профиль?',
+      Delete: 'Удалить',
     },
   },
 };
