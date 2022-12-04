@@ -11,10 +11,10 @@ import cl from './ColumnList.module.css';
 import ModalContent from './ModalContent/ModalContent';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import 'overlayscrollbars/overlayscrollbars.css';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext } from 'react-beautiful-dnd';
 import { useUpdateTasksSetMutation } from 'store/api/tasks';
 import { ITask } from 'interfaces/ITask';
-import { setTasks, setTasksByColumn } from 'store/taskListSlice';
+import { setTasksByColumn } from 'store/taskListSlice';
 
 // const reorder = (array: Array<ITask>, from: number, to: number) => {
 //   const a = [...array];
@@ -69,7 +69,7 @@ const ColumnList = memo(() => {
   const selectedBoardId = useAppSelector((state) => state.boards.selectedBoardId);
   const dispatch = useAppDispatch();
   const isOpen = useAppSelector((state) => state.column.isOpen);
-  const [updateTasksMutation, { isLoading }] = useUpdateTasksSetMutation();
+  const [updateTasksMutation] = useUpdateTasksSetMutation();
 
   const { t } = useTranslation();
   const boardId = useParams<{ id: string }>().id;
