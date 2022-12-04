@@ -92,6 +92,8 @@ const resources = {
       'Search Task...': 'Search Task...',
       'Change Avatar': 'Change Avatar',
       'New Password': 'New Password',
+      'Didn`t not found': 'Didn`t not found',
+      'Enter your search query': 'Enter your search query',
     },
   },
   Russian: {
@@ -188,6 +190,8 @@ const resources = {
       'Search Task...': 'Поиск Задачи...',
       'Change Avatar': 'Изменить Аватар',
       'New Password': 'Новый Пароль',
+      'Didn`t not found': 'Ничего не найдено',
+      'Enter your search query': 'Введите поисковый запрос',
     },
   },
 };
