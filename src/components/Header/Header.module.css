@@ -46,8 +46,7 @@
 }
 
 .linkLabel {
-  margin-right: 5px;
-  padding: 8px 0 8px 0;
+  padding: 8px 12px;
   transition: all 0.3s;
 }
 

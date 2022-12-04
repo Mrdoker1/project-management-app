@@ -1,0 +1,25 @@
+.pageTitle {
+  margin: 40px 0;
+  text-align: center;
+  color: #fff;
+}
+
+.searchWrapper {
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.searchInput {
+  background: #101113;
+  border-color: #25262B;
+  color: #ADB5BD;
+}
+
+.searchInput::placeholder {
+  color: #ADB5BD;
+}
+
+.searchInput:focus, .searchInput:focus-within {
+  border-color: #F1F3F5;
+  background-color: #1A1B1E;
+}

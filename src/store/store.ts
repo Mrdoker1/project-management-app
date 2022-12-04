@@ -11,6 +11,7 @@ import usersReducer from './usersSlice';
 import menuSlice from './menuSlice';
 import checkTokenMW from './checkTokenMW';
 import profileMenuSlice from './profileMenuSlice';
+import searchSlice from './searchSlice';
 
 const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   users: usersReducer,
   menu: menuSlice,
   profileMenu: profileMenuSlice,
+  search: searchSlice,
 });
 
 const store = configureStore({
