@@ -1,8 +1,3 @@
-.form {
-  *max-width: 460px;
-  *padding-top: 60px;
-}
-
 .inputWrapper {
   width: 100%;
   margin-bottom: 20px;
@@ -10,19 +5,19 @@
 }
 
 .label {
-color: #868E96;
-font-weight: 600;
+  color: #868E96;
+  font-weight: 600;
 }
 
 .name:focus, .name:focus-within {
-border-color: #F1F3F5;
-background-color: #1A1B1E;
+  border-color: #F1F3F5;
+  background-color: #1A1B1E;
 }
 
 .name {
-background: #101113;
-border-color: #25262B;
-color: #F8F9FA;
+  background: #101113;
+  border-color: #25262B;
+  color: #F8F9FA;
 }
 
 .selectValue {
@@ -30,21 +25,38 @@ color: #F8F9FA;
   color: #F8F9FA;
 }
 
+.dropdown {
+  background: #1A1B1E;
+  border-color: #25262B;
+}
+
+.dropdownItem {
+  color: #F8F9FA;
+}
+
+.itemsWrapper:hover {
+  *color: #000;
+  background: #1A1B1E;
+}
+
+.dropdownItem:hover {
+  color: #000;
+}
+
 .submit {
-background: #25262B;
-border-radius: 4px;
-width: 161px;
-height: 39px; 
-*margin-top: 5px;
+  background: #25262B;
+  border-radius: 4px;
+  width: 161px;
+  height: 39px; 
 }
 
 .submit:hover {
-color: #101113;
-background-color: rgba(231, 245, 255, 1);
+  color: #101113;
+  background-color: rgba(231, 245, 255, 1);
 }
 
 .form{
-display: flex;
-flex-direction: column;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

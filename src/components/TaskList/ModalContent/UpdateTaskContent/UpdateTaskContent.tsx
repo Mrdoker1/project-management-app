@@ -72,7 +72,12 @@ const UpdateTaskContent = memo(() => {
         searchable
         classNames={inputClasses}
         label={t('Owner')}
+        limit={20}
+        maxDropdownHeight={160}
+        transitionDuration={300}
+        transition="pop-top-left"
         data={usersList ?? []}
+        filter={(value, item) => console.log(value, item)}
         {...form.getInputProps('userId')}
       />
       <MultiSelect
@@ -108,6 +113,9 @@ const inputClasses = {
   root: cl.inputWrapper,
   label: cl.label,
   value: cl.selectValue,
+  dropdown: cl.dropdown,
+  item: cl.dropdownItem,
+  itemsWrapper: cl.itemsWrapper,
 };
 
 export default UpdateTaskContent;
