@@ -1,22 +1,21 @@
 import React, { useCallback, useEffect } from 'react';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
-import { Accordion, Loader, Text } from '@mantine/core';
-import { setProfileMenuState } from 'store/profileMenuSlice';
+import { Loader, Text, TextInput } from '@mantine/core';
+import { setProfileBoardsSearch, setProfileMenuState } from 'store/profileMenuSlice';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { useNavigate } from 'react-router-dom';
-import { useLazyGetBoardsByUserIdQuery } from 'store/api/boards';
 import { useLazyGetTasksSetQuery } from 'store/api/tasks';
 import { t } from 'i18next';
 import cl from './ProfileTasks.module.css';
+import { IconSearch } from '@tabler/icons';
 
 function ProfileTasks() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const search = useAppSelector((state) => state.profileMenu.profileBoardSearch);
   const isOpened = useAppSelector((state) => state.profileMenu.profileIsOpened);
-  const { _id } = useAppSelector((state) => state.profile);
-  const [getBoards, { data: boards, isLoading: isBoardsLoading }] = useLazyGetBoardsByUserIdQuery();
-  const [getTasks, { data: tasks }] = useLazyGetTasksSetQuery();
+  const { _id, name } = useAppSelector((state) => state.profile);
+  const [getTasks, { data: tasks, isLoading, isFetching }] = useLazyGetTasksSetQuery();
 
   const taskClickHandler = useCallback((route: string) => {
     dispatch(setProfileMenuState(false));
@@ -24,42 +23,62 @@ function ProfileTasks() {
   }, []);
 
   useEffect(() => {
-    getBoards(_id!);
-    getTasks({ ids: [], userId: _id!, searchQuery: '' });
+    getTasks({ ids: [], userId: '', searchQuery: name! });
   }, [isOpened]);
 
-  if (!tasks || !boards) return <div>{t('Ничего не найдено!')}</div>;
+  if (isLoading || isFetching) {
+    return <Loader style={{ width: '100%', margin: '50px 0' }} color="dark" />;
+  }
+
+  if (!tasks || tasks.length === 0) {
+    return (
+      <>
+        <Text align="center" size={14} color="#909296">
+          {t('You have no assigned tasks')}
+        </Text>
+      </>
+    );
+  }
 
   return (
-    <OverlayScrollbarsComponent
-      defer
-      options={{
-        overflow: {
-          y: 'scroll',
-          x: 'hidden',
-        },
-      }}
-    >
+    <>
+      <TextInput
+        value={search}
+        classNames={searchClasses}
+        size="md"
+        placeholder={`${t('Search Task...')}`}
+        rightSection={<IconSearch size={20} stroke={1} />}
+        onChange={(event) => {
+          dispatch(setProfileBoardsSearch(event.target.value));
+        }}
+      />
       <>
-        <Accordion className={cl.boardWrapper}>
-          {isBoardsLoading ? (
-            <Loader color="dark" />
-          ) : (
-            boards.map((board, index) => {
-              return (
-                <Accordion.Item key={index} value={board.title} className={cl.boardItem}>
-                  <Accordion.Control className={cl.boardTitle}>{board.title}</Accordion.Control>
-                  {tasks.map((task, index) => {
-                    if (
-                      task.description.toLowerCase().includes(search.toLowerCase()) ||
-                      task.title.toLowerCase().includes(search.toLowerCase())
-                    ) {
-                      if (board._id === task.boardId && task.userId === _id) {
-                        return (
-                          <Accordion.Panel
+        <OverlayScrollbarsComponent
+          defer
+          options={{
+            overflow: {
+              y: 'scroll',
+              x: 'hidden',
+            },
+          }}
+        >
+          <>
+            <div className={cl.boardWrapper}>
+              {isLoading || isFetching ? (
+                <Loader style={{ width: '100%', margin: '50px 0' }} color="dark" />
+              ) : (
+                tasks.map((task, index) => {
+                  if (
+                    task.description.toLowerCase().includes(search.toLowerCase()) ||
+                    task.title.toLowerCase().includes(search.toLowerCase())
+                  ) {
+                    if (task.users.includes(_id!)) {
+                      return (
+                        <div key={index} className={cl.boardItem}>
+                          <div
                             key={index}
                             className={cl.boardDescription}
-                            onClick={() => taskClickHandler(`/projects/${board._id}`)}
+                            onClick={() => taskClickHandler(`/projects/${task.boardId}`)}
                           >
                             <Text size={16} color="#fff">
                               {task.title}
@@ -67,19 +86,25 @@ function ProfileTasks() {
                             <Text size={14} color="#868E96">
                               {task.description}
                             </Text>
-                          </Accordion.Panel>
-                        );
-                      }
+                          </div>
+                        </div>
+                      );
                     }
-                  })}
-                </Accordion.Item>
-              );
-            })
-          )}
-        </Accordion>
+                  }
+                })
+              )}
+            </div>
+          </>
+        </OverlayScrollbarsComponent>
       </>
-    </OverlayScrollbarsComponent>
+    </>
   );
 }
 
 export default ProfileTasks;
+
+const searchClasses = {
+  input: cl.searchInput,
+  root: cl.searchWrapper,
+  label: cl.searchInput,
+};
