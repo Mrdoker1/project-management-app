@@ -79,6 +79,15 @@ const resources = {
         'Are you sure you want to delete this column? This action is destructive.',
       'Are you sure you want to delete this task? This action is destructive.':
         'Are you sure you want to delete this task? This action is destructive.',
+      'Edit Profile': 'Edit Profile',
+      'Delete Profile': 'Delete Profile',
+      Avatar: 'Avatar',
+      'Accept Changes': 'Accept Changes',
+      'Your tasks': 'Your tasks',
+      'You have no assigned tasks': 'You have no assigned tasks',
+      'Are you sure you want to delete your profile?':
+        'Are you sure you want to delete your profile?',
+      Delete: 'Delete',
     },
   },
   Russian: {
@@ -162,6 +171,15 @@ const resources = {
         'Вы уверены, что хотите удалить эту колонку? Это действие необратимо.',
       'Are you sure you want to delete this task? This action is destructive.':
         'Вы уверены, что хотите удалить эту задачу? Это действие необратимо.',
+      'Edit Profile': 'Редактировать',
+      'Delete Profile': 'Удалить',
+      Avatar: 'Аватар',
+      'Accept Changes': 'Применить Изменения',
+      'Your tasks': 'Ваши задачи',
+      'You have no assigned tasks': 'У вас нет назначенных задач',
+      'Are you sure you want to delete your profile?':
+        'Вы уверены что хотите удалить свой профиль?',
+      Delete: 'Удалить',
     },
   },
 };

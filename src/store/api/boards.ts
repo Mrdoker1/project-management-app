@@ -97,4 +97,5 @@ export const {
   useLazyGetBoardQuery,
   useLazyGetBoardsByIdsQuery,
   useGetBoardsByUserIdQuery,
+  useLazyGetBoardsByUserIdQuery,
 } = boards;

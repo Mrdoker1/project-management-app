@@ -1,19 +1,15 @@
-import React, { useCallback, useState } from 'react';
-import { Modal, TextInput, Button, PasswordInput, Text, Flex, FileInput } from '@mantine/core';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Modal, TextInput, Button, PasswordInput, Flex, FileInput } from '@mantine/core';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { useForm } from '@mantine/form';
-import users, { useDeleteUserMutation, useUpdateUserMutation } from 'store/api/users';
+import users, { useUpdateUserMutation } from 'store/api/users';
 import { useTranslation } from 'react-i18next';
-import { setProfileEditState, setProfileMenuState } from 'store/profileMenuSlice';
+import { setProfileEditState } from 'store/profileMenuSlice';
 import { checkPassword, convertToBase64 } from 'utils/helpers';
-import { clearProfile, setProfile } from 'store/profileSlice';
+import { setProfile } from 'store/profileSlice';
 import { showNotification } from '@mantine/notifications';
 import { IconCheck, IconX } from '@tabler/icons';
 import cl from './ProfileModal.module.css';
-import { openConfirmModal } from '@mantine/modals';
-import { api } from 'store/api';
-import { setToken } from 'store/authSlice';
-import { useNavigate } from 'react-router-dom';
 
 interface IError {
   data: {
@@ -34,29 +30,44 @@ const ProfileModal = () => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [updateUser] = useUpdateUserMutation();
-  const [deleteUser] = useDeleteUserMutation();
   const [getUsers] = users.endpoints.getUsers.useLazyQuery();
   const dispatch = useAppDispatch();
   const isOpened = useAppSelector((state) => state.profileMenu.profileEditIsOpened);
   const { _id, login, name, avatar } = useAppSelector((state) => state.profile);
-  const stateAvatar = avatar;
-  const navigate = useNavigate();
 
   const form = useForm<IForm>({
-    initialValues: {
-      _id: _id!,
-      name: name!,
-      login: login!,
-      password: '',
-      avatar: null,
-    },
+    initialValues,
     validate: (values) => ({
       name: values.name.length < 3 ? 'Too short name at least 3' : null,
       login: values.login.length < 3 ? 'Too short login at least 3' : null,
       password: checkPassword(values.password),
-      avatar: values.avatar ? (values.avatar.size / 1024 > 100 ? 'File is too big' : null) : null,
+      avatar: values.avatar
+        ? values.avatar.size / 1024 > 100
+          ? 'File is too big'
+          : null
+        : 'Avatar required',
     }),
   });
+
+  /*
+  const convertTofile = useCallback(async () => {
+    return await convertTofileFromBase64(avatar).then((file) => {
+      const avatar = file;
+      form.setValues({ avatar });
+    });
+  }, []);
+  */
+
+  useEffect(() => {
+    /*
+    if (avatar.length === 0) {
+      const avatar = new File([''], 'Change Avatar', { type: 'image/png' });
+      form.setValues({ login, name, _id, avatar });
+    }
+    */
+
+    form.setValues({ login, name, _id });
+  }, [avatar, login]);
 
   const sendForm = useCallback(
     async (values: {
@@ -69,16 +80,16 @@ const ProfileModal = () => {
       try {
         setIsLoading(true);
 
-        let avatar;
-        if (values.avatar) {
-          avatar = await convertToBase64(values.avatar).then((result) => {
+        let avatarImg;
+        if (values.avatar && typeof values.avatar !== null) {
+          avatarImg = await convertToBase64(values.avatar).then((result) => {
             return result as string;
           });
         } else {
-          avatar = stateAvatar || name;
+          avatarImg = avatar || name;
         }
 
-        await updateUser({ ...values, avatar: avatar! }).unwrap();
+        await updateUser({ ...values, avatar: avatarImg! }).unwrap();
         const data = await getUsers().unwrap();
         const user = data.find((user) => user.login === values.login);
         if (!user) throw new Error('User not exists!');
@@ -116,53 +127,6 @@ const ProfileModal = () => {
     },
     []
   );
-
-  const deleteProfileHandler = () => {
-    openConfirmModal({
-      title: t('Delete Profile'),
-      modalId: 'deleteProfile',
-      centered: true,
-      className: cl.deleteModal,
-      children: <Text size="sm">{t('Are you sure you want to delete your profile?')}</Text>,
-      labels: { confirm: t('Delete'), cancel: t('Cancel') },
-      confirmProps: { color: 'red' },
-      onConfirm: async () => {
-        try {
-          await deleteUser(_id!);
-          dispatch(setToken(''));
-          dispatch(clearProfile);
-          dispatch(api.util.resetApiState());
-          dispatch(setProfileMenuState(false));
-          dispatch(setProfileEditState(false));
-          navigate('/');
-          showNotification({
-            title: 'Success',
-            message: 'Profile delete',
-            color: 'red',
-            icon: <IconX size={18} />,
-            styles: () => ({
-              root: { backgroundColor: '#101113', border: '1px solid #343A40' },
-              title: { color: '#fff' },
-              description: { color: '#fff' },
-            }),
-          });
-        } catch (err) {
-          const error = err as IError;
-          showNotification({
-            title: `Error ${error.data.statusCode}`,
-            message: `${error.data.message}`,
-            color: 'red',
-            icon: <IconX size={18} />,
-            styles: () => ({
-              root: { backgroundColor: '#101113', border: '1px solid #343A40' },
-              title: { color: '#fff' },
-              description: { color: '#fff' },
-            }),
-          });
-        }
-      },
-    });
-  };
 
   const formComponent = (
     <form className={cl.form} onSubmit={form.onSubmit(sendForm)}>
@@ -202,15 +166,6 @@ const ProfileModal = () => {
         >
           {t('Accept Changes')}
         </Button>
-        <Button
-          className={cl.submit}
-          loaderPosition="center"
-          mt="sm"
-          color="red"
-          onClick={deleteProfileHandler}
-        >
-          {t('Delete profile')}
-        </Button>
       </Flex>
     </form>
   );
@@ -222,13 +177,20 @@ const ProfileModal = () => {
       onClose={() => {
         dispatch(setProfileEditState(false));
       }}
-      title="Edit Profile"
+      title={t('Edit Profile')}
     >
       {formComponent}
     </Modal>
   );
 };
 
+const initialValues: IForm = {
+  _id: '',
+  name: '',
+  login: '',
+  password: '',
+  avatar: null,
+};
 const inputClasses = { input: cl.name, root: cl.inputWrapper, label: cl.label };
 const passwordClasses = {
   input: cl.password,

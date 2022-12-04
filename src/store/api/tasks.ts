@@ -84,4 +84,5 @@ export const {
   useGetTasksSetQuery,
   useUpdateTasksSetMutation,
   useGetTasksSetByBoardIdQuery,
+  useLazyGetTasksSetQuery,
 } = tasks;

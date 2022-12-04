@@ -9,7 +9,7 @@ import LoginButtons from './LoginButtons/LoginButtons';
 import MenuComponent from './Menu/Menu';
 import i18n from 'i18n';
 import { IconChevronDown } from '@tabler/icons';
-import { useTranslation } from 'react-i18next';
+import { t } from 'i18next';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { setMenuState } from 'store/menuSlice';
 import { setLang } from 'store/settingsSlice';
@@ -23,7 +23,6 @@ interface IHeaderProps {
 }
 
 const HeaderAction = memo(({ links }: IHeaderProps) => {
-  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const isOpened = useAppSelector((state) => state.menu.isOpened);
   const language = useAppSelector((state) => state.settings.lang);
@@ -45,6 +44,7 @@ const HeaderAction = memo(({ links }: IHeaderProps) => {
   }, []);
 
   const openProfileHandler = useCallback(() => {
+    dispatch(setMenuState(false));
     dispatch(setProfileMenuState(true));
   }, []);
 
