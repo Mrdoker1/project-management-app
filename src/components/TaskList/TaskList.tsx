@@ -42,8 +42,6 @@ const TaskList = memo<ITaskListProps>(({ boardId, columnId, placeholder }) => {
       } else {
         if (!(columnId in tasksListState[boardId])) {
           dispatch(setTasks({ boardID: boardId, columnID: columnId, array: tasks }));
-        } else if (tasks.length > tasksListState[boardId][columnId].length) {
-          dispatch(setTasks({ boardID: boardId, columnID: columnId, array: tasks }));
         }
       }
       dispatch(setSelectedBoardId(boardId));

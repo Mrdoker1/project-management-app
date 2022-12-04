@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { ITask } from 'interfaces/ITask';
 import { useCreateTaskMutation } from 'store/api/tasks';
 import { setIsOpen } from 'store/taskSlice';
-import { addTask, setTaskByOrder } from 'store/taskListSlice';
+import { addTask } from 'store/taskListSlice';
 
 interface TaskFormValues {
   title: string;
@@ -34,7 +34,17 @@ const CreateTaskContent = memo(() => {
   const createTask = async (values: TaskFormValues) => {
     if (!creatingTask) return;
     const task: Omit<ITask, '_id'> = { ...creatingTask, ...values };
-    await createTaskMutation(task);
+    const response = await createTaskMutation(task).unwrap();
+
+    if (response) {
+      dispatch(
+        addTask({
+          boardID: task.boardId,
+          columnID: task.columnId,
+          task: response,
+        })
+      );
+    }
     dispatch(setIsOpen(false));
   };
 
