@@ -32,7 +32,7 @@ export const taskListSlice = createSlice({
         Object.assign(state, state, obj);
       }
 
-      console.log(obj);
+      //console.log(obj);
     },
     setTasksByColumn: (
       state,

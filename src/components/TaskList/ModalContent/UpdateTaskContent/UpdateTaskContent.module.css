@@ -25,6 +25,11 @@ border-color: #25262B;
 color: #F8F9FA;
 }
 
+.selectValue {
+  background: #25262b;
+  color: #F8F9FA;
+}
+
 .submit {
 background: #25262B;
 border-radius: 4px;
