@@ -32,15 +32,17 @@
 
 .dropdownItem {
   color: #F8F9FA;
+  transition: none;
+  transition: 0.3s all;
 }
 
-.itemsWrapper:hover {
-  *color: #000;
-  background: #1A1B1E;
+.dropdown [data-hovered], .dropdownItem:hover {
+  background-color: #25262B;
+  color: #F8F9FA;
 }
 
-.dropdownItem:hover {
-  color: #000;
+.dropdown [data-selected] {
+  background-color: #25262B !important;
 }
 
 .submit {

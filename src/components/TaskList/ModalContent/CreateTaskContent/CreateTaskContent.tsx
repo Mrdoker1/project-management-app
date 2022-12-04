@@ -1,4 +1,4 @@
-import { Button, MultiSelect, Select, Textarea, TextInput } from '@mantine/core';
+import { Button, Loader, MultiSelect, Select, Textarea, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import React, { memo, useEffect } from 'react';
 import cl from './CreateTaskContent.module.css';
@@ -56,7 +56,8 @@ const CreateTaskContent = memo(() => {
     });
   }, []);
 
-  //console.log(usersList);
+  if (!usersList?.length) return <Loader style={{ width: '100%' }} color="dark" />;
+
   return (
     <form className={cl.form} onSubmit={form.onSubmit(createTask)}>
       <TextInput
@@ -77,8 +78,8 @@ const CreateTaskContent = memo(() => {
         label={t('Owner')}
         limit={20}
         maxDropdownHeight={160}
-        transitionDuration={300}
-        transition="pop-top-left"
+        // transitionDuration={300}
+        // transition="pop-top-left"
         data={usersList ?? []}
         {...form.getInputProps('userId')}
       />
@@ -87,12 +88,10 @@ const CreateTaskContent = memo(() => {
         clearable
         classNames={inputClasses}
         label={t('Users')}
-        nothingFound="Nothing found"
-        maxSelectedValues={3}
+        //nothingFound="Nothing found"
+        //maxSelectedValues={3}
         limit={20}
         maxDropdownHeight={160}
-        transitionDuration={300}
-        transition="pop-top-left"
         data={usersList ?? []}
         {...form.getInputProps('users')}
       />
@@ -115,6 +114,8 @@ const inputClasses = {
   root: cl.inputWrapper,
   label: cl.label,
   value: cl.selectValue,
+  dropdown: cl.dropdown,
+  item: cl.dropdownItem,
 };
 
 export default CreateTaskContent;

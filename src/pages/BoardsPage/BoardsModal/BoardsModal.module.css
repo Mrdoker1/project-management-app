@@ -38,3 +38,28 @@
   flex-direction: column;
   align-items: center;
 }
+
+.dropdown {
+  background: #1A1B1E;
+  border-color: #25262B;
+}
+
+.dropdownItem {
+  color: #F8F9FA;
+  transition: none;
+  transition: 0.3s all;
+}
+
+.dropdown [data-hovered], .dropdownItem:hover {
+  background-color: #25262B;
+  color: #F8F9FA;
+}
+
+.dropdown [data-selected] {
+  background-color: #25262B !important;
+}
+
+.rightSection button svg{
+  fill: #25262B;
+  background-color: #25262B !important;
+}

@@ -7,6 +7,26 @@ function getRandom(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+const getRandHexColor = (): string => {
+  let color = '';
+  for (let j = 0; j < 3; j += 1) {
+    let temp = getRandom(0, 255).toString(16);
+    if (temp.length < 2) temp += 0;
+    color += temp;
+  }
+  return `#${color}`;
+};
+
+const getRandRGBColor = (): string => {
+  let color = '';
+  for (let j = 0; j < 3; j += 1) {
+    const temp = getRandom(0, 255);
+    color += temp;
+    if (j !== 2) color += ',';
+  }
+  return `rgb(${color})`;
+};
+
 function removeObjKey<T extends object>(obj: T, key: string) {
   const res = { ...obj };
   if (key in res) {
@@ -76,4 +96,6 @@ export {
   getFromStorage,
   convertToBase64,
   convertTofileFromBase64,
+  getRandHexColor,
+  getRandRGBColor,
 };

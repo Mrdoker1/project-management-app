@@ -23,6 +23,7 @@ function ProfileTasks() {
   }, []);
 
   useEffect(() => {
+    if (!isOpened) return;
     getTasks({ ids: [], userId: '', searchQuery: name! });
   }, [isOpened]);
 
