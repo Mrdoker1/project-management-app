@@ -5,6 +5,10 @@
 }
 
 .boardItem {
+  padding: 8px 16px;
+  margin-top: 16px;
+  border-radius: 6px;
+  background: #25262B;
   border: none;
 }
 
@@ -21,9 +25,6 @@
 }
 
 .boardDescription {
-  margin-top: 16px;
-  border-radius: 6px;
-  background: #25262B;
   font-weight: 600;
   font-size: 14px;
   line-height: 155%;
@@ -32,4 +33,23 @@
 
 .boardDescription:hover {
   cursor: pointer;
+}
+
+.searchInput {
+  background: #101113;
+  border-color: #25262B;
+  color: #ADB5BD;
+}
+
+.searchInput::placeholder {
+  color: #ADB5BD;
+}
+
+.searchInput:focus, .searchInput:focus-within {
+  border-color: #F1F3F5;
+  background-color: #1A1B1E;
+}
+
+.searchWrapper {
+  margin: 16px 0;
 }

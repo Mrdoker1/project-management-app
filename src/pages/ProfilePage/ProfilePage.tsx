@@ -1,16 +1,9 @@
-import { Avatar, Drawer, Flex, Title, Text, Group, Button, TextInput } from '@mantine/core';
+import { Avatar, Drawer, Flex, Title, Text, Group, Button } from '@mantine/core';
 import React, { memo, useCallback, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import {
-  setProfileMenuState,
-  setProfileEditState,
-  setProfileBoardsSearch,
-} from 'store/profileMenuSlice';
+import { setProfileMenuState, setProfileEditState } from 'store/profileMenuSlice';
 import ProfileModal from './ProfileModal/ProfileModal';
-import { useGetBoardsByUserIdQuery } from 'store/api/boards';
-import { useGetTasksSetQuery } from 'store/api/tasks';
 import { t } from 'i18next';
-import { IconSearch } from '@tabler/icons';
 import { useNavigate } from 'react-router-dom';
 import { openConfirmModal } from '@mantine/modals';
 import { IconX, IconCheck } from '@tabler/icons';
@@ -34,14 +27,9 @@ const ProfilePage = memo(() => {
   const [isDeleted, setIsDeleted] = useState(false);
   const isOpened = useAppSelector((state) => state.profileMenu.profileIsOpened);
   const { _id, name, avatar } = useAppSelector((state) => state.profile);
-  const { data: boards } = useGetBoardsByUserIdQuery(_id!);
-  const { data: tasks } = useGetTasksSetQuery({
-    ids: [],
-    userId: _id!,
-    searchQuery: '',
-  });
+
   const [deleteUser] = useDeleteUserMutation();
-  const search = useAppSelector((state) => state.profileMenu.profileBoardSearch);
+
   const navigate = useNavigate();
 
   const closeMenuHandler = useCallback(() => {
@@ -52,8 +40,6 @@ const ProfilePage = memo(() => {
   const editModalHandler = useCallback(() => {
     dispatch(setProfileEditState(true));
   }, []);
-
-  if (!tasks || !boards) return <div>{t('Ничего не найдено!')}</div>;
 
   const deleteProfileHandler = () => {
     openConfirmModal({
@@ -125,7 +111,9 @@ const ProfilePage = memo(() => {
               <Title order={4} size={18}>
                 {name}
               </Title>
-              <Text size={12}>ID: {_id}</Text>
+              <Text size={12} style={{ color: '#54555a' }}>
+                ID: {_id}
+              </Text>
             </Flex>
           </Flex>
         </div>
@@ -154,33 +142,12 @@ const ProfilePage = memo(() => {
         <Text align="center" size={18} color="#909296">
           {t('Your tasks')}
         </Text>
-        {tasks.length === 0 ? (
-          <Text align="center" size={14} color="#909296">
-            {t('You have no assigned tasks')}
-          </Text>
-        ) : (
-          <TextInput
-            value={search}
-            classNames={searchClasses}
-            size="md"
-            placeholder={`${t('Search Task...')}`}
-            rightSection={<IconSearch size={20} stroke={1} />}
-            onChange={(event) => {
-              dispatch(setProfileBoardsSearch(event.target.value));
-            }}
-          />
-        )}
+
         <ProfileTasks />
       </Drawer>
       <ProfileModal />
     </>
   );
 });
-
-const searchClasses = {
-  input: cl.searchInput,
-  root: cl.searchWrapper,
-  label: cl.searchInput,
-};
 
 export default ProfilePage;

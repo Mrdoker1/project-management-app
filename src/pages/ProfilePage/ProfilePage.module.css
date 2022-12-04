@@ -30,25 +30,6 @@
   color: #000;
 }
 
-.searchInput {
-  background: #101113;
-  border-color: #25262B;
-  color: #ADB5BD;
-}
-
-.searchInput::placeholder {
-  color: #ADB5BD;
-}
-
-.searchInput:focus, .searchInput:focus-within {
-  border-color: #F1F3F5;
-  background-color: #1A1B1E;
-}
-
-.searchWrapper {
-  margin: 16px 0;
-}
-
 @media (max-width: 480px) {
   .button {
     width: 100%;

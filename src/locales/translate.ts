@@ -89,6 +89,7 @@ const resources = {
       'Are you sure you want to delete your profile?':
         'Are you sure you want to delete your profile?',
       Delete: 'Delete',
+      'Search Task...': 'Search Task...',
     },
   },
   Russian: {
@@ -182,6 +183,7 @@ const resources = {
       'Are you sure you want to delete your profile?':
         'Вы уверены что хотите удалить свой профиль?',
       Delete: 'Удалить',
+      'Search Task...': 'Поиск Задачи...',
     },
   },
 };
