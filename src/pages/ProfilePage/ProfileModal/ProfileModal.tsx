@@ -49,25 +49,9 @@ const ProfileModal = () => {
     }),
   });
 
-  /*
-  const convertTofile = useCallback(async () => {
-    return await convertTofileFromBase64(avatar).then((file) => {
-      const avatar = file;
-      form.setValues({ avatar });
-    });
-  }, []);
-  */
-
   useEffect(() => {
-    /*
-    if (avatar.length === 0) {
-      const avatar = new File([''], 'Change Avatar', { type: 'image/png' });
-      form.setValues({ login, name, _id, avatar });
-    }
-    */
-
     form.setValues({ login, name, _id });
-  }, [avatar, login]);
+  }, [login]);
 
   const sendForm = useCallback(
     async (values: {
