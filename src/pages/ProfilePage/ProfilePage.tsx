@@ -111,7 +111,9 @@ const ProfilePage = memo(() => {
               <Title order={4} size={18}>
                 {name}
               </Title>
-              <Text size={12}>ID: {_id}</Text>
+              <Text size={12} style={{ color: '#54555a' }}>
+                ID: {_id}
+              </Text>
             </Flex>
           </Flex>
         </div>

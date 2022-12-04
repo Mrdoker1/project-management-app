@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { setModalState, actionType } from 'store/boardsSlice';
-import { Modal, Select, TextInput, Button, Textarea, ColorInput } from '@mantine/core';
+import {
+  Modal,
+  Select,
+  TextInput,
+  Button,
+  Textarea,
+  ColorInput,
+  Loader,
+  ActionIcon,
+} from '@mantine/core';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { useForm } from '@mantine/form';
 import cl from './BoardsModal.module.css';
@@ -11,6 +20,8 @@ import {
 } from 'store/api/boards';
 import { useGetUsersQuery } from 'store/api/users';
 import { useTranslation } from 'react-i18next';
+import { IconRefresh } from '@tabler/icons';
+import { getRandRGBColor } from 'utils/helpers';
 
 interface IBoardFormValues {
   title: string;
@@ -69,6 +80,10 @@ const BoardsModal = () => {
     } else form.setValues({ ...initialValues, owner });
   }, [board, modal.type, owner]);
 
+  const randomColor = () => {
+    form.setValues({ color: getRandRGBColor() });
+  };
+
   const formComponent = (
     <form
       className={cl.form}
@@ -120,6 +135,8 @@ const BoardsModal = () => {
         classNames={inputClasses}
         label={t('Owner')}
         placeholder={t('Select user')}
+        maxDropdownHeight={180}
+        limit={20}
         data={usersList ?? []}
         {...form.getInputProps('owner')}
       />
@@ -129,6 +146,11 @@ const BoardsModal = () => {
         format="rgb"
         placeholder={t('Select color')}
         {...form.getInputProps('color')}
+        rightSection={
+          <ActionIcon onClick={randomColor}>
+            <IconRefresh size={16} />
+          </ActionIcon>
+        }
       />
       <Textarea
         classNames={inputClasses}
@@ -152,7 +174,7 @@ const BoardsModal = () => {
       }}
       title={modal.type === actionType.Edit ? t('Edit Board') : t('Create Board')}
     >
-      {formComponent}
+      {!usersList?.length ? <Loader style={{ width: '100%' }} color="dark" /> : formComponent}
     </Modal>
   );
 };
@@ -164,6 +186,13 @@ const initialValues: IBoardFormValues = {
   color: 'rgb(140, 140, 140)',
 };
 
-const inputClasses = { input: cl.name, root: cl.inputWrapper, label: cl.label };
+const inputClasses = {
+  input: cl.name,
+  root: cl.inputWrapper,
+  label: cl.label,
+  dropdown: cl.dropdown,
+  item: cl.dropdownItem,
+  rightSection: cl.rightSection,
+};
 
 export default BoardsModal;

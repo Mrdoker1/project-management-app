@@ -38,10 +38,12 @@ const TaskList = memo<ITaskListProps>(({ boardId, columnId, placeholder }) => {
   useEffect(() => {
     if (tasks) {
       if (!(boardId in tasksListState)) {
-        dispatch(setTasks({ boardId: boardId, columnId: columnId, array: tasks }));
-      } else if (boardId in tasksListState) {
+        dispatch(setTasks({ boardID: boardId, columnID: columnId, array: tasks }));
+      } else {
         if (!(columnId in tasksListState[boardId])) {
-          dispatch(setTasks({ boardId: boardId, columnId: columnId, array: tasks }));
+          dispatch(setTasks({ boardID: boardId, columnID: columnId, array: tasks }));
+        } else if (tasks.length > tasksListState[boardId][columnId].length) {
+          dispatch(setTasks({ boardID: boardId, columnID: columnId, array: tasks }));
         }
       }
       dispatch(setSelectedBoardId(boardId));
