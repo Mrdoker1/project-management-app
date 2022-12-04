@@ -66,14 +66,14 @@
   z-index: 300;
 }
 
-.innerInput, .password:-webkit-autofill {
+.innerInput, .name .password:-webkit-autofill {
   box-shadow: inset 0 0 0 70px #101113;
   transition: background-color 600000s 0s, color 600000s 0s;
   -webkit-transition: background-color 600000s 0s, color 600000s 0s;
   background: #101113;
 }
 
-.innerInput, .password:autofill {
+.innerInput, .name .password:autofill {
   background: #101113;
 
 }
