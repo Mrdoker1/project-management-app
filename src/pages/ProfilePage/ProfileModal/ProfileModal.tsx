@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { Modal, TextInput, Button, PasswordInput, Flex, FileInput } from '@mantine/core';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { useForm } from '@mantine/form';
@@ -26,7 +26,7 @@ interface IForm {
   avatar: File | null;
 }
 
-const ProfileModal = () => {
+const ProfileModal = memo(() => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [updateUser] = useUpdateUserMutation();
@@ -167,7 +167,7 @@ const ProfileModal = () => {
       {formComponent}
     </Modal>
   );
-};
+});
 
 const initialValues: IForm = {
   _id: '',
