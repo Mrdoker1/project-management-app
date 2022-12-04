@@ -58,4 +58,22 @@ function convertToBase64(file: File | null) {
   });
 }
 
-export { getRandom, removeObjKey, checkPassword, getErrorMessage, getFromStorage, convertToBase64 };
+function convertTofileFromBase64(stringImg: string) {
+  return fetch(stringImg)
+    .then(function (res) {
+      return res.arrayBuffer();
+    })
+    .then(function (buf) {
+      return new File([buf], 'avatar.png', { type: 'image/png' });
+    });
+}
+
+export {
+  getRandom,
+  removeObjKey,
+  checkPassword,
+  getErrorMessage,
+  getFromStorage,
+  convertToBase64,
+  convertTofileFromBase64,
+};
