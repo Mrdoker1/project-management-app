@@ -10,7 +10,7 @@ const ModalContent = memo(() => {
   const { t } = useTranslation();
   const isOpen = useAppSelector((state) => state.task.isOpen);
   const isEdit = useAppSelector((state) => state.task.isEdit);
-  const title = isEdit ? 'Update task' : 'Create task';
+  const title = isEdit ? 'Edit task' : 'Create task';
   const dispatch = useAppDispatch();
 
   const closeModal = useCallback(() => {

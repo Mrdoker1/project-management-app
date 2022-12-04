@@ -71,6 +71,7 @@ const resources = {
       'Create task': 'Create task',
       'Task name': 'Task name',
       'Update task': 'Update task',
+      'Edit task': 'Edit task',
       Update: 'Update',
       'Delete column': 'Delete column',
       'Delete task': 'Delete task',
@@ -156,6 +157,7 @@ const resources = {
       Name: 'Имя',
       'Update task': 'Изменить задачу',
       Update: 'Изменить',
+      'Edit task': 'Редактировать задачу',
       'Delete column': 'Удалить колонку',
       'Delete task': 'Удалить задачу',
       'Are you sure you want to delete this column? This action is destructive.':

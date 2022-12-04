@@ -1,4 +1,4 @@
-import { Button, Select, Textarea, TextInput } from '@mantine/core';
+import { Button, MultiSelect, Select, Textarea, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import React, { memo, useEffect } from 'react';
 import cl from './CreateTaskContent.module.css';
@@ -13,6 +13,7 @@ interface TaskFormValues {
   title: string;
   description: string;
   userId: string;
+  users: string[];
 }
 
 const CreateTaskContent = memo(() => {
@@ -31,7 +32,7 @@ const CreateTaskContent = memo(() => {
 
   const createTask = async (values: TaskFormValues) => {
     if (!creatingTask) return;
-    const task: Omit<ITask, '_id'> = { ...values, ...creatingTask, users: [] };
+    const task: Omit<ITask, '_id'> = { ...creatingTask, ...values };
     await createTaskMutation(task);
     dispatch(setIsOpen(false));
   };
@@ -50,9 +51,12 @@ const CreateTaskContent = memo(() => {
   });
 
   useEffect(() => {
-    form.setValues({ userId: currentUserId });
+    form.setValues({
+      userId: currentUserId,
+    });
   }, []);
 
+  //console.log(usersList);
   return (
     <form className={cl.form} onSubmit={form.onSubmit(createTask)}>
       <TextInput
@@ -71,8 +75,26 @@ const CreateTaskContent = memo(() => {
         searchable
         classNames={inputClasses}
         label={t('Owner')}
+        limit={20}
+        maxDropdownHeight={160}
+        transitionDuration={300}
+        transition="pop-top-left"
         data={usersList ?? []}
         {...form.getInputProps('userId')}
+      />
+      <MultiSelect
+        searchable
+        clearable
+        classNames={inputClasses}
+        label={t('Users')}
+        nothingFound="Nothing found"
+        maxSelectedValues={3}
+        limit={20}
+        maxDropdownHeight={160}
+        transitionDuration={300}
+        transition="pop-top-left"
+        data={usersList ?? []}
+        {...form.getInputProps('users')}
       />
       <Button type="submit" className={cl.submit} mt="sm" loading={isLoading}>
         {t('Create')}
@@ -85,8 +107,14 @@ const initialValues: TaskFormValues = {
   title: '',
   description: '',
   userId: '',
+  users: [],
 };
 
-const inputClasses = { input: cl.name, root: cl.inputWrapper, label: cl.label };
+const inputClasses = {
+  input: cl.name,
+  root: cl.inputWrapper,
+  label: cl.label,
+  value: cl.selectValue,
+};
 
 export default CreateTaskContent;

@@ -1,4 +1,4 @@
-import { Button, Select, Textarea, TextInput } from '@mantine/core';
+import { Button, MultiSelect, Select, Textarea, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import React, { memo, useEffect } from 'react';
 import cl from './UpdateTaskContent.module.css';
@@ -13,6 +13,7 @@ interface ITaskFormValues {
   title: string;
   description: string;
   userId: string;
+  users: string[];
 }
 
 const UpdateTaskContent = memo(() => {
@@ -39,7 +40,7 @@ const UpdateTaskContent = memo(() => {
     validate: {
       title: (value) => (value.length < 3 ? 'Board name must have at least 3 letters' : null),
       description: (value) => {
-        if (value.length < 2) return 'Dscription must have at least 2 letters';
+        if (value.length < 2) return 'Description must have at least 2 letters';
         if (value.length > 120) return 'Description must not exceed 120 letters';
         return null;
       },
@@ -49,8 +50,8 @@ const UpdateTaskContent = memo(() => {
 
   useEffect(() => {
     if (!updatingTask) return;
-    const { title, description, userId } = updatingTask;
-    form.setValues({ title, description, userId });
+    const { title, description, userId, users } = updatingTask;
+    form.setValues({ title, description, userId, users });
   }, []);
 
   return (
@@ -74,8 +75,22 @@ const UpdateTaskContent = memo(() => {
         data={usersList ?? []}
         {...form.getInputProps('userId')}
       />
+      <MultiSelect
+        searchable
+        clearable
+        classNames={inputClasses}
+        label={t('Users')}
+        nothingFound="Nothing found"
+        maxSelectedValues={3}
+        limit={20}
+        maxDropdownHeight={160}
+        transitionDuration={300}
+        transition="pop-top-left"
+        data={usersList ?? []}
+        {...form.getInputProps('users')}
+      />
       <Button type="submit" className={cl.submit} mt="sm" loading={isLoading}>
-        {t('Update')}
+        {t('Save')}
       </Button>
     </form>
   );
@@ -85,8 +100,14 @@ const initialValues: ITaskFormValues = {
   title: '',
   description: '',
   userId: '',
+  users: [],
 };
 
-const inputClasses = { input: cl.name, root: cl.inputWrapper, label: cl.label };
+const inputClasses = {
+  input: cl.name,
+  root: cl.inputWrapper,
+  label: cl.label,
+  value: cl.selectValue,
+};
 
 export default UpdateTaskContent;

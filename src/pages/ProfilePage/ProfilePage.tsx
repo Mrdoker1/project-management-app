@@ -31,6 +31,8 @@ const ProfilePage = memo(() => {
   const isOpened = useAppSelector((state) => state.profileMenu.profileIsOpened);
   const { _id, name, avatar } = useAppSelector((state) => state.profile);
   const { data: boards } = useGetBoardsByUserIdQuery(_id!);
+  //console.log(boards, _id);
+
   const { data: tasks, isLoading } = useGetTasksSetQuery({
     ids: [],
     userId: _id!,
@@ -53,7 +55,7 @@ const ProfilePage = memo(() => {
     dispatch(setProfileEditState(true));
   }, []);
 
-  console.log(tasks, boards);
+  //console.log(tasks, boards);
 
   if (!tasks || !boards) return <div>{t('Ничего не найдено!')}</div>;
 
