@@ -125,7 +125,7 @@ button {
   right: -30%;
   width: 1000px;
   height: 1000px;
-  animation: rotating 20s infinite ease-in-out;
+  animation: rotating 8s infinite ease-in-out;
   background: linear-gradient(180deg, #ff7615 0%, #c8ff15 14%, #43FFDD 35.88%, #45BCFF 67.65%, #D795FF 100%);
   mix-blend-mode: normal;
   filter: blur(120px);
@@ -149,10 +149,10 @@ button {
 }
 
 .animated-background--centerRight:before {
-  bottom: 0px;
-  right: -226px;
-  width: 400px;
+  bottom: 0;
   height: 400px;
+  right: 300px;
+  width: 300px;
 }
 
 .animated-background--centerRight:after {
