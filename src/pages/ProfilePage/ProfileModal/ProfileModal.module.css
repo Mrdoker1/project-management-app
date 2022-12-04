@@ -47,8 +47,15 @@
 .submit {
   background: #25262B;
   border-radius: 4px;
-  width: 161px;
   height: 39px; 
+}
+
+.submit[data-loading] {
+  color: #444;
+}
+
+.submit[data-loading]::before {
+  background-color: rgba(0, 0, 0, 0.3);;
 }
 
 .submit:hover {
