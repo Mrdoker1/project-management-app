@@ -18,7 +18,7 @@ const BoardsPage = () => {
   return (
     <main className="main">
       <BoardsModal />
-      <div className="container">
+      <div className="container fullsize">
         <Space h={40} />
         <div className={layoutClasses.heading}>
           <h1>

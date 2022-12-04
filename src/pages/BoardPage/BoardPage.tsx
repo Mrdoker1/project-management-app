@@ -1,18 +1,41 @@
 import { Space } from '@mantine/core';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ColumnList from 'components/ColumnList/ColumnList';
 import ColumnModal from './ColumnModal/ColumnModal';
 import BoardHeader from './BoardHeader/BoardHeader';
+import { useGetBoardsQuery } from 'store/api/boards';
+import { useLocation } from 'react-router-dom';
+import cl from './BoardPage.module.css';
 
 const BoardPage = () => {
+  const location = useLocation();
+  const path = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
+  const [gradient, setGradient] = useState('');
+  const { board } = useGetBoardsQuery(undefined, {
+    selectFromResult: ({ data }) => ({
+      board: data?.find((board) => board._id === path),
+    }),
+  });
+
+  useEffect(() => {
+    if (board) {
+      const rgba = `rgba${board.color.slice(3, board.color.length - 1)}, 0)`;
+      const rgbaZero = `rgba${board.color.slice(3, board.color.length - 1)}, 0.2)`;
+      const gradient = `linear-gradient(180deg, ${rgba}, 30%, ${rgbaZero})`;
+      setGradient(gradient);
+    }
+  }, [board]);
+
   return (
     <main className="main">
-      <div className="container flex-column">
-        <BoardHeader />
-        <ColumnList />
-        <Space h={20} />
-      </div>
-      <ColumnModal />
+      <section style={{ background: gradient }} className={`page-wrapper ${cl.splash}`}>
+        <div className="container fullsize flex-column">
+          <BoardHeader />
+          <ColumnList />
+          <Space h={20} />
+        </div>
+        <ColumnModal />
+      </section>
     </main>
   );
 };

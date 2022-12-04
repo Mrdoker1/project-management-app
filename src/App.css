@@ -55,6 +55,10 @@ button {
   cursor: pointer;
 }
 
+.fullsize {
+  max-width: 1920px !important;
+}
+
 .container {
   max-width: 1200px;
   width: 100%;

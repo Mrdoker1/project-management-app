@@ -1,11 +1,3 @@
-.splash {
-  padding: 68px 0;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  background: url("../../assets/noise.svg");
-}
-
 @keyframes rotating {
   from{
       transform: rotate(0deg);
@@ -17,6 +9,14 @@
 
 .rotate {
   animation: rotation 1s infinite linear;
+}
+
+.splash {
+  padding: 68px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: url("../../assets/noise.svg");
 }
 
 .splash:after {

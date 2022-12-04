@@ -91,7 +91,7 @@ const HeaderAction = memo(({ links }: IHeaderProps) => {
   return (
     <>
       <Header className={`${cl.header} ${stickyHeader}`} height={64}>
-        <Container size={1200} className={cl.inner}>
+        <Container size={1920} className={cl.inner}>
           <Group>
             <Burger
               color="#fff"
