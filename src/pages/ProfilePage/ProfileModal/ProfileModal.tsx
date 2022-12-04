@@ -153,6 +153,7 @@ const ProfileModal = () => {
       <PasswordInput
         classNames={passwordClasses}
         label={t('Password')}
+        placeholder={`${t('New Password')}`}
         {...form.getInputProps('password')}
         autoComplete="current-password"
       />

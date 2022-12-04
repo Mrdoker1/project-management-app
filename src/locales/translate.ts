@@ -90,6 +90,8 @@ const resources = {
         'Are you sure you want to delete your profile?',
       Delete: 'Delete',
       'Search Task...': 'Search Task...',
+      'Change Avatar': 'Change Avatar',
+      'New Password': 'New Password',
     },
   },
   Russian: {
@@ -184,6 +186,8 @@ const resources = {
         'Вы уверены что хотите удалить свой профиль?',
       Delete: 'Удалить',
       'Search Task...': 'Поиск Задачи...',
+      'Change Avatar': 'Изменить Аватар',
+      'New Password': 'Новый Пароль',
     },
   },
 };
