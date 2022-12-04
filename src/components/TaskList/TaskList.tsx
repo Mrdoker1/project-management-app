@@ -37,7 +37,13 @@ const TaskList = memo<ITaskListProps>(({ boardId, columnId, placeholder }) => {
 
   useEffect(() => {
     if (tasks) {
-      dispatch(setTasks({ boardId: boardId, columnId: columnId, array: tasks }));
+      if (!(boardId in tasksListState)) {
+        dispatch(setTasks({ boardId: boardId, columnId: columnId, array: tasks }));
+      } else if (boardId in tasksListState) {
+        if (!(columnId in tasksListState[boardId])) {
+          dispatch(setTasks({ boardId: boardId, columnId: columnId, array: tasks }));
+        }
+      }
       dispatch(setSelectedBoardId(boardId));
     }
   }, [tasks]);
