@@ -187,6 +187,12 @@ button {
   border-radius: 17px 0 0 17px;
 }
 
+@media (max-width: 480px) {
+  .mantine-Paper-root.profile-drawer {
+    padding: 20px;
+  }
+}
+
 .profile-drawer .animated-background {
   position: absolute;
   top: 0;
@@ -207,4 +213,8 @@ button {
   height: 93%;
   display: flex;
   flex-direction: column;
+}
+
+.mantine-1b64eov:focus {
+  outline: none;
 }
