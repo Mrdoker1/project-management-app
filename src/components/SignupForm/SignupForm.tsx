@@ -103,7 +103,6 @@ const SignupForm = memo(() => {
         size={24}
         className={cl.closeBtn}
         aria-label="Close modal"
-        title="back to home page"
       />
     </form>
   );

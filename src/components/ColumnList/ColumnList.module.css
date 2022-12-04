@@ -3,7 +3,8 @@
   *overflow-y: hidden;
   padding-bottom: 30px;
   align-items: flex-start;
-  height: calc(-346px + 100vh);
+  *height: calc(-346px + 100vh);
+  height: calc(-286px + 100vh);
   flex-grow: 1;
 }
 

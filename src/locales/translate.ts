@@ -66,9 +66,19 @@ const resources = {
       'Back to HomePage': 'Back to HomePage',
       'Sets targets and objectives and actively works towards them, whilst raising the quality of the outcomes.':
         'Sets targets and objectives and actively works towards them, whilst raising the quality of the outcomes.',
-      'Add column': 'Add column',
-      'Add task': 'Add task',
+      'Create column': 'Create column',
+      'Column name': 'Column name',
+      'Create task': 'Create task',
+      'Task name': 'Task name',
+      'Update task': 'Update task',
+      Update: 'Update',
+      'Delete column': 'Delete column',
+      'Delete task': 'Delete task',
       Name: 'Name',
+      'Are you sure you want to delete this column? This action is destructive.':
+        'Are you sure you want to delete this column? This action is destructive.',
+      'Are you sure you want to delete this task? This action is destructive.':
+        'Are you sure you want to delete this task? This action is destructive.',
       'Edit Profile': 'Edit Profile',
       'Delete Profile': 'Delete Profile',
       Avatar: 'Avatar',
@@ -148,9 +158,19 @@ const resources = {
       'Back to HomePage': 'Вернуться на главную',
       'Sets targets and objectives and actively works towards them, whilst raising the quality of the outcomes.':
         'Ставит цели и задачи и активно работает над их достижением, повышая при этом качество результатов.',
-      'Add column': 'Добавить колонку',
-      'Add task': 'Добавить задачу',
+      'Create column': 'Создать колонку',
+      'Create task': 'Создать задачу',
+      'Column name': 'Название колонки',
+      'Task name': 'Название задачи',
       Name: 'Имя',
+      'Update task': 'Изменить задачу',
+      Update: 'Изменить',
+      'Delete column': 'Удалить колонку',
+      'Delete task': 'Удалить задачу',
+      'Are you sure you want to delete this column? This action is destructive.':
+        'Вы уверены, что хотите удалить эту колонку? Это действие необратимо.',
+      'Are you sure you want to delete this task? This action is destructive.':
+        'Вы уверены, что хотите удалить эту задачу? Это действие необратимо.',
       'Edit Profile': 'Редактировать',
       'Delete Profile': 'Удалить',
       Avatar: 'Аватар',

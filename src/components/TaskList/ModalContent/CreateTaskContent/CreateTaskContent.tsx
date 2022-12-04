@@ -58,7 +58,7 @@ const CreateTaskContent = memo(() => {
       <TextInput
         data-autofocus
         classNames={inputClasses}
-        label={t('Column name')}
+        label={t('Task name')}
         {...form.getInputProps('title')}
       />
       <Textarea
