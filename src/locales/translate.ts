@@ -94,6 +94,7 @@ const resources = {
       'New Password': 'New Password',
       'Didn`t not found': 'Didn`t not found',
       'Enter your search query': 'Enter your search query',
+      'Assigned users': 'Assigned users',
     },
   },
   Russian: {
@@ -192,6 +193,7 @@ const resources = {
       'New Password': 'Новый Пароль',
       'Didn`t not found': 'Ничего не найдено',
       'Enter your search query': 'Введите поисковый запрос',
+      'Assigned users': 'Назначенные пользователи',
     },
   },
 };
