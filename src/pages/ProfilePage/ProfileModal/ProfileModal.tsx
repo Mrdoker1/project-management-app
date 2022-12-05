@@ -8,7 +8,7 @@ import { setProfileEditState } from 'store/profileMenuSlice';
 import { checkPassword, convertToBase64 } from 'utils/helpers';
 import { setProfile } from 'store/profileSlice';
 import { showNotification } from '@mantine/notifications';
-import { IconCheck, IconX } from '@tabler/icons';
+import { IconCheck, IconX, IconUpload } from '@tabler/icons';
 import cl from './ProfileModal.module.css';
 
 interface IError {
@@ -130,6 +130,7 @@ const ProfileModal = memo(() => {
         label={t('Avatar')}
         classNames={inputClasses}
         placeholder={`${t('Change Avatar')}`}
+        icon={<IconUpload size={14} />}
         accept=".png,.jpg,.jpeg"
         clearable={true}
         {...form.getInputProps('avatar')}

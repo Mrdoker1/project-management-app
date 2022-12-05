@@ -131,7 +131,6 @@ const ProfilePage = memo(() => {
             className={cl.button}
             variant="subtle"
             radius={8}
-            loaderPosition="center"
             loading={isDeleted}
             sx={{ height: 45 }}
             onClick={deleteProfileHandler}
