@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/project-management-app/static/css/main.a298088a.css",
+    "main.css": "/project-management-app/static/css/main.f409f433.css",
     "main.js": "/project-management-app/static/js/main.33901ed8.js",
     "static/media/noise.svg": "/project-management-app/static/media/noise.e07516f4891703e45c35.svg",
     "static/media/main-page-img1.svg": "/project-management-app/static/media/main-page-img1.1dc3138393bbcac78dd6cff6b77d9432.svg",
@@ -20,11 +20,11 @@
     "static/media/feature1.svg": "/project-management-app/static/media/feature1.01749128703ef353cc2116c84b61c259.svg",
     "index.html": "/project-management-app/index.html",
     "static/media/check-ico.svg": "/project-management-app/static/media/check-ico.66a125ab8bc3afeb89ff24cd0e8ca3de.svg",
-    "main.a298088a.css.map": "/project-management-app/static/css/main.a298088a.css.map",
+    "main.f409f433.css.map": "/project-management-app/static/css/main.f409f433.css.map",
     "main.33901ed8.js.map": "/project-management-app/static/js/main.33901ed8.js.map"
   },
   "entrypoints": [
-    "static/css/main.a298088a.css",
+    "static/css/main.f409f433.css",
     "static/js/main.33901ed8.js"
   ]
 }
