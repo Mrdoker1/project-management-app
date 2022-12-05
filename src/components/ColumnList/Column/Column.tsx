@@ -1,6 +1,7 @@
 import { CloseButton, Text, Title } from '@mantine/core';
 import { openConfirmModal } from '@mantine/modals';
 import TaskList from 'components/TaskList/TaskList';
+import { IconX } from '@tabler/icons';
 import React, { memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -11,6 +12,7 @@ import {
 import { getHtmlElement } from 'utils/getHtmlElement';
 import cl from './Column.module.css';
 import { Droppable } from 'react-beautiful-dnd';
+import { showNotification } from '@mantine/notifications';
 
 interface IColumnProps {
   _id: string;
@@ -67,7 +69,17 @@ const Column = memo<IColumnProps>(({ _id, boardId }) => {
   };
 
   if (!column) {
-    console.log('Сolumn not found in cache!');
+    showNotification({
+      title: 'Data Error!',
+      message: 'Сolumn not found in cache!',
+      color: 'red',
+      icon: <IconX size={18} />,
+      styles: () => ({
+        root: { backgroundColor: '#101113', border: '1px solid #343A40' },
+        title: { color: '#fff' },
+        description: { color: '#fff' },
+      }),
+    });
     return null;
   }
 

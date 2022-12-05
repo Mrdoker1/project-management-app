@@ -6,7 +6,6 @@ import { setToken } from 'store/authSlice';
 
 const Nav = () => {
   const token = useAppSelector((state) => state.auth.token);
-  //console.log(token);
   const dispatch = useAppDispatch();
 
   function clickHandler(e: React.MouseEvent) {

@@ -11,6 +11,8 @@ import cl from './SignupForm.module.css';
 import users from 'store/api/users';
 import { setProfile } from 'store/profileSlice';
 import { useTranslation } from 'react-i18next';
+import { showNotification } from '@mantine/notifications';
+import { IconX } from '@tabler/icons';
 
 interface ISignupForm {
   name: string;
@@ -54,7 +56,17 @@ const SignupForm = memo(() => {
       //navigate('/projects');
     } catch (err) {
       setIsLoading(false);
-      console.log(err);
+      showNotification({
+        title: 'Login Error!',
+        message: `${err}`,
+        color: 'red',
+        icon: <IconX size={18} />,
+        styles: () => ({
+          root: { backgroundColor: '#101113', border: '1px solid #343A40' },
+          title: { color: '#fff' },
+          description: { color: '#fff' },
+        }),
+      });
     }
   }, []);
 

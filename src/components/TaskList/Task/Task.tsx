@@ -8,6 +8,8 @@ import { setIsEdit, setIsOpen, setUpdatingTask } from 'store/taskSlice';
 import cl from './Task.module.css';
 import { ITask } from 'interfaces/ITask';
 import { setTasks } from 'store/taskListSlice';
+import { IconX } from '@tabler/icons';
+import { showNotification } from '@mantine/notifications';
 
 interface ITaskListProps {
   _id: string;
@@ -65,7 +67,17 @@ const Task = memo<ITaskListProps>(({ _id, index, columnId, boardId, data }) => {
   };
 
   if (!data) {
-    console.log('Task not found in cache!');
+    showNotification({
+      title: 'Data Error!',
+      message: 'Task not found in cache!',
+      color: 'red',
+      icon: <IconX size={18} />,
+      styles: () => ({
+        root: { backgroundColor: '#101113', border: '1px solid #343A40' },
+        title: { color: '#fff' },
+        description: { color: '#fff' },
+      }),
+    });
     return null;
   }
 

@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { IconCheck, IconX, IconUpload } from '@tabler/icons';
 import { memo } from 'react';
 import { useGetBoardsQuery, useDeleteBoardMutation } from 'store/api/boards';
 import { Button, CloseButton, Text } from '@mantine/core';
@@ -16,6 +17,7 @@ import {
 import { closeModal, openConfirmModal } from '@mantine/modals';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
+import { showNotification } from '@mantine/notifications';
 
 interface IBoardProps {
   id: string;
@@ -74,7 +76,6 @@ const Board = memo<IBoardProps>(({ id }) => {
     dispatch(setModalState(true));
     dispatch(setModalType(actionType.Edit));
     dispatch(setModalBoardId(id));
-    //console.log(id);
   }, []);
 
   const deleteBoardHandler = useCallback(() => {
@@ -90,7 +91,7 @@ const Board = memo<IBoardProps>(({ id }) => {
       ),
       labels: { confirm: t('Delete board'), cancel: t('Cancel') },
       confirmProps: { color: 'red', loading: isDeleted },
-      onCancel: () => console.log('Cancel'),
+      onCancel: () => {},
       onConfirm: async () => {
         setIsDeleted(true);
         await deleteBoard(id);
@@ -100,7 +101,17 @@ const Board = memo<IBoardProps>(({ id }) => {
   }, []);
 
   if (!board) {
-    console.log('Board not found in cache!');
+    showNotification({
+      title: 'Data Error!',
+      message: 'Board not found in cache!',
+      color: 'red',
+      icon: <IconX size={18} />,
+      styles: () => ({
+        root: { backgroundColor: '#101113', border: '1px solid #343A40' },
+        title: { color: '#fff' },
+        description: { color: '#fff' },
+      }),
+    });
     return null;
   }
 

@@ -10,7 +10,9 @@ import { NavLink } from 'react-router-dom';
 import { checkPassword, getErrorMessage } from 'utils/helpers';
 import users from 'store/api/users';
 import { setProfile } from 'store/profileSlice';
+import { IconX } from '@tabler/icons';
 import { useTranslation } from 'react-i18next';
+import { showNotification } from '@mantine/notifications';
 
 interface ILoginForm {
   login: string;
@@ -43,7 +45,17 @@ const LoginForm = memo(() => {
       dispatch(setProfile(user));
       //navigate('/projects');
     } catch (err) {
-      console.log(err);
+      showNotification({
+        title: 'Login Error!',
+        message: `${err}`,
+        color: 'red',
+        icon: <IconX size={18} />,
+        styles: () => ({
+          root: { backgroundColor: '#101113', border: '1px solid #343A40' },
+          title: { color: '#fff' },
+          description: { color: '#fff' },
+        }),
+      });
     }
   }, []);
 

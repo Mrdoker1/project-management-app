@@ -97,7 +97,6 @@ const ColumnList = memo(() => {
               source.index,
               destination?.index || 0
             );
-            console.log(reorderedArray);
             dispatch(
               setTasksByColumn({
                 boardID: selectedBoardId,
@@ -120,7 +119,6 @@ const ColumnList = memo(() => {
               destination?.index || 0,
               destination?.droppableId || ''
             );
-            console.log(reorderedArrays);
             dispatch(
               setTasksByColumn({
                 boardID: selectedBoardId,
