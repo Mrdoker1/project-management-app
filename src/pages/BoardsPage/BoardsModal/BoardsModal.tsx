@@ -192,7 +192,7 @@ const inputClasses = {
   label: cl.label,
   dropdown: cl.dropdown,
   item: cl.dropdownItem,
-  rightSection: cl.rightSection,
+  //rightSection: cl.rightSection,
 };
 
 export default BoardsModal;

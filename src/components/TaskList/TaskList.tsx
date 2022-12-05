@@ -80,6 +80,8 @@ const TaskList = memo<ITaskListProps>(({ boardId, columnId, placeholder }) => {
     </Draggable>
   ));
 
+  const minHeight = taskListState.length ? '36px' : '';
+
   return (
     <>
       <OverlayScrollbarsComponent
@@ -93,7 +95,7 @@ const TaskList = memo<ITaskListProps>(({ boardId, columnId, placeholder }) => {
           },
         }}
       >
-        <Flex className={cl.tasks} gap={{ base: 'xs', sm: 'sm' }}>
+        <Flex style={{ minHeight }} className={cl.tasks} gap={{ base: 'xs', sm: 'sm' }}>
           {taskList}
           {placeholder}
         </Flex>

@@ -89,8 +89,6 @@ const CreateTaskContent = memo(() => {
         label={t('Owner')}
         limit={20}
         maxDropdownHeight={160}
-        // transitionDuration={300}
-        // transition="pop-top-left"
         data={usersList ?? []}
         {...form.getInputProps('userId')}
       />
@@ -98,9 +96,7 @@ const CreateTaskContent = memo(() => {
         searchable
         clearable
         classNames={inputClasses}
-        label={t('Users')}
-        //nothingFound="Nothing found"
-        //maxSelectedValues={3}
+        label={t('Assigned users')}
         limit={20}
         maxDropdownHeight={160}
         data={usersList ?? []}
