@@ -3,9 +3,16 @@
   width: 100%;
   gap: 8px;
   *min-height: 30px;
-  max-height: calc(-440px + 100vh);
+  *max-height: calc(-440px + 100vh);
+  max-height: calc(-500px + 100vh);
   align-items: flex-start;
   justify-content: flex-start;
+}
+
+@media (max-height: 600px) {
+  .tasks {
+    max-height: calc(-440px + 100vh);
+  }
 }
 
 .placeholder {
