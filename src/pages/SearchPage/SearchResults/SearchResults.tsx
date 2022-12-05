@@ -28,7 +28,7 @@ const SearchResults = memo(() => {
   }, []);
 
   if (isFetching) {
-    return <Loader style={{ width: '100%', margin: '50px 0' }} color="white" />;
+    return <Loader style={{ width: '100%', margin: '50px 0' }} color="dark" />;
   }
 
   if (debounced.length === 0) {
@@ -49,44 +49,40 @@ const SearchResults = memo(() => {
 
   return (
     <div className={cl.boardWrapper}>
-      {isFetching ? (
-        <Loader style={{ width: '100%', margin: '50px 0' }} color="white" />
-      ) : (
-        <>
-          <SimpleGrid
-            cols={3}
-            spacing="xl"
-            breakpoints={[
-              { maxWidth: 980, cols: 3, spacing: 'md' },
-              { maxWidth: 755, cols: 2, spacing: 'sm' },
-              { maxWidth: 600, cols: 1, spacing: 'sm' },
-              { minWidth: 981, cols: 4, spacing: 'md' },
-            ]}
-            className={cl.resultsWrapper}
-          >
-            {tasks.map((task, index) => {
-              return (
-                <div key={index} className={cl.resultItem}>
-                  <Text size={16} color="#fff">
-                    {task.title}
-                  </Text>
+      <>
+        <SimpleGrid
+          cols={3}
+          spacing="xl"
+          breakpoints={[
+            { maxWidth: 980, cols: 3, spacing: 'md' },
+            { maxWidth: 755, cols: 2, spacing: 'sm' },
+            { maxWidth: 600, cols: 1, spacing: 'sm' },
+            { minWidth: 981, cols: 4, spacing: 'md' },
+          ]}
+          className={cl.resultsWrapper}
+        >
+          {tasks.map((task, index) => {
+            return (
+              <div key={index} className={cl.resultItem}>
+                <Text size={16} color="#fff">
+                  {task.title}
+                </Text>
 
-                  <Text size={14} color="#868E96">
-                    {task.description}
-                  </Text>
-                  <Button
-                    className={cl.button}
-                    mt="sm"
-                    onClick={() => taskClickHandler(`/projects/${task.boardId}`)}
-                  >
-                    {t('Open Board')}
-                  </Button>
-                </div>
-              );
-            })}
-          </SimpleGrid>
-        </>
-      )}
+                <Text size={14} color="#868E96">
+                  {task.description}
+                </Text>
+                <Button
+                  className={cl.button}
+                  mt="sm"
+                  onClick={() => taskClickHandler(`/projects/${task.boardId}`)}
+                >
+                  {t('Open Board')}
+                </Button>
+              </div>
+            );
+          })}
+        </SimpleGrid>
+      </>
     </div>
   );
 });

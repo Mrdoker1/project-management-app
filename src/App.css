@@ -211,6 +211,7 @@ button {
   max-width: 480px;
   position: fixed;
   border-radius: 17px 0 0 17px;
+  overflow: auto;
 }
 
 @media (max-width: 480px) {
@@ -236,7 +237,7 @@ button {
 }
 
 .mantine-1s8spa1 {
-  height: 94%;
+  height: 83vh;
   display: flex;
   flex-direction: column;
 }
