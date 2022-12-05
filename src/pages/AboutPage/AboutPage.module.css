@@ -61,6 +61,7 @@ img:hover {
 .respList {
   display: flex;
   gap: 6px;
+  flex-wrap: wrap;
 }
 
 .respItem {

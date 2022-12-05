@@ -44,4 +44,7 @@
   .logo {
     display: none;
   }
+  .list {
+    gap: 10px;
+  }
 }

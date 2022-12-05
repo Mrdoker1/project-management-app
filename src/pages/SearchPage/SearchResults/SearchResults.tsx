@@ -19,7 +19,7 @@ const SearchResults = memo(() => {
 
   useEffect(() => {
     if (debounced.length === 0) return;
-    getTasks({ ids: [], userId: '', searchQuery: search });
+    getTasks({ ids: [], userId: '', searchQuery: search.toLowerCase() });
   }, [debounced]);
 
   const taskClickHandler = useCallback((route: string) => {
