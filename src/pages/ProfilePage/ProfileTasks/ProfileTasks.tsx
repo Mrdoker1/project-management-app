@@ -24,7 +24,7 @@ const ProfileTasks = memo(() => {
 
   useEffect(() => {
     if (!isOpened) return;
-    getTasks({ ids: [], userId: '', searchQuery: name! });
+    if (name) getTasks({ ids: [], userId: '', searchQuery: name.toUpperCase() });
   }, [isOpened]);
 
   if (isLoading || isFetching) {
