@@ -12,6 +12,7 @@ import AboutPage from 'pages/AboutPage/AboutPage';
 import LoginPage from 'pages/LoginPage/LoginPage';
 import ProfilePage from 'pages/ProfilePage/ProfilePage';
 import BoardPage from 'pages/BoardPage/BoardPage';
+import SearchPage from 'pages/SearchPage/SearchPage';
 
 const AppRouter = memo(() => {
   const token = useAppSelector((state) => state.auth.token);
@@ -29,6 +30,7 @@ const AppRouter = memo(() => {
           <Route element={<ProtectedRoute isAllowed={!!token} />}>
             <Route path="/projects" element={<BoardsPage />} />
             <Route path="/projects/:id" element={<BoardPage />} />
+            <Route path="/search/" element={<SearchPage />} />
           </Route>
           <Route path="*" element={<NoPage />} />
         </Route>

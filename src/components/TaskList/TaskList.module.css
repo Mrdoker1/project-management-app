@@ -2,7 +2,6 @@
   flex-direction: column;
   width: 100%;
   gap: 8px;
-  min-height: 40px;
   max-height: calc(-440px + 100vh);
   align-items: flex-start;
   justify-content: flex-start;

@@ -55,10 +55,14 @@ button {
   cursor: pointer;
 }
 
+.fullsize {
+  max-width: 1920px !important;
+}
+
 .container {
   max-width: 1200px;
   width: 100%;
-  padding: 0 15px;
+  padding: 0 40px;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -239,4 +243,12 @@ button {
 
 .mantine-1b64eov:focus {
   outline: none;
+}
+
+.mantine-ActionIcon-root {
+  color: rgb(134, 142, 150);
+}
+
+.mantine-1og8eki{
+  padding: 0 40px;
 }

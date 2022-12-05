@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { Loader, Text, TextInput } from '@mantine/core';
 import { setProfileBoardsSearch, setProfileMenuState } from 'store/profileMenuSlice';
@@ -9,7 +9,7 @@ import { t } from 'i18next';
 import cl from './ProfileTasks.module.css';
 import { IconSearch } from '@tabler/icons';
 
-function ProfileTasks() {
+const ProfileTasks = memo(() => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const search = useAppSelector((state) => state.profileMenu.profileBoardSearch);
@@ -52,6 +52,7 @@ function ProfileTasks() {
         onChange={(event) => {
           dispatch(setProfileBoardsSearch(event.target.value));
         }}
+        autoComplete="off"
       />
       <>
         <OverlayScrollbarsComponent
@@ -100,7 +101,7 @@ function ProfileTasks() {
       </>
     </>
   );
-}
+});
 
 export default ProfileTasks;
 

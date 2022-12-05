@@ -1,12 +1,13 @@
 import { Button, CloseButton, Group, Text } from '@mantine/core';
 import { openConfirmModal } from '@mantine/modals';
-import { useAppDispatch } from 'hooks/redux';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import React, { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDeleteTaskByIdMutation } from 'store/api/tasks';
+import { useDeleteTaskByIdMutation, useUpdateTasksSetMutation } from 'store/api/tasks';
 import { setIsEdit, setIsOpen, setUpdatingTask } from 'store/taskSlice';
 import cl from './Task.module.css';
 import { ITask } from 'interfaces/ITask';
+import { setTasks } from 'store/taskListSlice';
 
 interface ITaskListProps {
   _id: string;
@@ -16,10 +17,18 @@ interface ITaskListProps {
   data: ITask;
 }
 
+const reorderDelete = (sourceArray: Array<ITask>, order: number) => {
+  const a = [...sourceArray];
+  a.splice(order, 1);
+  return a.map((t: ITask, index) => ({ ...t, order: index }));
+};
+
 const Task = memo<ITaskListProps>(({ _id, index, columnId, boardId, data }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const [deleteTaskMutation] = useDeleteTaskByIdMutation();
+  const [updateTasksMutation] = useUpdateTasksSetMutation();
+  const tasksListState = useAppSelector((state) => state.taskList);
 
   const openUpdatingModal = useCallback(async () => {
     if (!data) return;
@@ -41,7 +50,16 @@ const Task = memo<ITaskListProps>(({ _id, index, columnId, boardId, data }) => {
       labels: { confirm: t('Delete task'), cancel: t('Cancel') },
       confirmProps: { color: 'red' },
       onConfirm: async () => {
+        const updatedTaskList = reorderDelete(tasksListState[boardId][columnId], data.order);
         deleteTaskMutation({ _id, columnId, boardId });
+        updateTasksMutation(
+          updatedTaskList.map((t: ITask) => ({
+            _id: t._id,
+            order: t.order,
+            columnId: t.columnId,
+          }))
+        );
+        dispatch(setTasks({ boardID: boardId, columnID: columnId, array: updatedTaskList }));
       },
     });
   };

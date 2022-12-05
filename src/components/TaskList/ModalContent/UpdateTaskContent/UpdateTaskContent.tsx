@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { ITask } from 'interfaces/ITask';
 import { useUpdateTaskByIdMutation } from 'store/api/tasks';
 import { setIsOpen } from 'store/taskSlice';
+import { setTaskByOrder } from 'store/taskListSlice';
 
 interface ITaskFormValues {
   title: string;
@@ -32,6 +33,14 @@ const UpdateTaskContent = memo(() => {
     if (!updatingTask) return;
     const task: ITask = { ...updatingTask, ...values };
     await updateTaskMutation(task);
+    dispatch(
+      setTaskByOrder({
+        boardID: updatingTask.boardId,
+        columnID: updatingTask.columnId,
+        order: updatingTask.order,
+        task: task,
+      })
+    );
     dispatch(setIsOpen(false));
   };
 

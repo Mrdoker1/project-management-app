@@ -1,5 +1,5 @@
 import { Button, Title } from '@mantine/core';
-import React from 'react';
+import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import cl from './AboutPage.module.css';
 import gitIco from '../../assets/git.svg';
@@ -9,7 +9,7 @@ import ts from '../../assets/ts-ico.svg';
 import redux from '../../assets/redux-ico.svg';
 import i18 from '../../assets/i18-ico.svg';
 
-const AboutPage = () => {
+const AboutPage = memo(() => {
   const { t } = useTranslation();
 
   return (
@@ -161,6 +161,6 @@ const AboutPage = () => {
       </div>
     </main>
   );
-};
+});
 
 export default AboutPage;

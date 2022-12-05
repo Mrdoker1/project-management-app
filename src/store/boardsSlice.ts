@@ -8,6 +8,11 @@ export enum actionType {
 interface IBoardsState {
   search: string;
   selectedBoardId: string;
+  boardColors: {
+    [key: string]: {
+      color: string;
+    };
+  };
   modal: {
     board: {
       id: string;
@@ -20,6 +25,7 @@ interface IBoardsState {
 const initialState: IBoardsState = {
   search: '',
   selectedBoardId: '',
+  boardColors: {},
   modal: {
     board: {
       id: '',
@@ -48,9 +54,28 @@ export const boardsSlice = createSlice({
     setSelectedBoardId: (state, action: PayloadAction<string>) => {
       state.selectedBoardId = action.payload;
     },
+    setSelectedBoardColor: (state, action: PayloadAction<{ boardID: string; color: string }>) => {
+      const obj = {
+        [action.payload.boardID]: {
+          color: action.payload.color,
+        },
+      };
+
+      if (state.boardColors[action.payload.boardID]) {
+        Object.assign(state.boardColors[action.payload.boardID], obj[action.payload.boardID]);
+      } else {
+        Object.assign(state.boardColors, state.boardColors, obj);
+      }
+    },
   },
 });
 
 export default boardsSlice.reducer;
-export const { setModalState, setModalBoardId, setModalType, setBoardsSearch, setSelectedBoardId } =
-  boardsSlice.actions;
+export const {
+  setModalState,
+  setModalBoardId,
+  setModalType,
+  setBoardsSearch,
+  setSelectedBoardId,
+  setSelectedBoardColor,
+} = boardsSlice.actions;

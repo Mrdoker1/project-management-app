@@ -15,14 +15,7 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { useUpdateTasksSetMutation } from 'store/api/tasks';
 import { ITask } from 'interfaces/ITask';
 import { setTasksByColumn } from 'store/taskListSlice';
-
-// const reorder = (array: Array<ITask>, from: number, to: number) => {
-//   const a = [...array];
-//   const tmp = a[to];
-//   a[to] = a[from];
-//   a[from] = tmp;
-//   return a.map((t: ITask, index) => ({ _id: t._id, order: index, columnId: t.columnId }));
-// };
+import { useGetBoardsQuery } from 'store/api/boards';
 
 const reorder = (sourceArray: Array<ITask>, from: number, to: number) => {
   const a = [...sourceArray];

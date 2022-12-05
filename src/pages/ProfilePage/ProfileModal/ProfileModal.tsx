@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { Modal, TextInput, Button, PasswordInput, Flex, FileInput } from '@mantine/core';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { useForm } from '@mantine/form';
@@ -8,7 +8,7 @@ import { setProfileEditState } from 'store/profileMenuSlice';
 import { checkPassword, convertToBase64 } from 'utils/helpers';
 import { setProfile } from 'store/profileSlice';
 import { showNotification } from '@mantine/notifications';
-import { IconCheck, IconX } from '@tabler/icons';
+import { IconCheck, IconX, IconUpload } from '@tabler/icons';
 import cl from './ProfileModal.module.css';
 
 interface IError {
@@ -26,7 +26,7 @@ interface IForm {
   avatar: File | null;
 }
 
-const ProfileModal = () => {
+const ProfileModal = memo(() => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [updateUser] = useUpdateUserMutation();
@@ -49,25 +49,9 @@ const ProfileModal = () => {
     }),
   });
 
-  /*
-  const convertTofile = useCallback(async () => {
-    return await convertTofileFromBase64(avatar).then((file) => {
-      const avatar = file;
-      form.setValues({ avatar });
-    });
-  }, []);
-  */
-
   useEffect(() => {
-    /*
-    if (avatar.length === 0) {
-      const avatar = new File([''], 'Change Avatar', { type: 'image/png' });
-      form.setValues({ login, name, _id, avatar });
-    }
-    */
-
     form.setValues({ login, name, _id });
-  }, [avatar, login]);
+  }, [login]);
 
   const sendForm = useCallback(
     async (values: {
@@ -146,6 +130,7 @@ const ProfileModal = () => {
         label={t('Avatar')}
         classNames={inputClasses}
         placeholder={`${t('Change Avatar')}`}
+        icon={<IconUpload size={14} />}
         accept=".png,.jpg,.jpeg"
         clearable={true}
         {...form.getInputProps('avatar')}
@@ -153,6 +138,7 @@ const ProfileModal = () => {
       <PasswordInput
         classNames={passwordClasses}
         label={t('Password')}
+        placeholder={`${t('New Password')}`}
         {...form.getInputProps('password')}
         autoComplete="current-password"
       />
@@ -182,7 +168,7 @@ const ProfileModal = () => {
       {formComponent}
     </Modal>
   );
-};
+});
 
 const initialValues: IForm = {
   _id: '',

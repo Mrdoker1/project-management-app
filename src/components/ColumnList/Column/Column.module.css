@@ -7,7 +7,7 @@
   padding-bottom: 10px;
   border: 1px solid #343A40;
   border-radius: 8px;
-  background-color: #141517;
+  background-color: hsla(220, 7%, 8%, 0.5);
   width: 296px;
   flex-shrink: 0;
   max-height: 100%;
@@ -29,7 +29,7 @@
   padding: 0 12px;
   border-radius: 4px;
   flex-grow: 1;
-  border: 1px solid #141517;
+  border: 1px solid hsla(220, 7%, 8%, 0);
   transition: 0.3s all;
   word-break: break-word;
 }

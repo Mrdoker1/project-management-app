@@ -26,11 +26,12 @@ const BoardList = () => {
     <>
       <div>
         <SimpleGrid
-          cols={3}
+          cols={5}
           spacing="xl"
           breakpoints={[
-            { maxWidth: 980, cols: 3, spacing: 'md' },
-            { maxWidth: 755, cols: 2, spacing: 'sm' },
+            { maxWidth: 1600, cols: 4, spacing: 'sm' },
+            { maxWidth: 1280, cols: 3, spacing: 'md' },
+            { maxWidth: 960, cols: 2, spacing: 'sm' },
             { maxWidth: 600, cols: 1, spacing: 'sm' },
           ]}
         >
