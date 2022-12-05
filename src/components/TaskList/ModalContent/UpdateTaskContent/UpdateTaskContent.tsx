@@ -22,7 +22,6 @@ const UpdateTaskContent = memo(() => {
   const { t } = useTranslation();
   const updatingTask = useAppSelector((state) => state.task.updatingTask);
   const [updateTaskMutation, { isLoading }] = useUpdateTaskByIdMutation();
-  const tasksListState = useAppSelector((state) => state.taskList);
 
   const { usersList } = useGetUsersQuery(undefined, {
     selectFromResult: ({ data }) => ({
@@ -33,6 +32,7 @@ const UpdateTaskContent = memo(() => {
   const updateTask = async (values: ITaskFormValues) => {
     if (!updatingTask) return;
     const task: ITask = { ...updatingTask, ...values };
+    await updateTaskMutation(task);
     dispatch(
       setTaskByOrder({
         boardID: updatingTask.boardId,
@@ -41,7 +41,6 @@ const UpdateTaskContent = memo(() => {
         task: task,
       })
     );
-    await updateTaskMutation(task);
     dispatch(setIsOpen(false));
   };
 

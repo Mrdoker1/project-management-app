@@ -20,16 +20,16 @@ const BoardPage = () => {
   useEffect(() => {
     if (board) {
       const rgba = `rgba${board.color.slice(3, board.color.length - 1)}, 0)`;
-      const rgbaZero = `rgba${board.color.slice(3, board.color.length - 1)}, 0.2)`;
-      const gradient = `linear-gradient(180deg, ${rgba}, 30%, ${rgbaZero})`;
+      const rgbaZero = `rgba${board.color.slice(3, board.color.length - 1)}, 0.3)`;
+      const gradient = `linear-gradient(180deg, ${rgba}, 50%, ${rgbaZero})`;
       setGradient(gradient);
     }
   }, [board]);
 
   return (
-    <main className="main">
-      <section style={{ background: gradient }} className={`page-wrapper ${cl.splash}`}>
-        <div className="container fullsize flex-column">
+    <main className={`main ${cl.boardWrapper}`}>
+      <section style={{ background: gradient }} className={cl.splash}>
+        <div className={`container page-wrapper fullsize flex-column ${cl.heightFix}`}>
           <BoardHeader />
           <ColumnList />
           <Space h={20} />
