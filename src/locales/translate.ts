@@ -95,6 +95,12 @@ const resources = {
       'Didn`t not found': 'Didn`t not found',
       'Enter your search query': 'Enter your search query',
       'Assigned users': 'Assigned users',
+      'Layout, Localization, Pages: Main, Profile, Search, About, 404. Api requests.':
+        'Layout, Localization, Pages: Main, Profile, Search, About, 404. Api requests.',
+      "App design, API requests, Boards page, Drag'n Drop, Supervise the development process.":
+        "App design, API requests, Boards page, Drag'n Drop, Supervise the development process.",
+      'Routing, API requests, authorization / registration, kanban-board, project documentation.':
+        'Routing, API requests, authorization / registration, kanban-board, project documentation.',
     },
   },
   Russian: {
@@ -194,6 +200,12 @@ const resources = {
       'Didn`t not found': 'Ничего не найдено',
       'Enter your search query': 'Введите поисковый запрос',
       'Assigned users': 'Назначенные пользователи',
+      'Layout, Localization, Pages: Main, Profile, Search, About, 404. Api requests.':
+        'Вёрстка, Локализация, Страницы: Главная, Профиль, Поиск, О проекте, 404. Запросы API.',
+      "App design, API requests, Boards page, Drag'n Drop, Supervise the development process.":
+        "Дизайн приложения, API-запросы, страница проектов, Drag'n Drop, Контроль процесса разработки.",
+      'Routing, API requests, authorization / registration, kanban-board, project documentation.':
+        'Маршрутизация, запросы API, логин / регистрация, канбан-доска, проектная документация.',
     },
   },
 };

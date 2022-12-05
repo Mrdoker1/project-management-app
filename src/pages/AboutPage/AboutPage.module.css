@@ -13,7 +13,7 @@
 }
 
 img:hover {
-  filter: brightness(120%);
+  opacity: 0.7 !important;
 }
 
 .aboutList {

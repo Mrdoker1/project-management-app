@@ -1,4 +1,4 @@
-import { Button, Title } from '@mantine/core';
+import { Button, Title, Space } from '@mantine/core';
 import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import cl from './AboutPage.module.css';
@@ -55,9 +55,10 @@ const AboutPage = memo(() => {
                 Features
               </Button>
             </div>
+            <Space w="xs" />
             <p className={cl.aboutDescr}>
               {t(
-                'Made design, api requests, statistics, sprint game, made some typesetting and supervised the development'
+                "App design, API requests, Boards page, Drag'n Drop, Supervise the development process."
               )}
             </p>
           </div>
@@ -98,9 +99,10 @@ const AboutPage = memo(() => {
                 Features
               </Button>
             </div>
+            <Space w="xs" />
             <p className={cl.aboutDescr}>
               {t(
-                'Authorization / registration module, Audio call game, statistics collection, routing, typing of studied words.'
+                'Routing, API requests, authorization / registration, kanban-board, project documentation.'
               )}
             </p>
           </div>
@@ -141,10 +143,9 @@ const AboutPage = memo(() => {
                 Features
               </Button>
             </div>
+            <Space w="xs" />
             <p className={cl.aboutDescr}>
-              {t(
-                'Made the main page of the application, an electronic textbook, layout and adaptive.'
-              )}
+              {t('Layout, Localization, Pages: Main, Profile, Search, About, 404. Api requests.')}
             </p>
           </div>
         </div>
