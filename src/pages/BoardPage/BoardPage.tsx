@@ -27,9 +27,9 @@ const BoardPage = () => {
   }, [board]);
 
   return (
-    <main className="main">
+    <main className={`main ${cl.boardWrapper}`}>
       <section style={{ background: gradient }} className={cl.splash}>
-        <div className="container page-wrapper fullsize flex-column">
+        <div className={`container page-wrapper fullsize flex-column ${cl.heightFix}`}>
           <BoardHeader />
           <ColumnList />
           <Space h={20} />

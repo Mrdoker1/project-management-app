@@ -2,6 +2,7 @@
     background: url("../../assets/noise.svg");
     position: relative;
     overflow: hidden;
+    height: 100%;
   }
   
   .splash:after {
@@ -14,4 +15,12 @@
     background: url('../../assets/noise.svg');
     background-size: 10%;
     mix-blend-mode: soft-light;
+  }
+
+  .boardWrapper {
+    display: grid !important;
+  }
+
+  .heightFix {
+    height: 100%;
   }
