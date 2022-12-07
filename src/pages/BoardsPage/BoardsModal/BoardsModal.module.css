@@ -1,0 +1,65 @@
+.inputWrapper {
+    width: 100%;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+}
+  
+.label {
+  color: #868E96;
+  font-weight: 600;
+}
+
+.name:focus, .name:focus-within {
+  border-color: #F1F3F5;
+  background-color: #1A1B1E;
+}
+
+.name {
+  background: #101113;
+  border-color: #25262B;
+  color: #F8F9FA;
+}
+
+.submit {
+  background: #25262B;
+  border-radius: 4px;
+  width: 161px;
+  height: 39px; 
+  *margin-top: 5px;
+}
+
+.submit:hover {
+  color: #101113;
+  background-color: rgba(231, 245, 255, 1);
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dropdown {
+  background: #1A1B1E;
+  border-color: #25262B;
+}
+
+.dropdownItem {
+  color: #F8F9FA;
+  transition: none;
+  transition: 0.3s all;
+}
+
+.dropdown [data-hovered], .dropdownItem:hover {
+  background-color: #25262B;
+  color: #F8F9FA;
+}
+
+.dropdown [data-selected] {
+  background-color: #25262B !important;
+}
+
+/* .rightSection button svg{
+  fill: #25262B;
+  background-color: #25262B !important;
+} */

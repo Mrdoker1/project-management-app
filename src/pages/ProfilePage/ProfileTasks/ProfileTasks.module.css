@@ -1,0 +1,55 @@
+.boardWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.boardItem {
+  padding: 8px 16px;
+  margin-top: 16px;
+  border-radius: 6px;
+  background: #25262B;
+  border: none;
+}
+
+.boardTitle {
+  padding: 8px 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 155%;
+  color: #ADB5BD
+}
+
+.boardTitle:hover {
+  background: none;
+}
+
+.boardDescription {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 155%;
+  color: #868E96;
+}
+
+.boardDescription:hover {
+  cursor: pointer;
+}
+
+.searchInput {
+  background: #101113;
+  border-color: #25262B;
+  color: #ADB5BD;
+}
+
+.searchInput::placeholder {
+  color: #ADB5BD;
+}
+
+.searchInput:focus, .searchInput:focus-within {
+  border-color: #F1F3F5;
+  background-color: #1A1B1E;
+}
+
+.searchWrapper {
+  margin: 16px 0;
+}

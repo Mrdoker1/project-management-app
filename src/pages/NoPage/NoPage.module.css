@@ -1,0 +1,17 @@
+.pageTitle {
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 60px;
+  line-height: 100%;
+  letter-spacing: -0.04em;
+  white-space: pre-line;
+}
+
+.pageDescription {
+  margin-bottom: 40px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 155%;
+  color: #909296;
+  white-space: pre-line;
+}

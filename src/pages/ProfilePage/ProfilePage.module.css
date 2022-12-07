@@ -1,0 +1,37 @@
+.profileHeader {
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 10;
+}
+
+.animated-background {
+  position: absolute;
+}
+
+.button {
+  padding: 0 23px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 155%;
+  background: #25262B;
+  border: none;
+  color: #fff;
+}
+
+.button[data-loading] {
+  color: #444;
+}
+
+.button[data-loading]::before {
+  background-color: rgba(0, 0, 0, 0.3);;
+}
+
+.button:hover {
+  color: #000;
+}
+
+@media (max-width: 480px) {
+  .button {
+    width: 100%;
+  }
+}
