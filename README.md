@@ -1,6 +1,6 @@
 # Project Management App!
 
-![Preview](https://user-images.githubusercontent.com/26232484/206292536-cd193c8a-121e-4399-a9a9-4774924ec95b.png)
+![Preview](https://user-images.githubusercontent.com/26232484/206300529-04140ac4-f383-4c36-b8b5-c9a18216c970.png)
 
 #### Done 06.12.2022 / Deadline 06.12.2022
 
@@ -14,6 +14,7 @@ About
 * [Figma Design](https://www.figma.com/community/file/1182421505296451718)
 
 Tools:
+
 * React
 * Redux Toolkit
 * Typescript
