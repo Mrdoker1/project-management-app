@@ -86,7 +86,7 @@ const Task = memo<ITaskListProps>(({ _id, index, columnId, boardId, data }) => {
   return (
     <Group className={cl.task}>
       <Button classNames={ButtonClasses}>
-        <div onClick={openUpdatingModal}>{title}</div>
+        <Text onClick={openUpdatingModal}>{title}</Text>
       </Button>
       <CloseButton onClick={deleteTask} size={24} className={cl.closeBtn} />
     </Group>

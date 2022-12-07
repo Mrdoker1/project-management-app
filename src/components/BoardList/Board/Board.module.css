@@ -25,6 +25,7 @@
   margin-bottom: 8px;
   font-size: 18px;
   line-height: 155%;
+  word-wrap: break-word;
 }
 
 .boardDescription {

@@ -128,6 +128,7 @@ const BoardsModal = () => {
         classNames={inputClasses}
         label={t('Board name')}
         placeholder={t('Board name')}
+        maxLength={40}
         {...form.getInputProps('title')}
       />
       <Select

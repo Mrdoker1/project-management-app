@@ -74,6 +74,7 @@ const CreateTaskContent = memo(() => {
       <TextInput
         data-autofocus
         classNames={inputClasses}
+        maxLength={40}
         label={t('Task name')}
         {...form.getInputProps('title')}
       />
