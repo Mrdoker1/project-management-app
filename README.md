@@ -21,3 +21,5 @@ Tools:
 Additional:
 * SCSS
 * ESlint!
+* Mantine
+* React-i18next
