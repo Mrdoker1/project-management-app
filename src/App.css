@@ -253,3 +253,12 @@ button {
 .mantine-1og8eki{
   padding: 0 40px;
 }
+
+@media screen and (max-width: 540px) {
+  .mantine-1og8eki {
+    padding: 0 20px;
+  }
+  .container {
+    padding: 0 20px;
+  }
+}
