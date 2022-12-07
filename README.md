@@ -11,7 +11,7 @@ Deploy
 About
 * [Task Description](https://github.com/rolling-scopes-school/tasks/blob/master/tasks/react/project-management-system-EN.md)
 * [Project Documentation](https://goofy-secure-b26.notion.site/React-PM-App-50f7bf06748a4bf5a99317ef066027fe)
-* [Figma Design](https://www.figma.com/file/HHDYCgo8Nik91m0P6JpxBH/PM-App?node-id=1004%3A210175&t=8Otf56UyOdTKgCH0-1)
+* [Figma Design](https://www.figma.com/community/file/1182421505296451718)
 
 Tools:
 * React
