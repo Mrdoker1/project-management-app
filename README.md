@@ -1,6 +1,6 @@
-# Project Management App!
+# Project Management App
 
-![Preview](https://user-images.githubusercontent.com/26232484/206300529-04140ac4-f383-4c36-b8b5-c9a18216c970.png)
+![Preview](https://user-images.githubusercontent.com/26232484/209233112-0040e798-07d1-40db-8273-75cdb06ed28c.png)
 
 #### Done 06.12.2022 / Deadline 06.12.2022
 
