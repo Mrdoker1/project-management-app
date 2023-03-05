@@ -1,0 +1,79 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputWrapper {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.label {
+  color: #868E96;
+  font-weight: 600;
+}
+
+.name:focus, .name:focus-within {
+  border-color: #F1F3F5;
+  background-color: #1A1B1E;
+}
+
+.login, .password {
+  background: #101113;
+  border-color: #25262B;
+}
+
+.login::placeholder, .password::placeholder {
+  color: #F8F9FA;
+}
+
+.innerInput {
+  color: #F8F9FA;
+}
+
+.login:focus, .login:focus-within, .password:focus, .password:focus-within {
+  border-color: #F1F3F5;
+  background-color: #1A1B1E;
+}
+
+.name {
+  background: #101113;
+  border-color: #25262B;
+  color: #F8F9FA;
+}
+
+.submit {
+  background: #25262B;
+  border-radius: 4px;
+  height: 39px; 
+}
+
+.submit[data-loading] {
+  color: #444;
+}
+
+.submit[data-loading]::before {
+  background-color: rgba(0, 0, 0, 0.3);;
+}
+
+.submit:hover {
+  color: #101113;
+  background-color: rgba(231, 245, 255, 1);
+}
+
+.deleteModal {
+  z-index: 300;
+}
+
+.innerInput, .name .password:-webkit-autofill {
+  box-shadow: inset 0 0 0 70px #101113;
+  transition: background-color 600000s 0s, color 600000s 0s;
+  -webkit-transition: background-color 600000s 0s, color 600000s 0s;
+  background: #101113;
+}
+
+.innerInput, .name .password:autofill {
+  background: #101113;
+
+}

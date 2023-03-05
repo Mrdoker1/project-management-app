@@ -1,0 +1,113 @@
+.border {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  *padding: 0 15px;
+  width: 200px;
+}
+
+.board {
+  text-align: center;
+  padding: 60px 20px 60px;
+  border-radius: 17px;
+  background: linear-gradient(180deg, #000000 0%, rgba(83, 107, 155, 0) 100%);
+}
+
+.box {
+  position: 'relative';
+  box-sizing: 'border-box';
+  background-clip: 'padding-box';
+  border: 'solid 1px transparent';
+}
+
+.boardTitle {
+  margin-bottom: 8px;
+  font-size: 18px;
+  line-height: 155%;
+  word-wrap: break-word;
+}
+
+.boardDescription {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 155%;
+  margin-bottom: 20px;
+  word-wrap: break-word;
+}
+
+.gradientBorder:before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: -1;
+  margin: -1px; 
+  border-radius: inherit; 
+  background: linear-gradient(
+    to bottom, 
+    rgba(52, 58, 64, 1), 
+    rgba(52, 58, 64, 0)
+  ) ;
+}
+
+.gradientBorder {
+  position: relative;
+  box-sizing: border-box;
+  background-clip: padding-box; 
+  border: solid 1px transparent;
+  border-style: solid;
+}
+
+.buttons {
+  position: absolute;
+  display: flex;
+  width: calc(100% - 40px);
+  flex-direction: row;
+  gap: 8px;
+  justify-content: center;
+}
+
+.button {
+  background:rgba(80, 80, 80, 0.4);
+  border-radius: 4px;
+}
+
+.button:hover {
+  color:rgba(0, 0, 0, 1);
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.deleteBtn {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+}
+
+/*
+.board {
+  background: linear-gradient(
+    to bottom, 
+    rgba(10, 10, 10, 1), 
+    rgba(52, 58, 64, 0)
+  );
+}
+*/
+
+.boardGradient:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transition: opacity 0.5s linear;
+  opacity: 0;
+  background: inherit;
+  border-radius: 17px;
+}
+
+.board:hover .boardGradient:before {
+  opacity: 1;
+  filter: brightness(85%);
+}
