@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/project-management-app/static/css/main.bbb1f733.css",
-    "main.js": "/project-management-app/static/js/main.57d54fef.js",
+    "main.js": "/project-management-app/static/js/main.9ce14e74.js",
     "static/media/noise.svg": "/project-management-app/static/media/noise.a2d3768d7dec9a58bea8.svg",
     "static/media/main-page-img1.svg": "/project-management-app/static/media/main-page-img1.e3bf2a3cd686c9b1ed70400e71631e13.svg",
     "static/media/main-page-img3.svg": "/project-management-app/static/media/main-page-img3.4886dbd12e51a45ddecaccf74b3c0023.svg",
@@ -21,10 +21,10 @@
     "index.html": "/project-management-app/index.html",
     "static/media/check-ico.svg": "/project-management-app/static/media/check-ico.953d2a0487c175ab0a2300e28a7cd0fd.svg",
     "main.bbb1f733.css.map": "/project-management-app/static/css/main.bbb1f733.css.map",
-    "main.57d54fef.js.map": "/project-management-app/static/js/main.57d54fef.js.map"
+    "main.9ce14e74.js.map": "/project-management-app/static/js/main.9ce14e74.js.map"
   },
   "entrypoints": [
     "static/css/main.bbb1f733.css",
-    "static/js/main.57d54fef.js"
+    "static/js/main.9ce14e74.js"
   ]
 }
