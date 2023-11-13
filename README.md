@@ -14,7 +14,6 @@ About
 * [Figma Design](https://www.figma.com/community/file/1182421505296451718)
 
 Tools:
-
 * React
 * Redux Toolkit
 * Typescript
